@@ -16,11 +16,15 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class HttpClient {
   
+  public final static HttpClient DEFAULT = new HttpClient();
+  
   public static final String CHARSET = "UTF-8";
   
   public static final String CONTENT_TYPE = "application/json";
   
   public static final String USER_AGENT = "gocardless-java";
+  
+  public static final Map<String, String> BASE_HEADERS = headers();
   
   protected enum RequestMethod {GET, POST};
   
@@ -31,16 +35,12 @@ public class HttpClient {
   public HttpClient() {
   }
   
-  public String get(String url) {
-    return get(url, new HashMap<String, String>());
+  public String get(String url, Map<String, String> headers, Map<String, String> params) {
+    return request(RequestMethod.GET, String.format("%s?%s", url, createQuery(params)), headers, null);
   }
   
-  public String get(String url, Map<String, String> params) {
-    return request(RequestMethod.GET, String.format("%s?%s", url, createQuery(params)), null);
-  }
-  
-  public String post(String url, String payload) {
-    return request(RequestMethod.POST, url, payload);
+  public String post(String url, Map<String, String> headers, String payload) {
+    return request(RequestMethod.POST, url, headers, payload);
   }
   
   public int getConnectTimeout() {
@@ -59,10 +59,14 @@ public class HttpClient {
     this.readTimeout = readTimeout;
   }
 
-  protected String request(RequestMethod method, String url, String payload) {
+  protected String request(RequestMethod method, String url, Map<String, String> headers, String payload) {
     HttpsURLConnection conn = null;
     try {
       conn = createConnection(url);
+      headers = (headers != null) ? headers : new HashMap<String, String>(); 
+      for(Map.Entry<String, String> header: headers.entrySet()) {
+        conn.setRequestProperty(header.getKey(), header.getValue());
+      }
       if (method.equals(RequestMethod.GET)) {
         conn.setRequestMethod("GET");
       } else if (method.equals(RequestMethod.POST)) {
@@ -110,18 +114,10 @@ public class HttpClient {
     conn.setConnectTimeout(connectTimeout);
     conn.setReadTimeout(readTimeout);
     conn.setUseCaches(false);
-    for(Map.Entry<String, String> header: headers().entrySet()) {
+    for(Map.Entry<String, String> header: BASE_HEADERS.entrySet()) {
       conn.setRequestProperty(header.getKey(), header.getValue());
     }
     return conn;
-  }
-  
-  protected Map<String, String> headers() {
-    Map<String, String> headers = new HashMap<String, String>();
-    headers.put("Accept-Charset", CHARSET);
-    headers.put("Content-Type", String.format("%s;charset=%s", CONTENT_TYPE, CHARSET));
-    headers.put("User-Agent", USER_AGENT);
-    return headers;
   }
   
   protected String createQuery(Map<String, String> params) {
@@ -142,6 +138,14 @@ public class HttpClient {
     } catch (UnsupportedEncodingException ex) {
       throw new RuntimeException("Failed to encode params " + params.toString(), ex);
     }
+  }
+  
+  protected static Map<String, String> headers() {
+    Map<String, String> headers = new HashMap<String, String>();    
+    headers.put("Accept", format("%s", CONTENT_TYPE));
+    headers.put("Content-Type", format("%s;charset=%s", CONTENT_TYPE, CHARSET));
+    headers.put("User-Agent", USER_AGENT);
+    return headers;
   }
   
 }
