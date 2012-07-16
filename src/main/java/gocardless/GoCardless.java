@@ -1,6 +1,7 @@
 package gocardless;
 
 import gocardless.api.Api;
+import gocardless.connect.Connect;
 
 /**
  * GoCardless is the main interface to the GoCardless API.<p>
@@ -10,7 +11,9 @@ public class GoCardless {
   
   public final static AccountDetails accountDetails = new AccountDetails();
   
-  public final static Api api = new Api(accountDetails); 
+  public final static Api api = new Api(accountDetails);
+  
+  public final static Connect connect = new Connect(accountDetails);
   
   public interface ApiBase {
     public static final String PRODUCTION = "https://gocardless.com";  
