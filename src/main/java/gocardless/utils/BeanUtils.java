@@ -163,10 +163,9 @@ public class BeanUtils {
   // see http://stackoverflow.com/questions/2559759/how-do-i-convert-camelcase-into-human-readable-names-in-java
   private static String underscoreAndLowercase(String s) {
     return s.replaceAll(
-        String.format("%s|%s|%s",
+        String.format("%s|%s",
            "(?<=[A-Z])(?=[A-Z][a-z])",
-           "(?<=[^A-Z])(?=[A-Z])",
-           "(?<=[A-Za-z])(?=[^A-Za-z])"
+           "(?<=[^A-Z])(?=[A-Z])"
         ),
         "_"
      ).toLowerCase();
