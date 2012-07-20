@@ -1,6 +1,7 @@
 package gocardless.api;
 
 import static gocardless.utils.JsonUtils.fromJson;
+import static gocardless.utils.JsonUtils.toJson;
 import static java.lang.String.format;
 import gocardless.AccountDetails;
 import gocardless.GoCardless;
@@ -14,6 +15,7 @@ public class Api {
   public interface ApiPath {
     public static final String BASE = format("%s/api/v1", GoCardless.getApiBase());  
     public static final String MERCHANT = format("%s/merchants", BASE);
+    public static final String BILL = format("%s/bills", BASE);
   }
   
   protected HttpClient httpClient = HttpClient.DEFAULT;
@@ -26,6 +28,10 @@ public class Api {
   
   public Merchant getMerchant(String merchantId) {
     return fromJson(httpClient.get(format("%s/%s", ApiPath.MERCHANT, merchantId), headers(), null), Merchant.class);
+  }
+  
+  public Bill postPreAuthorizedBill(PreAuthorizedBill preAuthorizedBill) {
+    return fromJson(httpClient.post(ApiPath.BILL, headers(), toJson(preAuthorizedBill, "bill")), Bill.class);
   }
   
   protected Map<String, String> headers() {

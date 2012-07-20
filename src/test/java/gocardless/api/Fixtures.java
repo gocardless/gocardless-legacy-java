@@ -48,4 +48,54 @@ public interface Fixtures {
     )
     .build();
   
+  public final static PreAuthorizedBill PRE_AUTHORIZED_BILL = new PreAuthorizedBill.Builder()
+    .amount(10.00f)
+    .preAuthorizationId("UQSTF7AMQMYWBL")
+    .build();
+  
+  public final static String PRE_AUTHORIZED_BILL_POST = 
+    "{" + 
+		  "\"bill\":{" + 
+		    "\"amount\":10.0," + 
+		    "\"pre_authorization_id\":\"UQSTF7AMQMYWBL\"" + 
+		  "}" + 
+		"}";
+  
+  public final static String BILL_RESPONSE = 
+    "{\n" + 
+		"   \"amount\": \"10.00\",\n" + 
+		"   \"gocardless_fees\": \"0.10\",\n" + 
+		"   \"partner_fees\": \"0\",\n" + 
+		"   \"currency\": \"GBP\",\n" + 
+		"   \"created_at\": \"2011-11-22T11: 59: 12Z\",\n" + 
+		"   \"description\": null,\n" + 
+		"   \"id\": \"PWSDXRYSCOKA7Z\",\n" + 
+		"   \"name\": null,\n" + 
+		"   \"status\": \"pending\",\n" + 
+		"   \"merchant_id\": \"6UFY9IJWGYBTAP\",\n" + 
+		"   \"user_id\": \"BWJ2GP659OXPAU\",\n" + 
+		"   \"paid_at\": null,\n" + 
+		"   \"source_type\": \"pre_authorization\",\n" + 
+		"   \"source_id\": \"FAZ6FGSMTCOZUG\",\n" + 
+		"   \"uri\": \"https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z\"\n" + 
+		"}";
+  
+  public final static Bill BILL = new Bill.Builder()
+    .amount(10.00f)
+    .gocardlessFees(0.10f)
+    .partnerFees(0.00f)
+    .currency("GBP")
+    .createdAt(parse("2011-11-22T11:59:12Z"))
+    .description(null)
+    .id("PWSDXRYSCOKA7Z")
+    .name(null)
+    .status("pending")
+    .merchantId("6UFY9IJWGYBTAP")
+    .userId("BWJ2GP659OXPAU")
+    .paidAt(null)
+    .sourceType("pre_authorization")
+    .sourceId("FAZ6FGSMTCOZUG")
+    .uri("https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z")
+    .build();
+  
 }

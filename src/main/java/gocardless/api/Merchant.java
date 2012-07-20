@@ -10,29 +10,43 @@ public class Merchant implements Serializable {
 
   private static final long serialVersionUID = 1L;
   
-  public Date createdAt;
-  public String description;
-  public String id;
-  public String name;
-  public String firstName;
-  public String lastName;
-  public String email;
-  public String uri;
-  public Float balance;
-  public Float pendingBalance;
-  public Date nextPayoutDate;
-  public Float nextPayoutAmount;
-  public SubResourceUris subResourceUris = new SubResourceUris();
+  private Date createdAt;
   
-  public static class SubResourceUris {
+  private String description;
+  
+  private String id;
+  
+  private String name;
+  
+  private String firstName;
+  
+  private String lastName;
+  
+  private String email;
+  
+  private String uri;
+  
+  private Float balance;
+  
+  private Float pendingBalance;
+  
+  private Date nextPayoutDate;
+  
+  private Float nextPayoutAmount;
+  
+  private SubResourceUris subResourceUris = new SubResourceUris();
+  
+  public static class SubResourceUris implements Serializable {
     
-    public SubResourceUris() {      
+    private static final long serialVersionUID = 1L;
+    
+    public SubResourceUris() {
     }
     
-    public String users;
-    public String bills;
-    public String preAuthorizations;
-    public String subscriptions;
+    private String users;
+    private String bills;
+    private String preAuthorizations;
+    private String subscriptions;
     
     public String getUsers() {
       return users;

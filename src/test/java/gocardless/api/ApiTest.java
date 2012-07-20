@@ -39,5 +39,13 @@ public class ApiTest {
     verify(mockHttpClient, times(1)).get(url, headers, null);
     assertEquals(Fixtures.MERCHANT, merchant);
   }
+  
+  @Test
+  public void testPostPreAuthorizedBill() {
+    when(mockHttpClient.post(Api.ApiPath.BILL, headers, Fixtures.PRE_AUTHORIZED_BILL_POST)).thenReturn(Fixtures.BILL_RESPONSE);
+    Bill bill = api.postPreAuthorizedBill(Fixtures.PRE_AUTHORIZED_BILL);
+    verify(mockHttpClient, times(1)).post(Api.ApiPath.BILL, headers, Fixtures.PRE_AUTHORIZED_BILL_POST);
+    assertEquals(Fixtures.BILL, bill);
+  }
 
 }
