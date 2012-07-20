@@ -61,7 +61,7 @@ public class ConnectTest {
   @Test
   public void testConfirmResource() {    
     Map<String, String> headers = mockHttpClient.basicAuth(accountDetails.getAppId(), accountDetails.getAppSecret());
-    connect.confirmResource(Fixtures.RESOURCE);
+    connect.confirm(Fixtures.RESOURCE);
     verify(mockHttpClient, times(1)).post(Connect.ApiPath.CONFIRM, headers, Fixtures.CONFIRM_POST);    
   }
   

@@ -46,7 +46,7 @@ public class Connect {
     return this.newUrl(preAuthorization, ApiPath.NEW_PRE_AUTHORIZATION, redirectUri, cancelUri, state);    
   }
   
-  public void confirmResource(Resource resource) {    
+  public void confirm(Resource resource) {    
     Map<String, String> params = new HashMap<String, String>();
     params.put(Resource.Params.RESOURCE_ID, resource.getResourceId());
     params.put(Resource.Params.RESOURCE_TYPE, resource.getResourceType());
