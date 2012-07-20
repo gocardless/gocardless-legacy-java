@@ -12,8 +12,6 @@ import gocardless.utils.BeanUtils;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.codec.binary.Base64;
-
 public class Partner {
   
   public interface ApiPath {
@@ -44,14 +42,8 @@ public class Partner {
     params.put("code", code);
     params.put("grant_type", "authorization_code");
     String accessTokenUrl = format("%s?%s", ApiPath.ACCESS_TOKEN, urlEncodedQueryPath(params));
-    return fromJson(httpClient.post(accessTokenUrl, headers(), null), MerchantAccessToken.class);
-  }
-  
-  protected Map<String, String> headers() {
-    Map<String, String> headers = new HashMap<String, String>();
-    String basicAuth = Base64.encodeBase64String(format("%s:%s", accountDetails.getAppId(), accountDetails.getAppSecret()).getBytes());
-    headers.put("Authorization", "Basic " + basicAuth);
-    return headers;
+    Map<String, String> headers = httpClient.basicAuth(accountDetails.getAppId(), accountDetails.getAppSecret());
+    return fromJson(httpClient.post(accessTokenUrl, headers, null), MerchantAccessToken.class);
   }
   
   protected Map<String, String> params(String redirectUri, String state) {

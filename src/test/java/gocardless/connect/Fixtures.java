@@ -33,4 +33,14 @@ public interface Fixtures {
     "&client_id=id01" +
     "&signature=eb46228f02b1bb2efddff55ac0e38614c2c562b7507779768abc0063d57dc1a4";
   
+  public final static Resource RESOURCE = new Resource.Builder()
+    .resourceId("VZUG2SC3PRT5EM")
+    .resourceType("bill")
+    .resourceUri("https://gocardless.com/api/v1/bills/VZUG2SC3PRT5EM")
+    .state("id_9SX5G36")
+    .signature("f5332dc226ef1196cc03bd3f4d7259412a180a4528f9fae28f8c008a772c540e")
+    .build();
+  
+  public final static String CONFIRM_POST = "{\"resource_id\":\"VZUG2SC3PRT5EM\", \"resource_type\":\"bill\"}";
+  
 }

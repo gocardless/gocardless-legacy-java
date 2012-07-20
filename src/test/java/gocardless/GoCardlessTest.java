@@ -2,19 +2,20 @@ package gocardless;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class GoCardlessTest {
   
-  @Before
-  public void setUp() {
-    GoCardless.environment = GoCardless.Environment.SANDBOX;
-  }
-  
   @Test
   public void testApiBase() {
+    // Test default first
+    assertEquals(GoCardless.ApiBase.PRODUCTION, GoCardless.getApiBase());
+    
+    GoCardless.environment = GoCardless.Environment.SANDBOX;
     assertEquals(GoCardless.ApiBase.SANDBOX, GoCardless.getApiBase());
-  } 
+    
+    GoCardless.environment = GoCardless.Environment.PRODUCTION;
+    assertEquals(GoCardless.ApiBase.PRODUCTION, GoCardless.getApiBase());    
+  }
 
 }

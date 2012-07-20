@@ -7,10 +7,14 @@ import static gocardless.utils.Utils.utc;
 import static java.lang.String.format;
 import gocardless.AccountDetails;
 import gocardless.GoCardless;
+import gocardless.exception.SignatureException;
+import gocardless.http.HttpClient;
 import gocardless.utils.BeanUtils;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
 
 public class Connect {
   
@@ -19,7 +23,10 @@ public class Connect {
     public static final String NEW_BILL = format("%s/bills/new", BASE);
     public static final String NEW_SUBSCRIPTION = format("%s/subscriptions/new", BASE);
     public static final String NEW_PRE_AUTHORIZATION = format("%s/pre_authorizations/new", BASE);
+    public static final String CONFIRM = format("%s/confirm", GoCardless.getApiBase());
   }
+  
+  protected HttpClient httpClient = HttpClient.DEFAULT;
   
   protected AccountDetails accountDetails;
 
@@ -37,6 +44,25 @@ public class Connect {
   
   public String newPreAuthorizationUrl(PreAuthorization preAuthorization, String redirectUri, String cancelUri, String state) {
     return this.newUrl(preAuthorization, ApiPath.NEW_PRE_AUTHORIZATION, redirectUri, cancelUri, state);    
+  }
+  
+  public void confirmResource(Resource resource) {    
+    Map<String, String> params = new HashMap<String, String>();
+    params.put(Resource.Params.RESOURCE_ID, resource.getResourceId());
+    params.put(Resource.Params.RESOURCE_TYPE, resource.getResourceType());
+    params.put(Resource.Params.RESOURCE_URI, resource.getResourceUri());
+    if (StringUtils.isNotBlank(resource.getState())) {
+      params.put(Resource.Params.STATE, resource.getState());
+    }
+    if (!resource.getSignature().equals(signParams(params, accountDetails.getAppSecret()))) {
+      throw new SignatureException("Invalid signature when confirming resource");
+    }
+    
+    String payload = String.format("{\"%s\":\"%s\", \"%s\":\"%s\"}", 
+        Resource.Params.RESOURCE_ID, resource.getResourceId(),
+        Resource.Params.RESOURCE_TYPE, resource.getResourceType());
+    Map<String, String> headers = httpClient.basicAuth(accountDetails.getAppId(), accountDetails.getAppSecret());
+    httpClient.post(ApiPath.CONFIRM, headers, payload);
   }
   
   /**
@@ -65,6 +91,10 @@ public class Connect {
       params.put("state", state);
     }    
     return params;
+  }
+  
+  protected void setHttpClient(HttpClient httpClient) {
+    this.httpClient = httpClient;
   }
   
 }

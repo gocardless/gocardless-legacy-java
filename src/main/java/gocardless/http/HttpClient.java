@@ -14,6 +14,8 @@ import java.util.Map.Entry;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.apache.commons.codec.binary.Base64;
+
 public class HttpClient {
   
   public final static HttpClient DEFAULT = new HttpClient();
@@ -41,6 +43,13 @@ public class HttpClient {
   
   public String post(String url, Map<String, String> headers, String payload) {
     return request(RequestMethod.POST, url, headers, payload);
+  }
+  
+  public Map<String, String> basicAuth(String username, String password) {
+    String basicAuth = Base64.encodeBase64String(format("%s:%s", username, password).getBytes());
+    Map<String, String> headers = new HashMap<String, String>();
+    headers.put("Authorization", "Basic " + basicAuth);
+    return headers;
   }
   
   public int getConnectTimeout() {

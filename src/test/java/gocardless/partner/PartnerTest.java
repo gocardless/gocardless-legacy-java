@@ -20,8 +20,6 @@ public class PartnerTest {
   
   private Partner partner = new Partner(accountDetails);
   
-  private Map<String, String> headers = partner.headers();
-  
   @Mock private HttpClient mockHttpClient;
   
   @Before
@@ -31,17 +29,13 @@ public class PartnerTest {
   }
   
   @Test
-  public void testHeaders() {
-    assertEquals("Basic aWQwMTpzZWMwMQ==", partner.headers().get("Authorization"));
-  }
-  
-  @Test
   public void testNewMerchantUrl() throws Exception {
     assertEquals(partner.newMerchantUrl(Fixtures.REDIRECT_URI, null, null), Fixtures.NEW_MERCHANT_URL);
   }
   
   @Test
   public void testGetMechantAccessToken() {
+    Map<String, String> headers = mockHttpClient.basicAuth(accountDetails.getAppId(), accountDetails.getAppSecret());
     when(mockHttpClient.post(Fixtures.ACCESS_TOKEN_URL, headers, null)).thenReturn(Fixtures.MERCHANT_ACCESS_TOKEN_RESPONSE);    
     MerchantAccessToken merchantAccessToken = partner.getMerchantAccessToken(Fixtures.REDIRECT_URI, Fixtures.CODE);
     verify(mockHttpClient, times(1)).post(Fixtures.ACCESS_TOKEN_URL, headers, null);
