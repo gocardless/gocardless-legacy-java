@@ -1,5 +1,7 @@
 package gocardless.signature;
 
+import gocardless.exception.SignatureException;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -35,6 +37,16 @@ public class ParameterSigner {
       return sb.toString();
     } catch (Exception ex) {
       throw new RuntimeException(ex);
+    }
+  }
+  
+  /**
+   * Note that params must include the key "signature"
+   */
+  public static void validateSignature(Map<String, ? extends Object> params, String key) {
+    String signature = (String) params.remove("signature");
+    if (!signParams(params, key).equals(signature)) {
+      throw new SignatureException("Invalid signature");
     }
   }
 

@@ -1,9 +1,12 @@
 package gocardless.utils;
 
+import java.util.Map;
+
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Wrapper around gson
@@ -26,6 +29,11 @@ public class JsonUtils {
     JsonObject json = new JsonObject();
     json.add(root, gson.toJsonTree(src));
     return json.toString();
+  }
+  
+  public static Map<String, Object> toMap(String json) {
+    // See https://sites.google.com/site/gson/gson-user-guide#TOC-Serializing-and-Deserializing-Generic-Types
+    return gson.fromJson(json, new TypeToken<Map<String, Object>>(){}.getType());    
   }
   
 }

@@ -3,6 +3,7 @@ package gocardless;
 import gocardless.api.Api;
 import gocardless.connect.Connect;
 import gocardless.partner.Partner;
+import gocardless.webhook.WebHook;
 
 /**
  * GoCardless is the main interface to the GoCardless API.<p>
@@ -17,6 +18,8 @@ public class GoCardless {
   public final static Connect connect = new Connect(accountDetails);
   
   public final static Partner partner = new Partner(accountDetails);
+  
+  public final static WebHook webHook = new WebHook(accountDetails);
   
   public interface ApiBase {
     public static final String PRODUCTION = "https://gocardless.com";  

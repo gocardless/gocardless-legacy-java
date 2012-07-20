@@ -26,17 +26,21 @@ import org.apache.commons.beanutils.ConvertUtilsBean;
  * Modified to:
  *  - use underscored lowercase instead of camel case
  *  - use bracket notation instead of dot notation
- *  - include prefix of object being described
+ *  - include prefix of object being described by default (see includeRoot arg)
  */
 public class BeanUtils {
 
   public static Map<String, String> recursiveDescribe(Object object) {
+    return recursiveDescribe(object, true);
+  }
+  
+  public static Map<String, String> recursiveDescribe(Object object, boolean includeRoot) {
     Set<Object> cache = new HashSet<Object>();
-    return recursiveDescribe(object, null, cache);
+    return recursiveDescribe(object, null, includeRoot, cache);
   }
 
   @SuppressWarnings("unchecked")
-  private static Map<String, String> recursiveDescribe(Object object, String prefix, Set<Object> cache) {
+  private static Map<String, String> recursiveDescribe(Object object, String prefix, boolean includeRoot, Set<Object> cache) {
     if (object == null || cache.contains(object))
       return Collections.EMPTY_MAP;
     cache.add(object);
@@ -46,8 +50,8 @@ public class BeanUtils {
     Map<String, Object> properties = getProperties(object);
     for (String property : properties.keySet()) {      
       // Use bracket notation and underscored lowercase, instead of dot notation and camel case
-      prefix = (prefix != null) ? prefix : underscoreAndLowercase(object.getClass().getSimpleName());
-      String propertyName = format("%s[%s]", prefix, underscoreAndLowercase(property));
+      prefix = (prefix != null) ? prefix : (includeRoot) ? underscoreAndLowercase(object.getClass().getSimpleName()) : null;
+      String propertyName = (prefix != null) ? format("%s[%s]", prefix, underscoreAndLowercase(property)) : underscoreAndLowercase(property);
       
       Object value = properties.get(property);
       try {
@@ -156,7 +160,7 @@ public class BeanUtils {
       return valueMap;
     } else {
       // otherwise, treat it as a nested bean that needs to be described itself
-      return recursiveDescribe(value, key, cache);
+      return recursiveDescribe(value, key, true, cache);
     }
   }
   

@@ -1,20 +1,18 @@
 package gocardless.connect;
 
 import static gocardless.signature.ParameterSigner.signParams;
+import static gocardless.signature.ParameterSigner.validateSignature;
 import static gocardless.utils.Utils.nonce;
 import static gocardless.utils.Utils.urlEncodedQueryPath;
 import static gocardless.utils.Utils.utc;
 import static java.lang.String.format;
 import gocardless.AccountDetails;
 import gocardless.GoCardless;
-import gocardless.exception.SignatureException;
 import gocardless.http.HttpClient;
 import gocardless.utils.BeanUtils;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.commons.lang.StringUtils;
 
 public class Connect {
   
@@ -46,18 +44,8 @@ public class Connect {
     return this.newUrl(preAuthorization, ApiPath.NEW_PRE_AUTHORIZATION, redirectUri, cancelUri, state);    
   }
   
-  public void confirm(Resource resource) {    
-    Map<String, String> params = new HashMap<String, String>();
-    params.put(Resource.Params.RESOURCE_ID, resource.getResourceId());
-    params.put(Resource.Params.RESOURCE_TYPE, resource.getResourceType());
-    params.put(Resource.Params.RESOURCE_URI, resource.getResourceUri());
-    if (StringUtils.isNotBlank(resource.getState())) {
-      params.put(Resource.Params.STATE, resource.getState());
-    }
-    if (!resource.getSignature().equals(signParams(params, accountDetails.getAppSecret()))) {
-      throw new SignatureException("Invalid signature when confirming resource");
-    }
-    
+  public void confirm(Resource resource) {
+    validateSignature(BeanUtils.recursiveDescribe(resource, false), accountDetails.getAppSecret());
     String payload = String.format("{\"%s\":\"%s\", \"%s\":\"%s\"}", 
         Resource.Params.RESOURCE_ID, resource.getResourceId(),
         Resource.Params.RESOURCE_TYPE, resource.getResourceType());
