@@ -19,9 +19,9 @@ public class Bill implements Serializable {
   public Bill() {    
   }
   
-  public Bill(Float amount, String merchantId) {
-    this.amount = amount;
+  public Bill(String merchantId, Float amount) {
     this.merchantId = merchantId;
+    this.amount = amount;    
   }
 
   public Float getAmount() {

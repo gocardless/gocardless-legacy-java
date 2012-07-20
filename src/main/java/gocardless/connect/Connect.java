@@ -17,6 +17,8 @@ public class Connect {
   public interface ApiPath {
     public static final String BASE = format("%s/connect", GoCardless.getApiBase());  
     public static final String NEW_BILL = format("%s/bills/new", BASE);
+    public static final String NEW_SUBSCRIPTION = format("%s/subscriptions/new", BASE);
+    public static final String NEW_PRE_AUTHORIZATION = format("%s/pre_authorizations/new", BASE);
   }
   
   protected AccountDetails accountDetails;
@@ -25,15 +27,27 @@ public class Connect {
     this.accountDetails = accountDetails;
   }
   
+  public String newBillUrl(Bill bill, String redirectUri, String cancelUri, String state) {
+    return this.newUrl(bill, ApiPath.NEW_BILL, redirectUri, cancelUri, state);    
+  }
+  
+  public String newSubscriptionUrl(Subscription subscription, String redirectUri, String cancelUri, String state) {
+    return this.newUrl(subscription, ApiPath.NEW_SUBSCRIPTION, redirectUri, cancelUri, state);    
+  }
+  
+  public String newPreAuthorizationUrl(PreAuthorization preAuthorization, String redirectUri, String cancelUri, String state) {
+    return this.newUrl(preAuthorization, ApiPath.NEW_PRE_AUTHORIZATION, redirectUri, cancelUri, state);    
+  }
+  
   /**
    * Note that this method automatically includes the nonce, timestamp and signature.
-   */
-  public String newBillUrl(Bill bill, String redirectUri, String cancelUri, String state) {
+   */  
+  protected String newUrl(Object resource, String apiPath, String redirectUri, String cancelUri, String state) {
     Map<String, String> params = params(redirectUri, cancelUri, state);
-    params.putAll(BeanUtils.recursiveDescribe(bill));
+    params.putAll(BeanUtils.recursiveDescribe(resource));
     String signature = signParams(params, accountDetails.getAppSecret());
     params.put("signature", signature);
-    return format("%s?%s", ApiPath.NEW_BILL, urlEncodedQueryPath(params));
+    return format("%s?%s", apiPath, urlEncodedQueryPath(params));
   }
   
   protected Map<String, String> params(String redirectUri, String cancelUri, String state) {

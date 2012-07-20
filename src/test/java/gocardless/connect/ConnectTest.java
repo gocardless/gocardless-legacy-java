@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import gocardless.AccountDetails;
 import gocardless.utils.Utils;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
@@ -20,12 +21,30 @@ public class ConnectTest {
   
   private Connect connect = new Connect(accountDetails);
   
-  @Test
-  public void testNewBillUrl() throws Exception {
+  @Before
+  public void setup() throws Exception {
     PowerMockito.spy(Utils.class);
     PowerMockito.when(Utils.class, "nonce").thenReturn("Q9gMPVBZixfRiQ9VnRdDyrrMiskqT0ox8IT+HO3ReWMxavlco0Fw8rva+ZcI");
     PowerMockito.when(Utils.class, "utc").thenReturn("2012-03-21T08:55:56Z");    
-    assertEquals(connect.newBillUrl(new Bill(1000.0f, accountDetails.getMerchantId()), null, null, null), Fixtures.NEW_BILL_URL);
+  }
+  
+  @Test
+  public void testNewBillUrl() {
+    Bill bill = new Bill(accountDetails.getMerchantId(), 1000.0f);
+    assertEquals(connect.newBillUrl(bill, null, null, null), Fixtures.NEW_BILL_URL);
+  }
+  
+  
+  @Test
+  public void testNewSubscriptionUrl() {
+    Subscription subscription = new Subscription(accountDetails.getMerchantId(), 15.00f, 1, "month");
+    assertEquals(connect.newSubscriptionUrl(subscription, null, null, null), Fixtures.NEW_SUBSCRIPTION_URL);
+  }
+  
+  @Test
+  public void testNewPreAuthorizationUrl() {
+    PreAuthorization preAuthorization = new PreAuthorization(accountDetails.getMerchantId(), 15.00f, 1, "month");
+    assertEquals(connect.newPreAuthorizationUrl(preAuthorization, null, null, null), Fixtures.NEW_PRE_AUTHORIZATION_URL);
   }
   
 }
