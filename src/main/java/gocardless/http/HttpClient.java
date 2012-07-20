@@ -1,6 +1,7 @@
 package gocardless.http;
 
 import static java.lang.String.format;
+import gocardless.GoCardless;
 import gocardless.exception.GoCardlessException;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class HttpClient {
   
   public static final String CONTENT_TYPE = "application/json";
   
-  public static final String USER_AGENT = "gocardless-java";
+  public static final String USER_AGENT = format("gocardless-java/%s", GoCardless.VERSION);
   
   public static final Map<String, String> BASE_HEADERS = headers();
   
