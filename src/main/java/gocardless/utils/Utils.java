@@ -25,6 +25,10 @@ public class Utils {
     }
   }
   
+  public static String format(Date date) {
+    return DateFormatUtils.format(date, ISO_DATE_FORMAT);    
+  }
+  
   public static String utc() {
     return DateFormatUtils.formatUTC(new Date(), ISO_DATE_FORMAT);    
   }

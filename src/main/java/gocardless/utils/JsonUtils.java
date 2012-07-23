@@ -1,5 +1,6 @@
 package gocardless.utils;
 
+import java.lang.reflect.Type;
 import java.util.Map;
 
 import com.google.gson.FieldNamingPolicy;
@@ -19,6 +20,10 @@ public class JsonUtils {
 
   public static <T> T fromJson(String json, Class<T> clazz) {
     return gson.fromJson(json, clazz);
+  }
+  
+  public static <T> T fromJson(String json, Type type) {
+    return gson.fromJson(json, type);
   }
   
   public static String toJson(Object src) {

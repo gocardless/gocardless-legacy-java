@@ -2,6 +2,9 @@ package gocardless.api;
 
 import static gocardless.utils.Utils.parse;
 
+import java.util.Arrays;
+import java.util.List;
+
 public interface Fixtures {
 
   public final static String MERCHANT_RESPONSE = "{\n" + 
@@ -97,5 +100,11 @@ public interface Fixtures {
     .sourceId("FAZ6FGSMTCOZUG")
     .uri("https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z")
     .build();
+  
+  public final static String BILLS_RESPONSE = "[" + BILL_RESPONSE + "," + BILL_RESPONSE + "]";
+  
+  public final static List<Bill> BILLS = Arrays.asList(BILL, BILL);
+  
+  public final static String BILLS_FILTER = "after=2011-11-23T09%3A00%3A00Z&subscription_id=test_subscriptiod_id&paid=false&before=2011-11-22T09%3A00%3A00Z&source_id=FAZ6FGSMTCOZUG&pre_authorization_id=test_pre_authorized_id&user_id=BWJ2GP659OXPAU";
   
 }
