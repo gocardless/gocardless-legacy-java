@@ -51,18 +51,40 @@ public interface Fixtures {
     )
     .build();
   
-  public final static PreAuthorizedBill PRE_AUTHORIZED_BILL = new PreAuthorizedBill.Builder()
-    .amount(10.00f)
-    .preAuthorizationId("UQSTF7AMQMYWBL")
-    .build();
-  
-  public final static String PRE_AUTHORIZED_BILL_POST = 
-    "{" + 
-		  "\"bill\":{" + 
-		    "\"amount\":10.0," + 
-		    "\"pre_authorization_id\":\"UQSTF7AMQMYWBL\"" + 
-		  "}" + 
-		"}";
+  public final static String MERCHANT_USERS_RESPONSE =
+    "[\n" +
+		"   {\n" +
+		"      \"created_at\":\"2011-11-18T17:06:15Z\",\n" +
+		"      \"email\":\"customer40@gocardless.com\",\n" +
+		"      \"id\": \"JKH8HGKL9H\",\n" +
+		"      \"first_name\":\"Frank\",\n" +
+		"      \"last_name\":\"Smith\"\n" +
+		"   },\n" +
+		"   {\n" +
+		"      \"created_at\":\"2011-11-19T14:16:15Z\",\n" +
+		"      \"email\":\"customer41@gocardless.com\",\n" +
+		"      \"id\":\"JKH8HGKL9I\",\n" +
+		"      \"first_name\":\"James\",\n" +
+		"      \"last_name\":\"Dean\"\n" +
+		"   }\n" +
+		"]";
+
+  public final static List<User> MERCHANT_USERS = Arrays.asList(
+    new User.Builder()
+      .createdAt(parseUTC("2011-11-18T17:06:15Z"))
+      .email("customer40@gocardless.com")
+      .id("JKH8HGKL9H")
+      .firstName("Frank")
+      .lastName("Smith")
+      .build(),
+    new User.Builder()
+      .createdAt(parseUTC("2011-11-19T14:16:15Z"))
+      .email("customer41@gocardless.com")
+      .id("JKH8HGKL9I")
+      .firstName("James")
+      .lastName("Dean")
+      .build()
+  );
   
   public final static String BILL_RESPONSE = 
     "{\n" + 
@@ -162,9 +184,9 @@ public interface Fixtures {
   public final static List<Subscription> SUBSCRIPTIONS = Arrays.asList(SUBSCRIPTION, SUBSCRIPTION);
 
   public final static String SUBSCRIPTIONS_FILTER =
-    "after=2011-11-23T09%3A00%3A00Z" +
-    "&before=2011-11-22T09%3A00%3A00Z" +
-    "&user_id=BWJ2GP659OXPAU";
+    "after=2011-09-12T09%3A00%3A00Z" +
+    "&before=2011-09-13T09%3A00%3A00Z" +
+    "&user_id=HJEH638AJD";
 
   public final static String PRE_AUTHORIZATION_RESPONSE =
     "{\n" +
@@ -210,5 +232,27 @@ public interface Fixtures {
           .build()
     )
     .build();
+
+  public final static String PRE_AUTHORIZATIONS_RESPONSE = "[" + PRE_AUTHORIZATION_RESPONSE + "," + PRE_AUTHORIZATION_RESPONSE + "]";
+
+  public final static List<PreAuthorization> PRE_AUTHORIZATIONS = Arrays.asList(PRE_AUTHORIZATION, PRE_AUTHORIZATION);
+
+  public final static String PRE_AUTHORIZATIONS_FILTER =
+    "after=2011-02-18T09%3A00%3A00Z" +
+    "&before=2011-02-19T09%3A00%3A00Z" +
+    "&user_id=834JUH8KLJ";
+
+  public final static PreAuthorizedBill PRE_AUTHORIZED_BILL = new PreAuthorizedBill.Builder()
+    .amount(10.00f)
+    .preAuthorizationId("UQSTF7AMQMYWBL")
+    .build();
+
+  public final static String PRE_AUTHORIZED_BILL_POST = 
+    "{" + 
+      "\"bill\":{" + 
+        "\"amount\":10.0," + 
+        "\"pre_authorization_id\":\"UQSTF7AMQMYWBL\"" + 
+      "}" + 
+    "}";
 
 }

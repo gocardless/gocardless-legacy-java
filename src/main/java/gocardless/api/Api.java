@@ -22,11 +22,13 @@ public class Api {
   public interface ApiPath {
     public static final String BASE = format("%s/api/v1", GoCardless.getApiBase());  
     public static final String MERCHANT = format("%s/merchants", BASE);
+    public static final String MERCHANT_USERS = MERCHANT + "/%s/users";
     public static final String BILL = format("%s/bills", BASE);
     public static final String MERCHANT_BILLS = MERCHANT + "/%s/bills";
     public static final String SUBSCRIPTION = format("%s/subscriptions", BASE);
     public static final String MERCHANT_SUBSCRIPTIONS = MERCHANT + "/%s/subscriptions";
     public static final String PRE_AUTHORIZATION = format("%s/pre_authorizations", BASE);
+    public static final String MERCHANT_PRE_AUTHORIZATIONS = MERCHANT + "/%s/pre_authorizations";
   }
   
   protected HttpClient httpClient = HttpClient.DEFAULT;
@@ -40,7 +42,11 @@ public class Api {
   public Merchant getMerchant(String merchantId) {
     return fromJson(httpClient.get(format("%s/%s", ApiPath.MERCHANT, merchantId), headers(), null), Merchant.class);
   }
-  
+
+  public List<User> getMerchantUsers(String merchantId) {
+    return fromJson(httpClient.get(format(ApiPath.MERCHANT_USERS, merchantId), headers(), null), new TypeToken<ArrayList<User>>(){}.getType());
+  }
+
   public Bill getBill(String billId) {
     return fromJson(httpClient.get(format("%s/%s", ApiPath.BILL, billId), headers(), null), Bill.class);
   }
@@ -81,6 +87,18 @@ public class Api {
 
   public PreAuthorization getPreAuthorization(String preAuthorizationId) {
     return fromJson(httpClient.get(format("%s/%s", ApiPath.PRE_AUTHORIZATION, preAuthorizationId), headers(), null), PreAuthorization.class);
+  }
+
+  public List<PreAuthorization> getMerchantPreAuthorizations(String merchantId, String userId, Date before, Date after) {
+    Map<String, String> params = new HashMap<String, String>();
+    if (userId != null) params.put("user_id", userId);
+    if (before != null) params.put("before", formatUTC(before));
+    if (after != null) params.put("after", formatUTC(after));
+
+    String url = (params.isEmpty())
+      ? format(ApiPath.MERCHANT_PRE_AUTHORIZATIONS, merchantId)
+      : format(ApiPath.MERCHANT_PRE_AUTHORIZATIONS + "?%s", merchantId, urlEncodedQueryPath(params));
+    return fromJson(httpClient.get(url, headers(), null), new TypeToken<ArrayList<PreAuthorization>>(){}.getType());
   }
 
   public Bill postPreAuthorizedBill(PreAuthorizedBill preAuthorizedBill) {
