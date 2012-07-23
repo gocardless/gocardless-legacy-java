@@ -25,7 +25,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @PowerMockIgnore({"javax.crypto.*"}) // See http://code.google.com/p/powermock/issues/detail?id=274
 public class ConnectTest {
   
-  private AccountDetails accountDetails = new AccountDetails().appId("id01").appSecret("sec01").accessToken("tok01").merchantId("mer01");
+  private AccountDetails accountDetails = new AccountDetails.Builder()
+    .appId("id01").appSecret("sec01").accessToken("tok01").merchantId("mer01").build();
   
   private Connect connect = new Connect(accountDetails);
   

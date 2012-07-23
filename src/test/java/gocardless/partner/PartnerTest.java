@@ -17,7 +17,8 @@ import org.mockito.Mock;
 
 public class PartnerTest {
   
-  private AccountDetails accountDetails = new AccountDetails().appId("id01").appSecret("sec01").accessToken("tok01").merchantId("mer01");
+  private AccountDetails accountDetails = new AccountDetails.Builder()
+    .appId("id01").appSecret("sec01").accessToken("tok01").merchantId("mer01").build();
   
   private Partner partner = new Partner(accountDetails);
   

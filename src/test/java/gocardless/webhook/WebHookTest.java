@@ -6,7 +6,8 @@ import org.junit.Test;
 
 public class WebHookTest {
   
-  private AccountDetails accountDetails = new AccountDetails().appId("id01").appSecret("sec01").accessToken("tok01").merchantId("mer01");
+  private AccountDetails accountDetails = new AccountDetails.Builder()
+    .appId("id01").appSecret("sec01").accessToken("tok01").merchantId("mer01").build();
   
   private WebHook webHook = new WebHook(accountDetails);
   

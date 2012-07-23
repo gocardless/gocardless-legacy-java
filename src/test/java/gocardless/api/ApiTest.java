@@ -19,7 +19,8 @@ import org.mockito.Mock;
 
 public class ApiTest {
   
-  private AccountDetails accountDetails = new AccountDetails().appId("id01").appSecret("sec01").accessToken("tok01").merchantId("mer01");
+  private AccountDetails accountDetails = new AccountDetails.Builder()
+    .appId("id01").appSecret("sec01").accessToken("tok01").merchantId("mer01").build();
   
   private Api api = new Api(accountDetails);
   
