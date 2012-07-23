@@ -27,6 +27,7 @@ public class Api {
     public static final String MERCHANT_BILLS = MERCHANT + "/%s/bills";
     public static final String SUBSCRIPTION = format("%s/subscriptions", BASE);
     public static final String MERCHANT_SUBSCRIPTIONS = MERCHANT + "/%s/subscriptions";
+    public static final String SUBSCRIPTION_CANCEL = SUBSCRIPTION + "/%s/cancel";
     public static final String PRE_AUTHORIZATION = format("%s/pre_authorizations", BASE);
     public static final String MERCHANT_PRE_AUTHORIZATIONS = MERCHANT + "/%s/pre_authorizations";
   }
@@ -79,6 +80,10 @@ public class Api {
     return fromJson(
         httpClient.get(url(format(ApiPath.MERCHANT_SUBSCRIPTIONS, merchantId), params), headers()),
         new TypeToken<ArrayList<Subscription>>(){}.getType());
+  }
+
+  public Subscription cancelSubscription(String subscriptionId) {
+    return fromJson(httpClient.put(format(ApiPath.SUBSCRIPTION_CANCEL, subscriptionId), headers(), null), Subscription.class);
   }
 
   public PreAuthorization getPreAuthorization(String preAuthorizationId) {

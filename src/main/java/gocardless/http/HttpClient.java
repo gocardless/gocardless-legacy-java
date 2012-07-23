@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class HttpClient {
   
   public static final Map<String, String> BASE_HEADERS = headers();
   
-  protected enum RequestMethod {GET, POST};
+  protected enum RequestMethod {GET, POST, PUT};
   
   protected int connectTimeout = 30000; // 30 second default
   
@@ -46,6 +47,10 @@ public class HttpClient {
     return request(RequestMethod.POST, url, headers, payload);
   }
   
+  public String put(String url, Map<String, String> headers, String payload) {
+    return request(RequestMethod.PUT, url, headers, payload);
+  }
+
   public static String url(String url, Map<String, String> params) {
     if (params == null || params.isEmpty()) {
       return url;
@@ -87,17 +92,11 @@ public class HttpClient {
       if (method.equals(RequestMethod.GET)) {
         conn.setRequestMethod("GET");
       } else if (method.equals(RequestMethod.POST)) {
-        conn.setDoOutput(true);
         conn.setRequestMethod("POST");
-        OutputStream output = null;
-        try {
-             output = conn.getOutputStream();
-             if (payload != null) {
-               output.write(payload.getBytes(CHARSET));
-             }
-        } finally {
-          if (output != null) output.close();
-        }
+        writeOutput(conn, payload);
+      } else if (method.equals(RequestMethod.PUT)) {
+        conn.setRequestMethod("PUT");
+        writeOutput(conn, payload);
       } else {
         throw new GoCardlessException(format("Unsupported Request Method [method: %s, url: %s]", method, url));
       }
@@ -115,6 +114,19 @@ public class HttpClient {
     }
   }
   
+  protected void writeOutput(URLConnection connection, String payload) throws IOException {
+    if (payload != null) {
+      connection.setDoOutput(true);
+      OutputStream output = null;
+      try {
+           output = connection.getOutputStream();
+           output.write(payload.getBytes(CHARSET));
+      } finally {
+        if (output != null) output.close();
+      }
+    }
+  }
+
   /**
    * See http://stackoverflow.com/questions/309424/in-java-how-do-i-read-convert-an-inputstream-to-a-string
    */

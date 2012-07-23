@@ -109,6 +109,15 @@ public class ApiTest {
   }
 
   @Test
+  public void testCancelSubscription() {
+    String url = format(Api.ApiPath.SUBSCRIPTION_CANCEL, Fixtures.SUBSCRIPTION.getId());
+    when(mockHttpClient.put(url, headers, null)).thenReturn(Fixtures.SUBSCRIPTION_RESPONSE);
+    Subscription subscription = api.cancelSubscription(Fixtures.SUBSCRIPTION.getId());
+    verify(mockHttpClient, times(1)).put(url, headers, null);
+    assertEquals(Fixtures.SUBSCRIPTION, subscription);
+  }
+
+  @Test
   public void testGetPreAuthorization() {
     String url = format("%s/%s", Api.ApiPath.PRE_AUTHORIZATION, Fixtures.PRE_AUTHORIZATION.getId());
     when(mockHttpClient.get(url, headers)).thenReturn(Fixtures.PRE_AUTHORIZATION_RESPONSE);
