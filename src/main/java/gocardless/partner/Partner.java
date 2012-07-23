@@ -6,7 +6,6 @@ import static gocardless.utils.JsonUtils.fromJson;
 import static java.lang.String.format;
 import gocardless.AccountDetails;
 import gocardless.GoCardless;
-import gocardless.api.Merchant;
 import gocardless.http.HttpClient;
 import gocardless.utils.BeanUtils;
 
