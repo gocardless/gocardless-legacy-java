@@ -1,7 +1,8 @@
 package gocardless.partner;
 
+import static gocardless.http.HttpClient.basicAuth;
+import static gocardless.http.HttpClient.url;
 import static gocardless.utils.JsonUtils.fromJson;
-import static gocardless.utils.Utils.urlEncodedQueryPath;
 import static java.lang.String.format;
 import gocardless.AccountDetails;
 import gocardless.GoCardless;
@@ -34,16 +35,15 @@ public class Partner {
     if (merchant != null) {
       params.putAll(BeanUtils.recursiveDescribe(merchant));
     }
-    return format("%s?%s", ApiPath.AUTHORIZE, urlEncodedQueryPath(params));
+    return url(ApiPath.AUTHORIZE, params);
   }
   
   public MerchantAccessToken getMerchantAccessToken(String redirectUri, String code) {
     Map<String, String> params = params(redirectUri, null);
     params.put("code", code);
     params.put("grant_type", "authorization_code");
-    String accessTokenUrl = format("%s?%s", ApiPath.ACCESS_TOKEN, urlEncodedQueryPath(params));
-    Map<String, String> headers = httpClient.basicAuth(accountDetails.getAppId(), accountDetails.getAppSecret());
-    return fromJson(httpClient.post(accessTokenUrl, headers, null), MerchantAccessToken.class);
+    Map<String, String> headers = basicAuth(accountDetails.getAppId(), accountDetails.getAppSecret());
+    return fromJson(httpClient.post(url(ApiPath.ACCESS_TOKEN, params), headers, null), MerchantAccessToken.class);
   }
   
   protected Map<String, String> params(String redirectUri, String state) {

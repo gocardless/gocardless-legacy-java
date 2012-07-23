@@ -1,9 +1,9 @@
 package gocardless.api;
 
+import static gocardless.http.HttpClient.url;
 import static gocardless.utils.JsonUtils.fromJson;
 import static gocardless.utils.JsonUtils.toJson;
 import static gocardless.utils.Utils.formatUTC;
-import static gocardless.utils.Utils.urlEncodedQueryPath;
 import static java.lang.String.format;
 import gocardless.AccountDetails;
 import gocardless.GoCardless;
@@ -40,15 +40,15 @@ public class Api {
   }
   
   public Merchant getMerchant(String merchantId) {
-    return fromJson(httpClient.get(format("%s/%s", ApiPath.MERCHANT, merchantId), headers(), null), Merchant.class);
+    return fromJson(httpClient.get(format("%s/%s", ApiPath.MERCHANT, merchantId), headers()), Merchant.class);
   }
 
   public List<User> getMerchantUsers(String merchantId) {
-    return fromJson(httpClient.get(format(ApiPath.MERCHANT_USERS, merchantId), headers(), null), new TypeToken<ArrayList<User>>(){}.getType());
+    return fromJson(httpClient.get(format(ApiPath.MERCHANT_USERS, merchantId), headers()), new TypeToken<ArrayList<User>>(){}.getType());
   }
 
   public Bill getBill(String billId) {
-    return fromJson(httpClient.get(format("%s/%s", ApiPath.BILL, billId), headers(), null), Bill.class);
+    return fromJson(httpClient.get(format("%s/%s", ApiPath.BILL, billId), headers()), Bill.class);
   }
   
   public List<Bill> getMerchantBills(
@@ -62,15 +62,13 @@ public class Api {
     if (before != null) params.put("before", formatUTC(before));
     if (after != null) params.put("after", formatUTC(after));
     if (paid != null) params.put("paid", paid.toString());
-
-    String url = (params.isEmpty())
-      ? format(ApiPath.MERCHANT_BILLS, merchantId)
-      : format(ApiPath.MERCHANT_BILLS + "?%s", merchantId, urlEncodedQueryPath(params));
-    return fromJson(httpClient.get(url, headers(), null), new TypeToken<ArrayList<Bill>>(){}.getType());
+    return fromJson(
+        httpClient.get(url(format(ApiPath.MERCHANT_BILLS, merchantId), params), headers()),
+        new TypeToken<ArrayList<Bill>>(){}.getType());
   }
 
   public Subscription getSubscription(String subscriptionId) {
-    return fromJson(httpClient.get(format("%s/%s", ApiPath.SUBSCRIPTION, subscriptionId), headers(), null), Subscription.class);
+    return fromJson(httpClient.get(format("%s/%s", ApiPath.SUBSCRIPTION, subscriptionId), headers()), Subscription.class);
   }
   
   public List<Subscription> getMerchantSubscriptions(String merchantId, String userId, Date before, Date after) {
@@ -78,15 +76,13 @@ public class Api {
     if (userId != null) params.put("user_id", userId);
     if (before != null) params.put("before", formatUTC(before));
     if (after != null) params.put("after", formatUTC(after));
-
-    String url = (params.isEmpty())
-      ? format(ApiPath.MERCHANT_SUBSCRIPTIONS, merchantId)
-      : format(ApiPath.MERCHANT_SUBSCRIPTIONS + "?%s", merchantId, urlEncodedQueryPath(params));
-    return fromJson(httpClient.get(url, headers(), null), new TypeToken<ArrayList<Subscription>>(){}.getType());
+    return fromJson(
+        httpClient.get(url(format(ApiPath.MERCHANT_SUBSCRIPTIONS, merchantId), params), headers()),
+        new TypeToken<ArrayList<Subscription>>(){}.getType());
   }
 
   public PreAuthorization getPreAuthorization(String preAuthorizationId) {
-    return fromJson(httpClient.get(format("%s/%s", ApiPath.PRE_AUTHORIZATION, preAuthorizationId), headers(), null), PreAuthorization.class);
+    return fromJson(httpClient.get(format("%s/%s", ApiPath.PRE_AUTHORIZATION, preAuthorizationId), headers()), PreAuthorization.class);
   }
 
   public List<PreAuthorization> getMerchantPreAuthorizations(String merchantId, String userId, Date before, Date after) {
@@ -94,11 +90,9 @@ public class Api {
     if (userId != null) params.put("user_id", userId);
     if (before != null) params.put("before", formatUTC(before));
     if (after != null) params.put("after", formatUTC(after));
-
-    String url = (params.isEmpty())
-      ? format(ApiPath.MERCHANT_PRE_AUTHORIZATIONS, merchantId)
-      : format(ApiPath.MERCHANT_PRE_AUTHORIZATIONS + "?%s", merchantId, urlEncodedQueryPath(params));
-    return fromJson(httpClient.get(url, headers(), null), new TypeToken<ArrayList<PreAuthorization>>(){}.getType());
+    return fromJson(
+        httpClient.get(url(format(ApiPath.MERCHANT_PRE_AUTHORIZATIONS, merchantId), params), headers()),
+        new TypeToken<ArrayList<PreAuthorization>>(){}.getType());
   }
 
   public Bill postPreAuthorizedBill(PreAuthorizedBill preAuthorizedBill) {

@@ -1,5 +1,6 @@
 package gocardless.partner;
 
+import static gocardless.http.HttpClient.basicAuth;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -35,7 +36,7 @@ public class PartnerTest {
   
   @Test
   public void testGetMechantAccessToken() {
-    Map<String, String> headers = mockHttpClient.basicAuth(accountDetails.getAppId(), accountDetails.getAppSecret());
+    Map<String, String> headers = basicAuth(accountDetails.getAppId(), accountDetails.getAppSecret());
     when(mockHttpClient.post(Fixtures.ACCESS_TOKEN_URL, headers, null)).thenReturn(Fixtures.MERCHANT_ACCESS_TOKEN_RESPONSE);    
     MerchantAccessToken merchantAccessToken = partner.getMerchantAccessToken(Fixtures.REDIRECT_URI, Fixtures.CODE);
     verify(mockHttpClient, times(1)).post(Fixtures.ACCESS_TOKEN_URL, headers, null);

@@ -1,9 +1,10 @@
 package gocardless.connect;
 
+import static gocardless.http.HttpClient.basicAuth;
+import static gocardless.http.HttpClient.url;
 import static gocardless.signature.ParameterSigner.signParams;
 import static gocardless.signature.ParameterSigner.validateSignature;
 import static gocardless.utils.Utils.nonce;
-import static gocardless.utils.Utils.urlEncodedQueryPath;
 import static gocardless.utils.Utils.utc;
 import static java.lang.String.format;
 import gocardless.AccountDetails;
@@ -49,7 +50,7 @@ public class Connect {
     String payload = String.format("{\"%s\":\"%s\", \"%s\":\"%s\"}", 
         Resource.Params.RESOURCE_ID, resource.getResourceId(),
         Resource.Params.RESOURCE_TYPE, resource.getResourceType());
-    Map<String, String> headers = httpClient.basicAuth(accountDetails.getAppId(), accountDetails.getAppSecret());
+    Map<String, String> headers = basicAuth(accountDetails.getAppId(), accountDetails.getAppSecret());
     httpClient.post(ApiPath.CONFIRM, headers, payload);
   }
   
@@ -61,7 +62,7 @@ public class Connect {
     params.putAll(BeanUtils.recursiveDescribe(resource));
     String signature = signParams(params, accountDetails.getAppSecret());
     params.put("signature", signature);
-    return format("%s?%s", apiPath, urlEncodedQueryPath(params));
+    return url(apiPath, params);
   }
   
   protected Map<String, String> params(String redirectUri, String cancelUri, String state) {

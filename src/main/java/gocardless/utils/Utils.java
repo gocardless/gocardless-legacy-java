@@ -1,12 +1,9 @@
 package gocardless.utils;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
 import java.util.TimeZone;
 
 import org.apache.commons.codec.binary.Base64;
@@ -46,24 +43,6 @@ public class Utils {
    */
   public static String nonce() {
     return Base64.encodeBase64String(RandomStringUtils.randomAlphanumeric(40).getBytes());
-  }
-  
-  public static String urlEncodedQueryPath(Map<?, ?> map) {
-    try {
-      StringBuilder sb = new StringBuilder();
-      for (Map.Entry<?,?> entry : map.entrySet()) {
-          if (sb.length() > 0) {
-              sb.append("&");
-          }
-          sb.append(String.format("%s=%s",
-              URLEncoder.encode(entry.getKey().toString(), CHARSET),
-              URLEncoder.encode(entry.getValue().toString(), CHARSET)
-          ));
-      }
-      return sb.toString();
-    } catch (UnsupportedEncodingException ex) {
-      throw new RuntimeException(ex);
-    }
   }
   
 }

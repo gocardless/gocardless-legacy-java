@@ -38,15 +38,22 @@ public class HttpClient {
   public HttpClient() {
   }
   
-  public String get(String url, Map<String, String> headers, Map<String, String> params) {
-    return request(RequestMethod.GET, String.format("%s?%s", url, createQuery(params)), headers, null);
+  public String get(String url, Map<String, String> headers) {
+    return request(RequestMethod.GET, url, headers, null);
   }
   
   public String post(String url, Map<String, String> headers, String payload) {
     return request(RequestMethod.POST, url, headers, payload);
   }
   
-  public Map<String, String> basicAuth(String username, String password) {
+  public static String url(String url, Map<String, String> params) {
+    if (params == null || params.isEmpty()) {
+      return url;
+    }
+    return format("%s?%s", url, createQuery(params));
+  }
+  
+  public static Map<String, String> basicAuth(String username, String password) {
     String basicAuth = Base64.encodeBase64String(format("%s:%s", username, password).getBytes());
     Map<String, String> headers = new HashMap<String, String>();
     headers.put("Authorization", "Basic " + basicAuth);
@@ -130,7 +137,7 @@ public class HttpClient {
     return conn;
   }
   
-  protected String createQuery(Map<String, String> params) {
+  protected static String createQuery(Map<String, String> params) {
     if (params == null) {
       return "";
     }

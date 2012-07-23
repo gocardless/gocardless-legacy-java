@@ -1,5 +1,6 @@
 package gocardless.connect;
 
+import static gocardless.http.HttpClient.basicAuth;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -60,7 +61,7 @@ public class ConnectTest {
   
   @Test
   public void testConfirmResource() {    
-    Map<String, String> headers = mockHttpClient.basicAuth(accountDetails.getAppId(), accountDetails.getAppSecret());
+    Map<String, String> headers = basicAuth(accountDetails.getAppId(), accountDetails.getAppSecret());
     connect.confirm(Fixtures.RESOURCE);
     verify(mockHttpClient, times(1)).post(Connect.ApiPath.CONFIRM, headers, Fixtures.CONFIRM_POST);    
   }
