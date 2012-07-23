@@ -30,6 +30,7 @@ public class Api {
     public static final String SUBSCRIPTION_CANCEL = SUBSCRIPTION + "/%s/cancel";
     public static final String PRE_AUTHORIZATION = format("%s/pre_authorizations", BASE);
     public static final String MERCHANT_PRE_AUTHORIZATIONS = MERCHANT + "/%s/pre_authorizations";
+    public static final String PRE_AUTHORIZATION_CANCEL = PRE_AUTHORIZATION + "/%s/cancel";
   }
   
   protected HttpClient httpClient = HttpClient.DEFAULT;
@@ -98,6 +99,10 @@ public class Api {
     return fromJson(
         httpClient.get(url(format(ApiPath.MERCHANT_PRE_AUTHORIZATIONS, merchantId), params), headers()),
         new TypeToken<ArrayList<PreAuthorization>>(){}.getType());
+  }
+
+  public PreAuthorization cancelPreAuthorization(String preAuthorizationId) {
+    return fromJson(httpClient.put(format(ApiPath.PRE_AUTHORIZATION_CANCEL, preAuthorizationId), headers(), null), PreAuthorization.class);
   }
 
   public Bill postPreAuthorizedBill(PreAuthorizedBill preAuthorizedBill) {

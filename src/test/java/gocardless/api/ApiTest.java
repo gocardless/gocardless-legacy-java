@@ -146,6 +146,15 @@ public class ApiTest {
   }
 
   @Test
+  public void testCancelPreAuthorization() {
+    String url = format(Api.ApiPath.PRE_AUTHORIZATION_CANCEL, Fixtures.PRE_AUTHORIZATION.getId());
+    when(mockHttpClient.put(url, headers, null)).thenReturn(Fixtures.PRE_AUTHORIZATION_RESPONSE);
+    PreAuthorization preAuthorization = api.cancelPreAuthorization(Fixtures.PRE_AUTHORIZATION.getId());
+    verify(mockHttpClient, times(1)).put(url, headers, null);
+    assertEquals(Fixtures.PRE_AUTHORIZATION, preAuthorization);
+  }
+
+  @Test
   public void testPostPreAuthorizedBill() {
     when(mockHttpClient.post(Api.ApiPath.BILL, headers, Fixtures.PRE_AUTHORIZED_BILL_POST)).thenReturn(Fixtures.BILL_RESPONSE);
     Bill bill = api.postPreAuthorizedBill(Fixtures.PRE_AUTHORIZED_BILL);
