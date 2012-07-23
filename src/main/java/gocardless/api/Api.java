@@ -30,6 +30,10 @@ public class Api {
     return fromJson(httpClient.get(format("%s/%s", ApiPath.MERCHANT, merchantId), headers(), null), Merchant.class);
   }
   
+  public Bill getBill(String billId) {
+    return fromJson(httpClient.get(format("%s/%s", ApiPath.BILL, billId), headers(), null), Bill.class);
+  }
+  
   public Bill postPreAuthorizedBill(PreAuthorizedBill preAuthorizedBill) {
     return fromJson(httpClient.post(ApiPath.BILL, headers(), toJson(preAuthorizedBill, "bill")), Bill.class);
   }
