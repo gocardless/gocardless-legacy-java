@@ -40,9 +40,6 @@ public class Merchant implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
-    public SubResourceUris() {
-    }
-    
     private String users;
     private String bills;
     private String preAuthorizations;
@@ -327,19 +324,19 @@ public class Merchant implements Serializable {
 
     public Merchant build() {
       Merchant merchant = new Merchant();
-      merchant.setCreatedAt(createdAt);
-      merchant.setDescription(description);
-      merchant.setId(id);
-      merchant.setName(name);
-      merchant.setFirstName(firstName);
-      merchant.setLastName(lastName);
-      merchant.setEmail(email);
-      merchant.setUri(uri);
-      merchant.setBalance(balance);
-      merchant.setPendingBalance(pendingBalance);
-      merchant.setNextPayoutDate(nextPayoutDate);
-      merchant.setNextPayoutAmount(nextPayoutAmount);
-      merchant.setSubResourceUris(subResourceUris);
+      merchant.createdAt = this.createdAt;
+      merchant.description = this.description;
+      merchant.id = this.id;
+      merchant.name = this.name;
+      merchant.firstName = this.firstName;
+      merchant.lastName = this.lastName;
+      merchant.email = this.email;
+      merchant.uri = this.uri;
+      merchant.balance = this.balance;
+      merchant.pendingBalance = this.pendingBalance;
+      merchant.nextPayoutDate = this.nextPayoutDate;
+      merchant.nextPayoutAmount = this.nextPayoutAmount;
+      merchant.subResourceUris = this.subResourceUris;
       return merchant;
     }
 

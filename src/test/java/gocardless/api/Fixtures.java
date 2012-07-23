@@ -1,6 +1,6 @@
 package gocardless.api;
 
-import static gocardless.utils.Utils.parse;
+import static gocardless.utils.Utils.parseUTC;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +29,7 @@ public interface Fixtures {
   		"}";
   
   public final static Merchant MERCHANT = new Merchant.Builder()
-    .createdAt(parse("2011-11-18T17:07:09Z"))
+    .createdAt(parseUTC("2011-11-18T17:07:09Z"))
     .description(null)
     .id("WOQRUJU9OH2HH1")
     .name("Tom's Delicious Chicken Shop")
@@ -39,7 +39,7 @@ public interface Fixtures {
     .uri("https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1")
     .balance(12.00f)
     .pendingBalance(0.00f)
-    .nextPayoutDate(parse("2011-11-25T17:07:09Z"))
+    .nextPayoutDate(parseUTC("2011-11-25T17:07:09Z"))
     .nextPayoutAmount(12.00f)
     .subResourceUris(
         new Merchant.SubResourceUris.Builder()
@@ -88,7 +88,7 @@ public interface Fixtures {
     .gocardlessFees(0.10f)
     .partnerFees(0.00f)
     .currency("GBP")
-    .createdAt(parse("2011-11-22T11:59:12Z"))
+    .createdAt(parseUTC("2011-11-22T11:59:12Z"))
     .description(null)
     .id("PWSDXRYSCOKA7Z")
     .name(null)
@@ -105,6 +105,56 @@ public interface Fixtures {
   
   public final static List<Bill> BILLS = Arrays.asList(BILL, BILL);
   
-  public final static String BILLS_FILTER = "after=2011-11-23T09%3A00%3A00Z&subscription_id=test_subscriptiod_id&paid=false&before=2011-11-22T09%3A00%3A00Z&source_id=FAZ6FGSMTCOZUG&pre_authorization_id=test_pre_authorized_id&user_id=BWJ2GP659OXPAU";
+  public final static String BILLS_FILTER =
+    "after=2011-11-23T09%3A00%3A00Z" +
+    "&subscription_id=test_subscriptiod_id" +
+    "&paid=false" +
+    "&before=2011-11-22T09%3A00%3A00Z" +
+    "&source_id=FAZ6FGSMTCOZUG" +
+    "&pre_authorization_id=test_pre_authorized_id" +
+    "&user_id=BWJ2GP659OXPAU";
+
+  public final static String SUBSCRIPTION_RESPONSE =
+    "{\n" +
+		"   \"amount\":\"44.0\",\n" +
+		"   \"interval_length\":1,\n" +
+		"   \"interval_unit\":\"month\",\n" +
+		"   \"created_at\":\"2011-09-12T13:51:30Z\",\n" +
+		"   \"currency\":\"GBP\",\n" +
+		"   \"name\":\"London Gym Membership\",\n" +
+		"   \"description\":\"Entitles you to use all of the gyms around London\",\n" +
+		"   \"expires_at\":null,\n" +
+		"   \"next_interval_start\":\"2011-10-12T13:51:30Z\",\n" +
+		"   \"id\": \"AJKH638A99\",\n" +
+		"   \"merchant_id\":\"WOQRUJU9OH2HH1\",\n" +
+		"   \"status\":\"active\",\n" +
+		"   \"user_id\":\"HJEH638AJD\",\n" +
+		"   \"uri\":\"https://gocardless.com/api/v1/subscriptions/1580\",\n" +
+		"   \"sub_resource_uris\":{\n" +
+		"      \"bills\":\"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/bills?source_id=1580\"\n" +
+		"   }\n" +
+		"}";
+  
+  public final static Subscription SUBSCRIPTION = new Subscription.Builder()
+    .amount(44.00f)
+    .intervalLength(1)
+    .intervalUnit("month")
+    .createdAt(parseUTC("2011-09-12T13:51:30Z"))
+    .currency("GBP")
+    .name("London Gym Membership")
+    .description("Entitles you to use all of the gyms around London")
+    .expiresAt(null)
+    .nextIntervalStart(parseUTC("2011-10-12T13:51:30Z"))
+    .id("AJKH638A99")
+    .merchantId("WOQRUJU9OH2HH1")
+    .status("active")
+    .userId("HJEH638AJD")
+    .uri("https://gocardless.com/api/v1/subscriptions/1580")
+    .subResourceUris(
+        new Subscription.SubResourceUris.Builder()
+          .bills("https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/bills?source_id=1580")
+          .build()
+    )
+    .build();
   
 }

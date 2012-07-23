@@ -1,6 +1,6 @@
 package gocardless.api;
 
-import static gocardless.utils.Utils.parse;
+import static gocardless.utils.Utils.parseUTC;
 import static java.lang.String.format;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.times;
@@ -66,9 +66,18 @@ public class ApiTest {
     when(mockHttpClient.get(url, headers, null)).thenReturn(Fixtures.BILLS_RESPONSE);
     List<Bill> bills = api.getMerchantBills(Fixtures.MERCHANT.getId(),
         Fixtures.BILL.getSourceId(), "test_subscriptiod_id", "test_pre_authorized_id", Fixtures.BILL.getUserId(),
-        parse("2011-11-22T09:00:00Z"), parse("2011-11-23T09:00:00Z"), Boolean.FALSE);
+        parseUTC("2011-11-22T09:00:00Z"), parseUTC("2011-11-23T09:00:00Z"), Boolean.FALSE);
     verify(mockHttpClient, times(1)).get(url, headers, null);
     assertEquals(Fixtures.BILLS, bills);
+  }
+  
+  @Test
+  public void testGetSubscription() {
+    String url = format("%s/%s", Api.ApiPath.SUBSCRIPTION, Fixtures.SUBSCRIPTION.getId());
+    when(mockHttpClient.get(url, headers, null)).thenReturn(Fixtures.SUBSCRIPTION_RESPONSE);
+    Subscription subscription = api.getSubscription(Fixtures.SUBSCRIPTION.getId());
+    verify(mockHttpClient, times(1)).get(url, headers, null);
+    assertEquals(Fixtures.SUBSCRIPTION, subscription);
   }
   
   @Test

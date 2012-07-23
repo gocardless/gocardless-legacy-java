@@ -2,7 +2,7 @@ package gocardless.api;
 
 import static gocardless.utils.JsonUtils.fromJson;
 import static gocardless.utils.JsonUtils.toJson;
-import static gocardless.utils.Utils.format;
+import static gocardless.utils.Utils.formatUTC;
 import static gocardless.utils.Utils.urlEncodedQueryPath;
 import static java.lang.String.format;
 import gocardless.AccountDetails;
@@ -24,6 +24,7 @@ public class Api {
     public static final String MERCHANT = format("%s/merchants", BASE);
     public static final String MERCHANT_BILLS = MERCHANT + "/%s/bills";
     public static final String BILL = format("%s/bills", BASE);
+    public static final String SUBSCRIPTION = format("%s/subscriptions", BASE);
   }
   
   protected HttpClient httpClient = HttpClient.DEFAULT;
@@ -50,14 +51,18 @@ public class Api {
     if (subscriptionId != null) params.put("subscription_id", subscriptionId);
     if (preAuthorizationId != null) params.put("pre_authorization_id", preAuthorizationId);
     if (userId != null) params.put("user_id", userId);
-    if (before != null) params.put("before", format(before));
-    if (after != null) params.put("after", format(after));
+    if (before != null) params.put("before", formatUTC(before));
+    if (after != null) params.put("after", formatUTC(after));
     if (paid != null) params.put("paid", paid.toString());
 
     String url = (params.isEmpty())
       ? format(ApiPath.MERCHANT_BILLS, merchantId)
       : format(ApiPath.MERCHANT_BILLS + "?%s", merchantId, urlEncodedQueryPath(params));
     return fromJson(httpClient.get(url, headers(), null), new TypeToken<ArrayList<Bill>>(){}.getType());
+  }
+
+  public Subscription getSubscription(String subscriptionId) {
+    return fromJson(httpClient.get(format("%s/%s", ApiPath.SUBSCRIPTION, subscriptionId), headers(), null), Subscription.class);
   }
 
   public Bill postPreAuthorizedBill(PreAuthorizedBill preAuthorizedBill) {
