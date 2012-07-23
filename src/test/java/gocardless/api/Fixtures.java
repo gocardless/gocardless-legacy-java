@@ -157,4 +157,49 @@ public interface Fixtures {
     )
     .build();
   
+  public final static String PRE_AUTHORIZATION_RESPONSE =
+    "{\n" +
+    "   \"created_at\":\"2011-02-18T15:25:58Z\",\n" +
+    "   \"currency\":\"GBP\",\n" +
+    "   \"name\":\"Variable Payments For Tennis Court Rental\",\n" +
+    "   \"description\":\"You will be charged according to your monthly usage of the tennis courts\",\n" +
+    "   \"expires_at\":null,\n" +
+    "   \"id\": \"1234JKH8KLJ\",\n" +
+    "   \"interval_length\":1,\n" +
+    "   \"interval_unit\":\"month\",\n" +
+    "   \"merchant_id\": \"WOQRUJU9OH2HH1\",\n" +
+    "   \"status\":\"active\",\n" +
+    "   \"remaining_amount\": \"65.0\",\n" +
+    "   \"next_interval_start\": \"2012-02-20T00:00:00Z\",\n" +
+    "   \"user_id\": \"834JUH8KLJ\",\n" +
+    "   \"max_amount\":\"70.0\",\n" +
+    "   \"uri\":\"https://gocardless.com/api/v1/pre_authorizations/1609\",\n" +
+    "   \"sub_resource_uris\":{\n" +
+    "      \"bills\":\"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/bills?source_id=1609\"\n" +
+    "   }\n" +
+    "}";
+
+  public final static PreAuthorization PRE_AUTHORIZATION = new PreAuthorization.Builder()
+    .maxAmount(70.00f)
+    .intervalLength(1)
+    .intervalUnit("month")
+    .createdAt(parseUTC("2011-02-18T15:25:58Z"))
+    .currency("GBP")
+    .name("Variable Payments For Tennis Court Rental")
+    .description("You will be charged according to your monthly usage of the tennis courts")
+    .expiresAt(null)
+    .nextIntervalStart(parseUTC("2012-02-20T00:00:00Z"))
+    .id("1234JKH8KLJ")
+    .merchantId("WOQRUJU9OH2HH1")
+    .status("active")
+    .remainingAmount(65.0f)
+    .userId("834JUH8KLJ")
+    .uri("https://gocardless.com/api/v1/pre_authorizations/1609")
+    .subResourceUris(
+        new PreAuthorization.SubResourceUris.Builder()
+          .bills("https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/bills?source_id=1609")
+          .build()
+    )
+    .build();
+
 }

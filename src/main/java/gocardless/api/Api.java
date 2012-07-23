@@ -25,6 +25,7 @@ public class Api {
     public static final String MERCHANT_BILLS = MERCHANT + "/%s/bills";
     public static final String BILL = format("%s/bills", BASE);
     public static final String SUBSCRIPTION = format("%s/subscriptions", BASE);
+    public static final String PRE_AUTHORIZATION = format("%s/pre_authorizations", BASE);
   }
   
   protected HttpClient httpClient = HttpClient.DEFAULT;
@@ -63,6 +64,10 @@ public class Api {
 
   public Subscription getSubscription(String subscriptionId) {
     return fromJson(httpClient.get(format("%s/%s", ApiPath.SUBSCRIPTION, subscriptionId), headers(), null), Subscription.class);
+  }
+
+  public PreAuthorization getPreAuthorization(String preAuthorizationId) {
+    return fromJson(httpClient.get(format("%s/%s", ApiPath.PRE_AUTHORIZATION, preAuthorizationId), headers(), null), PreAuthorization.class);
   }
 
   public Bill postPreAuthorizedBill(PreAuthorizedBill preAuthorizedBill) {
