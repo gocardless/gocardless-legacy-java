@@ -156,7 +156,16 @@ public interface Fixtures {
           .build()
     )
     .build();
-  
+
+  public final static String SUBSCRIPTIONS_RESPONSE = "[" + SUBSCRIPTION_RESPONSE + "," + SUBSCRIPTION_RESPONSE + "]";
+
+  public final static List<Subscription> SUBSCRIPTIONS = Arrays.asList(SUBSCRIPTION, SUBSCRIPTION);
+
+  public final static String SUBSCRIPTIONS_FILTER =
+    "after=2011-11-23T09%3A00%3A00Z" +
+    "&before=2011-11-22T09%3A00%3A00Z" +
+    "&user_id=BWJ2GP659OXPAU";
+
   public final static String PRE_AUTHORIZATION_RESPONSE =
     "{\n" +
     "   \"created_at\":\"2011-02-18T15:25:58Z\",\n" +

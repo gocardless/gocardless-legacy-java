@@ -79,7 +79,26 @@ public class ApiTest {
     verify(mockHttpClient, times(1)).get(url, headers, null);
     assertEquals(Fixtures.SUBSCRIPTION, subscription);
   }
-  
+
+  @Test
+  public void testGetMerchantSubscriptions() {
+    String url = format(Api.ApiPath.MERCHANT_SUBSCRIPTIONS, Fixtures.MERCHANT.getId());
+    when(mockHttpClient.get(url, headers, null)).thenReturn(Fixtures.SUBSCRIPTIONS_RESPONSE);
+    List<Subscription> subscriptions = api.getMerchantSubscriptions(Fixtures.MERCHANT.getId(), null, null, null);
+    verify(mockHttpClient, times(1)).get(url, headers, null);
+    assertEquals(Fixtures.SUBSCRIPTIONS, subscriptions);
+  }
+
+  @Test
+  public void testGetFilteredMerchantSubscriptions() {
+    String url = format(Api.ApiPath.MERCHANT_SUBSCRIPTIONS + "?%s", Fixtures.MERCHANT.getId(), Fixtures.SUBSCRIPTIONS_FILTER);
+    when(mockHttpClient.get(url, headers, null)).thenReturn(Fixtures.SUBSCRIPTIONS_RESPONSE);
+    List<Subscription> subscriptions = api.getMerchantSubscriptions(Fixtures.MERCHANT.getId(),
+        Fixtures.BILL.getUserId(), parseUTC("2011-11-22T09:00:00Z"), parseUTC("2011-11-23T09:00:00Z"));
+    verify(mockHttpClient, times(1)).get(url, headers, null);
+    assertEquals(Fixtures.SUBSCRIPTIONS, subscriptions);
+  }
+
   @Test
   public void testGetPreAuthorization() {
     String url = format("%s/%s", Api.ApiPath.PRE_AUTHORIZATION, Fixtures.PRE_AUTHORIZATION.getId());

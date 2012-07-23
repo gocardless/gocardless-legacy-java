@@ -22,9 +22,10 @@ public class Api {
   public interface ApiPath {
     public static final String BASE = format("%s/api/v1", GoCardless.getApiBase());  
     public static final String MERCHANT = format("%s/merchants", BASE);
-    public static final String MERCHANT_BILLS = MERCHANT + "/%s/bills";
     public static final String BILL = format("%s/bills", BASE);
+    public static final String MERCHANT_BILLS = MERCHANT + "/%s/bills";
     public static final String SUBSCRIPTION = format("%s/subscriptions", BASE);
+    public static final String MERCHANT_SUBSCRIPTIONS = MERCHANT + "/%s/subscriptions";
     public static final String PRE_AUTHORIZATION = format("%s/pre_authorizations", BASE);
   }
   
@@ -64,6 +65,18 @@ public class Api {
 
   public Subscription getSubscription(String subscriptionId) {
     return fromJson(httpClient.get(format("%s/%s", ApiPath.SUBSCRIPTION, subscriptionId), headers(), null), Subscription.class);
+  }
+  
+  public List<Subscription> getMerchantSubscriptions(String merchantId, String userId, Date before, Date after) {
+    Map<String, String> params = new HashMap<String, String>();
+    if (userId != null) params.put("user_id", userId);
+    if (before != null) params.put("before", formatUTC(before));
+    if (after != null) params.put("after", formatUTC(after));
+
+    String url = (params.isEmpty())
+      ? format(ApiPath.MERCHANT_SUBSCRIPTIONS, merchantId)
+      : format(ApiPath.MERCHANT_SUBSCRIPTIONS + "?%s", merchantId, urlEncodedQueryPath(params));
+    return fromJson(httpClient.get(url, headers(), null), new TypeToken<ArrayList<Subscription>>(){}.getType());
   }
 
   public PreAuthorization getPreAuthorization(String preAuthorizationId) {
