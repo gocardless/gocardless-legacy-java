@@ -6,6 +6,13 @@
   <packaging>jar</packaging>
   <name>gocardless-java</name>
   <url>https://gocardless.com</url>
+  <description>GoCardless Java Client Library</description>
+
+  <parent>
+	<groupId>org.sonatype.oss</groupId>
+	<artifactId>oss-parent</artifactId>
+	<version>7</version>
+  </parent>
 
   <scm>
     <url>https://github.com/gocardless/gocardless-java</url>
@@ -15,6 +22,19 @@
   
   <build>
 	<plugins>
+		<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>sign-artifacts</id>
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>sign</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
 		<plugin>
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-compiler-plugin</artifactId>
@@ -34,7 +54,19 @@
 					</goals>
 				</execution>
 			</executions>
-		</plugin>            
+		</plugin>
+		<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>attach-javadocs</id>
+                    <goals>
+                        <goal>jar</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
 	</plugins>
   </build>
   
