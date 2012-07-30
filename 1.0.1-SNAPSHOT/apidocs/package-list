@@ -1,0 +1,9 @@
+gocardless
+gocardless.api
+gocardless.connect
+gocardless.exception
+gocardless.http
+gocardless.partner
+gocardless.signature
+gocardless.utils
+gocardless.webhook
