@@ -17,8 +17,12 @@
   <scm>
     <url>https://github.com/gocardless/gocardless-java</url>
     <connection>scm:git:git://github.com/gocardless/gocardless-java.git</connection>
-    <developerConnection>scm:git:git://github.com/gocardless/gocardless-java.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:gocardless/gocardless-java.git</developerConnection>
   </scm>
+
+  <properties>
+  	<github.global.server>github</github.global.server>
+  </properties>
   
   <build>
 	<plugins>
