@@ -78,7 +78,6 @@
 			<configuration>
 				<message>Building site for ${project.version}</message>
 				<server>github</server>
-				<path>${project.version}</path>
 			</configuration>
 			<executions>
 				<execution>
