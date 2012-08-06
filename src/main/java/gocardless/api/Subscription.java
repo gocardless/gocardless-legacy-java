@@ -1,6 +1,7 @@
 package gocardless.api;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -10,7 +11,7 @@ public class Subscription implements Serializable {
 
   private static final long serialVersionUID = 1L;
   
-  private Float amount;
+  private BigDecimal amount;
   
   private Integer intervalLength;
   
@@ -83,11 +84,11 @@ public class Subscription implements Serializable {
     
   }
   
-  public Float getAmount() {
+  public BigDecimal getAmount() {
     return amount;
   }
 
-  public void setAmount(Float amount) {
+  public void setAmount(BigDecimal amount) {
     this.amount = amount;
   }
 
@@ -215,7 +216,7 @@ public class Subscription implements Serializable {
   
   public static class Builder {
     
-    private Float amount;
+    private BigDecimal amount;
     
     private Integer intervalLength;
     
@@ -245,7 +246,7 @@ public class Subscription implements Serializable {
 
     private SubResourceUris subResourceUris = new SubResourceUris();
 
-    public Builder amount(Float amount) {
+    public Builder amount(BigDecimal amount) {
       this.amount = amount;
       return this;
     }

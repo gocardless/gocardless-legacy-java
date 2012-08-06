@@ -1,6 +1,7 @@
 package gocardless.api;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -26,13 +27,13 @@ public class Merchant implements Serializable {
   
   private String uri;
   
-  private Float balance;
+  private BigDecimal balance;
   
-  private Float pendingBalance;
+  private BigDecimal pendingBalance;
   
   private Date nextPayoutDate;
   
-  private Float nextPayoutAmount;
+  private BigDecimal nextPayoutAmount;
   
   private SubResourceUris subResourceUris = new SubResourceUris();
   
@@ -191,19 +192,19 @@ public class Merchant implements Serializable {
     this.uri = uri;
   }
 
-  public Float getBalance() {
+  public BigDecimal getBalance() {
     return balance;
   }
 
-  public void setBalance(Float balance) {
+  public void setBalance(BigDecimal balance) {
     this.balance = balance;
   }
 
-  public Float getPendingBalance() {
+  public BigDecimal getPendingBalance() {
     return pendingBalance;
   }
 
-  public void setPendingBalance(Float pendingBalance) {
+  public void setPendingBalance(BigDecimal pendingBalance) {
     this.pendingBalance = pendingBalance;
   }
 
@@ -215,11 +216,11 @@ public class Merchant implements Serializable {
     this.nextPayoutDate = nextPayoutDate;
   }
 
-  public Float getNextPayoutAmount() {
+  public BigDecimal getNextPayoutAmount() {
     return nextPayoutAmount;
   }
 
-  public void setNextPayoutAmount(Float nextPayoutAmount) {
+  public void setNextPayoutAmount(BigDecimal nextPayoutAmount) {
     this.nextPayoutAmount = nextPayoutAmount;
   }
 
@@ -251,10 +252,10 @@ public class Merchant implements Serializable {
     private String lastName;
     private String email;
     private String uri;
-    private Float balance;
-    private Float pendingBalance;
+    private BigDecimal balance;
+    private BigDecimal pendingBalance;
     private Date nextPayoutDate;
-    private Float nextPayoutAmount;
+    private BigDecimal nextPayoutAmount;
     private SubResourceUris subResourceUris = new SubResourceUris();
 
     public Builder createdAt(Date createdAt) {
@@ -297,12 +298,12 @@ public class Merchant implements Serializable {
       return this;
     }
     
-    public Builder balance(Float balance) {
+    public Builder balance(BigDecimal balance) {
       this.balance = balance;
       return this;
     }
     
-    public Builder pendingBalance(Float pendingBalance) {
+    public Builder pendingBalance(BigDecimal pendingBalance) {
       this.pendingBalance = pendingBalance;
       return this;
     }
@@ -312,7 +313,7 @@ public class Merchant implements Serializable {
       return this;
     }
     
-    public Builder nextPayoutAmount(Float nextPayoutAmount) {
+    public Builder nextPayoutAmount(BigDecimal nextPayoutAmount) {
       this.nextPayoutAmount = nextPayoutAmount;
       return this;
     }

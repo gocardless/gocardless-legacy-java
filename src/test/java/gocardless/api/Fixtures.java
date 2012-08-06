@@ -2,6 +2,7 @@ package gocardless.api;
 
 import static gocardless.utils.Utils.parseUTC;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,10 +38,10 @@ public interface Fixtures {
     .lastName("Blomfield")
     .email("tom@gocardless.com")
     .uri("https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1")
-    .balance(12.00f)
-    .pendingBalance(0.00f)
+    .balance(new BigDecimal("12.00"))
+    .pendingBalance(new BigDecimal("0.00"))
     .nextPayoutDate(parseUTC("2011-11-25T17:07:09Z"))
-    .nextPayoutAmount(12.00f)
+    .nextPayoutAmount(new BigDecimal("12.00"))
     .subResourceUris(
         new Merchant.SubResourceUris.Builder()
           .users("https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/users")
@@ -106,9 +107,9 @@ public interface Fixtures {
 		"}";
   
   public final static Bill BILL = new Bill.Builder()
-    .amount(10.00f)
-    .gocardlessFees(0.10f)
-    .partnerFees(0.00f)
+    .amount(new BigDecimal("10.00"))
+    .gocardlessFees(new BigDecimal("0.10"))
+    .partnerFees(new BigDecimal("0"))
     .currency("GBP")
     .createdAt(parseUTC("2011-11-22T11:59:12Z"))
     .description(null)
@@ -158,7 +159,7 @@ public interface Fixtures {
 		"}";
   
   public final static Subscription SUBSCRIPTION = new Subscription.Builder()
-    .amount(44.00f)
+    .amount(new BigDecimal("44.0"))
     .intervalLength(1)
     .intervalUnit("month")
     .createdAt(parseUTC("2011-09-12T13:51:30Z"))
@@ -211,7 +212,7 @@ public interface Fixtures {
     "}";
 
   public final static PreAuthorization PRE_AUTHORIZATION = new PreAuthorization.Builder()
-    .maxAmount(70.00f)
+    .maxAmount(new BigDecimal("70.0"))
     .intervalLength(1)
     .intervalUnit("month")
     .createdAt(parseUTC("2011-02-18T15:25:58Z"))
@@ -223,7 +224,7 @@ public interface Fixtures {
     .id("1234JKH8KLJ")
     .merchantId("WOQRUJU9OH2HH1")
     .status("active")
-    .remainingAmount(65.0f)
+    .remainingAmount(new BigDecimal("65.0"))
     .userId("834JUH8KLJ")
     .uri("https://gocardless.com/api/v1/pre_authorizations/1609")
     .subResourceUris(
@@ -243,7 +244,7 @@ public interface Fixtures {
     "&user_id=834JUH8KLJ";
 
   public final static PreAuthorizedBill PRE_AUTHORIZED_BILL = new PreAuthorizedBill.Builder()
-    .amount(10.00f)
+    .amount(new BigDecimal("10.0"))
     .preAuthorizationId("UQSTF7AMQMYWBL")
     .build();
 

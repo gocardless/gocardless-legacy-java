@@ -1,6 +1,7 @@
 package gocardless.api;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -10,7 +11,7 @@ public class PreAuthorization implements Serializable {
 
   private static final long serialVersionUID = 1L;
   
-  private Float maxAmount;
+  private BigDecimal maxAmount;
   
   private Integer intervalLength;
   
@@ -34,7 +35,7 @@ public class PreAuthorization implements Serializable {
   
   private String status;
   
-  private Float remainingAmount;
+  private BigDecimal remainingAmount;
   
   private String userId;
   
@@ -85,11 +86,11 @@ public class PreAuthorization implements Serializable {
     
   }
   
-  public Float getMaxAmount() {
+  public BigDecimal getMaxAmount() {
     return maxAmount;
   }
 
-  public void setMaxAmount(Float maxAmount) {
+  public void setMaxAmount(BigDecimal maxAmount) {
     this.maxAmount = maxAmount;
   }
 
@@ -181,11 +182,11 @@ public class PreAuthorization implements Serializable {
     this.status = status;
   }
   
-  public Float getRemainingAmount() {
+  public BigDecimal getRemainingAmount() {
     return remainingAmount;
   }
 
-  public void setRemainingAmount(Float remainingAmount) {
+  public void setRemainingAmount(BigDecimal remainingAmount) {
     this.remainingAmount = remainingAmount;
   }
 
@@ -225,7 +226,7 @@ public class PreAuthorization implements Serializable {
   
   public static class Builder {
     
-    private Float maxAmount;
+    private BigDecimal maxAmount;
     
     private Integer intervalLength;
     
@@ -249,7 +250,7 @@ public class PreAuthorization implements Serializable {
     
     private String status;
     
-    private Float remainingAmount;
+    private BigDecimal remainingAmount;
     
     private String userId;
     
@@ -257,7 +258,7 @@ public class PreAuthorization implements Serializable {
 
     private SubResourceUris subResourceUris = new SubResourceUris();
 
-    public Builder maxAmount(Float maxAmount) {
+    public Builder maxAmount(BigDecimal maxAmount) {
       this.maxAmount = maxAmount;
       return this;
     }
@@ -317,7 +318,7 @@ public class PreAuthorization implements Serializable {
       return this;
     }
     
-    public Builder remainingAmount(Float remainingAmount) {
+    public Builder remainingAmount(BigDecimal remainingAmount) {
       this.remainingAmount = remainingAmount;
       return this;
     }

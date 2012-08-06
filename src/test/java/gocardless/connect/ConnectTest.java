@@ -9,6 +9,7 @@ import gocardless.AccountDetails;
 import gocardless.http.HttpClient;
 import gocardless.utils.Utils;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import org.junit.Before;
@@ -43,20 +44,19 @@ public class ConnectTest {
   
   @Test
   public void testNewBillUrl() {
-    Bill bill = new Bill(accountDetails.getMerchantId(), 1000.0f);
+    Bill bill = new Bill(accountDetails.getMerchantId(), new BigDecimal("1000.0"));
     assertEquals(connect.newBillUrl(bill, null, null, null), Fixtures.NEW_BILL_URL);
   }
   
-  
   @Test
   public void testNewSubscriptionUrl() {
-    Subscription subscription = new Subscription(accountDetails.getMerchantId(), 15.00f, 1, "month");
+    Subscription subscription = new Subscription(accountDetails.getMerchantId(), new BigDecimal("15.0"), 1, "month");
     assertEquals(connect.newSubscriptionUrl(subscription, null, null, null), Fixtures.NEW_SUBSCRIPTION_URL);
   }
   
   @Test
   public void testNewPreAuthorizationUrl() {
-    PreAuthorization preAuthorization = new PreAuthorization(accountDetails.getMerchantId(), 15.00f, 1, "month");
+    PreAuthorization preAuthorization = new PreAuthorization(accountDetails.getMerchantId(), new BigDecimal("15.0"), 1, "month");
     assertEquals(connect.newPreAuthorizationUrl(preAuthorization, null, null, null), Fixtures.NEW_PRE_AUTHORIZATION_URL);
   }
   

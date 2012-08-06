@@ -1,13 +1,14 @@
 package gocardless.connect;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Subscription implements Serializable {
 
   private static final long serialVersionUID = 1L;
   
-  private Float amount;
+  private BigDecimal amount;
   
   private String merchantId;
   
@@ -30,18 +31,18 @@ public class Subscription implements Serializable {
   public Subscription() {    
   }
   
-  public Subscription(String merchantId, Float amount, Integer intervalLength, String intervalUnit) {
+  public Subscription(String merchantId, BigDecimal amount, Integer intervalLength, String intervalUnit) {
     this.merchantId = merchantId;
     this.amount = amount;
     this.intervalLength = intervalLength;
     this.intervalUnit = intervalUnit;
   }
 
-  public Float getAmount() {
+  public BigDecimal getAmount() {
     return amount;
   }
 
-  public void setAmount(Float amount) {
+  public void setAmount(BigDecimal amount) {
     this.amount = amount;
   }
 

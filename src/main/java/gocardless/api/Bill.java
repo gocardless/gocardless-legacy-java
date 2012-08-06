@@ -1,6 +1,7 @@
 package gocardless.api;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -10,11 +11,11 @@ public class Bill implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  private Float amount;
+  private BigDecimal amount;
   
-  private Float gocardlessFees;
+  private BigDecimal gocardlessFees;
   
-  private Float partnerFees;
+  private BigDecimal partnerFees;
   
   private String currency;
   
@@ -40,27 +41,27 @@ public class Bill implements Serializable {
   
   private String uri;
 
-  public Float getAmount() {
+  public BigDecimal getAmount() {
     return amount;
   }
 
-  public void setAmount(Float amount) {
+  public void setAmount(BigDecimal amount) {
     this.amount = amount;
   }
 
-  public Float getGocardlessFees() {
+  public BigDecimal getGocardlessFees() {
     return gocardlessFees;
   }
 
-  public void setGocardlessFees(Float gocardlessFees) {
+  public void setGocardlessFees(BigDecimal gocardlessFees) {
     this.gocardlessFees = gocardlessFees;
   }
 
-  public Float getPartnerFees() {
+  public BigDecimal getPartnerFees() {
     return partnerFees;
   }
 
-  public void setPartnerFees(Float partnerFees) {
+  public void setPartnerFees(BigDecimal partnerFees) {
     this.partnerFees = partnerFees;
   }
 
@@ -172,11 +173,11 @@ public class Bill implements Serializable {
   
   public static class Builder {
 
-    private Float amount;
+    private BigDecimal amount;
     
-    private Float gocardlessFees;
+    private BigDecimal gocardlessFees;
     
-    private Float partnerFees;
+    private BigDecimal partnerFees;
     
     private String currency;
     
@@ -202,17 +203,17 @@ public class Bill implements Serializable {
     
     private String uri;
 
-    public Builder amount(Float amount) {
+    public Builder amount(BigDecimal amount) {
       this.amount = amount;
       return this;
     }
     
-    public Builder gocardlessFees(Float gocardlessFees) {
+    public Builder gocardlessFees(BigDecimal gocardlessFees) {
       this.gocardlessFees = gocardlessFees;
       return this;
     }
     
-    public Builder partnerFees(Float partnerFees) {
+    public Builder partnerFees(BigDecimal partnerFees) {
       this.partnerFees = partnerFees;
       return this;
     }

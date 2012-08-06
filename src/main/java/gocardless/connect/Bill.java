@@ -1,12 +1,13 @@
 package gocardless.connect;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class Bill implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  private Float amount;
+  private BigDecimal amount;
   
   private String merchantId;
   
@@ -19,16 +20,16 @@ public class Bill implements Serializable {
   public Bill() {    
   }
   
-  public Bill(String merchantId, Float amount) {
+  public Bill(String merchantId, BigDecimal amount) {
     this.merchantId = merchantId;
     this.amount = amount;    
   }
 
-  public Float getAmount() {
+  public BigDecimal getAmount() {
     return amount;
   }
 
-  public void setAmount(Float amount) {
+  public void setAmount(BigDecimal amount) {
     this.amount = amount;
   }
 

@@ -1,6 +1,7 @@
 package gocardless.api;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -9,7 +10,7 @@ public class PreAuthorizedBill implements Serializable {
 
   private static final long serialVersionUID = 1L;
   
-  private Float amount;
+  private BigDecimal amount;
   
   private String preAuthorizationId;
   
@@ -17,11 +18,11 @@ public class PreAuthorizedBill implements Serializable {
   
   private String description;
   
-  public Float getAmount() {
+  public BigDecimal getAmount() {
     return amount;
   }
 
-  public void setAmount(Float amount) {
+  public void setAmount(BigDecimal amount) {
     this.amount = amount;
   }
 
@@ -61,7 +62,7 @@ public class PreAuthorizedBill implements Serializable {
   
   public static class Builder {
 
-    private Float amount;
+    private BigDecimal amount;
     
     private String preAuthorizationId;
     
@@ -69,7 +70,7 @@ public class PreAuthorizedBill implements Serializable {
     
     private String description;
 
-    public Builder amount(Float amount) {
+    public Builder amount(BigDecimal amount) {
       this.amount = amount;
       return this;
     }

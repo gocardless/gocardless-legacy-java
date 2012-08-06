@@ -1,13 +1,14 @@
 package gocardless.connect;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class PreAuthorization implements Serializable {
 
   private static final long serialVersionUID = 1L;
   
-  private Float maxAmount;
+  private BigDecimal maxAmount;
   
   private String merchantId;
   
@@ -30,18 +31,18 @@ public class PreAuthorization implements Serializable {
   public PreAuthorization() {    
   }
   
-  public PreAuthorization(String merchantId, Float maxAmount, Integer intervalLength, String intervalUnit) {
+  public PreAuthorization(String merchantId, BigDecimal maxAmount, Integer intervalLength, String intervalUnit) {
     this.merchantId = merchantId;
     this.maxAmount = maxAmount;
     this.intervalLength = intervalLength;
     this.intervalUnit = intervalUnit;
   }
 
-  public Float getMaxAmount() {
+  public BigDecimal getMaxAmount() {
     return maxAmount;
   }
 
-  public void setMaxAmount(Float maxAmount) {
+  public void setMaxAmount(BigDecimal maxAmount) {
     this.maxAmount = maxAmount;
   }
 
