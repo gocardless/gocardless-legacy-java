@@ -14,9 +14,9 @@ Java 1.5 and later.
 Add this dependency to your project's POM:
 
     <dependency>
-      <groupId>com.gocardless</groupId>
-      <artifactId>gocardless-java</artifactId>
-      <version>1.0.0</version>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>${project.artifactId}</artifactId>
+      <version>${project.version}</version>
     </dependency>
 
 ### Usage
