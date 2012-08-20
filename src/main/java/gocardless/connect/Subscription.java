@@ -10,6 +10,8 @@ public class Subscription implements Serializable {
   
   private BigDecimal amount;
   
+  private BigDecimal setupFee;
+  
   private String merchantId;
   
   private Integer intervalLength;
@@ -116,6 +118,14 @@ public class Subscription implements Serializable {
 
   public void setUser(User user) {
     this.user = user;
+  }
+  
+  public void setSetupFee(BigDecimal setupFee){
+	  this.setupFee = setupFee;
+  }
+  
+  public BigDecimal getSetupFee(){
+	  return this.setupFee;
   }
 
 }

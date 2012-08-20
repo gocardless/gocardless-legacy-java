@@ -25,46 +25,53 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @PrepareForTest({Utils.class})
 @PowerMockIgnore({"javax.crypto.*"}) // See http://code.google.com/p/powermock/issues/detail?id=274
 public class ConnectTest {
-  
+
   private AccountDetails accountDetails = new AccountDetails.Builder()
     .appId("id01").appSecret("sec01").accessToken("tok01").merchantId("mer01").build();
-  
+
   private Connect connect = new Connect(accountDetails);
-  
+
   @Mock private HttpClient mockHttpClient;
-  
+
   @Before
   public void setup() throws Exception {
     initMocks(this);
     PowerMockito.spy(Utils.class);
     PowerMockito.when(Utils.class, "nonce").thenReturn("Q9gMPVBZixfRiQ9VnRdDyrrMiskqT0ox8IT+HO3ReWMxavlco0Fw8rva+ZcI");
-    PowerMockito.when(Utils.class, "utc").thenReturn("2012-03-21T08:55:56Z");    
+    PowerMockito.when(Utils.class, "utc").thenReturn("2012-03-21T08:55:56Z");
     connect.setHttpClient(mockHttpClient);
   }
-  
+
   @Test
   public void testNewBillUrl() {
     Bill bill = new Bill(accountDetails.getMerchantId(), new BigDecimal("1000.0"));
     assertEquals(connect.newBillUrl(bill, null, null, null), Fixtures.NEW_BILL_URL);
   }
-  
+
   @Test
   public void testNewSubscriptionUrl() {
     Subscription subscription = new Subscription(accountDetails.getMerchantId(), new BigDecimal("15.0"), 1, "month");
     assertEquals(connect.newSubscriptionUrl(subscription, null, null, null), Fixtures.NEW_SUBSCRIPTION_URL);
   }
-  
+
+  @Test
+  public void testNewSubscriptionUrlWithSetupFee() {
+    Subscription subscription = new Subscription(accountDetails.getMerchantId(), new BigDecimal("15.0"), 1, "month");
+    subscription.setSetupFee(new BigDecimal(20));
+    assertEquals(connect.newSubscriptionUrl(subscription, null, null, null), Fixtures.NEW_SUB_URL_WITH_SETUP_FEE);
+  }
+
   @Test
   public void testNewPreAuthorizationUrl() {
     PreAuthorization preAuthorization = new PreAuthorization(accountDetails.getMerchantId(), new BigDecimal("15.0"), 1, "month");
     assertEquals(connect.newPreAuthorizationUrl(preAuthorization, null, null, null), Fixtures.NEW_PRE_AUTHORIZATION_URL);
   }
-  
+
   @Test
-  public void testConfirmResource() {    
+  public void testConfirmResource() {
     Map<String, String> headers = basicAuth(accountDetails.getAppId(), accountDetails.getAppSecret());
     connect.confirm(Fixtures.RESOURCE);
-    verify(mockHttpClient, times(1)).post(Connect.ApiPath.CONFIRM, headers, Fixtures.CONFIRM_POST);    
+    verify(mockHttpClient, times(1)).post(Connect.ApiPath.CONFIRM, headers, Fixtures.CONFIRM_POST);
   }
-  
+
 }
