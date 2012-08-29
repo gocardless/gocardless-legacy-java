@@ -71,7 +71,8 @@ public class ConnectTest {
   public void testConfirmResource() {
     Map<String, String> headers = basicAuth(accountDetails.getAppId(), accountDetails.getAppSecret());
     connect.confirm(Fixtures.RESOURCE);
-    verify(mockHttpClient, times(1)).post(Connect.ApiPath.CONFIRM, headers, Fixtures.CONFIRM_POST);
+    String expectedPath = "https://gocardless.com/api/v1/confirm";
+    verify(mockHttpClient, times(1)).post(expectedPath, headers, Fixtures.CONFIRM_POST);
   }
 
 }

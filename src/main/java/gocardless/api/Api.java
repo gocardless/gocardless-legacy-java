@@ -20,7 +20,7 @@ import com.google.gson.reflect.TypeToken;
 public class Api {
   
   public interface ApiPath {
-    public static final String BASE = format("%s/api/v1", GoCardless.getApiBase());  
+    public static final String BASE = format("%s/%s", GoCardless.getApiBase(), GoCardless.API_PATH);  
     public static final String MERCHANT = format("%s/merchants", BASE);
     public static final String MERCHANT_USERS = MERCHANT + "/%s/users";
     public static final String BILL = format("%s/bills", BASE);

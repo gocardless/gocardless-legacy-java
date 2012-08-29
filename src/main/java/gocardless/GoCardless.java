@@ -22,6 +22,8 @@ public class GoCardless {
   public final static Partner partner = new Partner(accountDetails);
 
   public final static WebHook webHook = new WebHook(accountDetails);
+  
+  public final static String API_PATH = "/api/v1";
 
   public interface ApiBase {
     public static final String PRODUCTION = "https://gocardless.com";

@@ -22,7 +22,7 @@ public class Connect {
     public static final String NEW_BILL = format("%s/bills/new", BASE);
     public static final String NEW_SUBSCRIPTION = format("%s/subscriptions/new", BASE);
     public static final String NEW_PRE_AUTHORIZATION = format("%s/pre_authorizations/new", BASE);
-    public static final String CONFIRM = format("%s/confirm", GoCardless.getApiBase());
+    public static final String CONFIRM = format("%s%s/confirm", GoCardless.getApiBase(), GoCardless.API_PATH);
   }
   
   protected HttpClient httpClient = HttpClient.DEFAULT;
