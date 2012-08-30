@@ -35,7 +35,7 @@ public class ApiTest {
   }
   
   @Test
-  public void testGetMechant() {
+  public void testGetMerchant() {
     String url = format("%s/%s", Api.ApiPath.MERCHANT, Fixtures.MERCHANT.getId());
     when(mockHttpClient.get(url, headers)).thenReturn(Fixtures.MERCHANT_RESPONSE);
     Merchant merchant = api.getMerchant(Fixtures.MERCHANT.getId());
