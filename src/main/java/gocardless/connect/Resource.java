@@ -1,6 +1,7 @@
 package gocardless.connect;
 
 import java.io.Serializable;
+import java.net.URI;
 
 public class Resource implements Serializable {
 
@@ -18,7 +19,7 @@ public class Resource implements Serializable {
   
   private String resourceType;
   
-  private String resourceUri;
+  private URI resourceUri;
   
   private String state;
   
@@ -40,11 +41,11 @@ public class Resource implements Serializable {
     this.resourceType = resourceType;
   }
 
-  public String getResourceUri() {
+  public URI getResourceUri() {
     return resourceUri;
   }
 
-  public void setResourceUri(String resourceUri) {
+  public void setResourceUri(URI resourceUri) {
     this.resourceUri = resourceUri;
   }
 
@@ -70,7 +71,7 @@ public class Resource implements Serializable {
     
     private String resourceType;
     
-    private String resourceUri;
+    private URI resourceUri;
     
     private String state;
     
@@ -86,7 +87,7 @@ public class Resource implements Serializable {
       return this;
     }
     
-    public Builder resourceUri(String resourceUri) {
+    public Builder resourceUri(URI resourceUri) {
       this.resourceUri = resourceUri;
       return this;
     }

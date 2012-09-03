@@ -2,6 +2,7 @@ package gocardless.api;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.net.URI;
 import java.util.Date;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -37,7 +38,7 @@ public class Subscription implements Serializable {
   
   private String userId;
   
-  private String uri;
+  private URI uri;
   
   private SubResourceUris subResourceUris = new SubResourceUris();
   
@@ -188,11 +189,11 @@ public class Subscription implements Serializable {
     this.userId = userId;
   }
 
-  public String getUri() {
+  public URI getUri() {
     return uri;
   }
 
-  public void setUri(String uri) {
+  public void setUri(URI uri) {
     this.uri = uri;
   }
 
@@ -242,7 +243,7 @@ public class Subscription implements Serializable {
     
     private String userId;
     
-    private String uri;
+    private URI uri;
 
     private SubResourceUris subResourceUris = new SubResourceUris();
 
@@ -311,7 +312,7 @@ public class Subscription implements Serializable {
       return this;
     }
     
-    public Builder uri(String uri) {
+    public Builder uri(URI uri) {
       this.uri = uri;
       return this;
     }

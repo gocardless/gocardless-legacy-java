@@ -8,6 +8,7 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,7 +19,9 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.commons.beanutils.BeanUtilsBean;
+import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.ConvertUtilsBean;
+import org.apache.commons.beanutils.Converter;
 
 /**
  * See http://stackoverflow.com/questions/6133660/recursive-beanutils-describe
@@ -150,6 +153,25 @@ public class BeanUtils {
   }
 
   private static ConvertUtilsBean converter = BeanUtilsBean.getInstance().getConvertUtils();
+
+  static {
+    /*
+     * recursiveDescribe is used to String-ify parameters for signing; if we come across a URI
+     * in our Object graph, we want the straightforward toString() flattening rather than a
+     * recursive description
+     */
+    class URIToStringConverter implements Converter {
+        public Object convert(Class aClass, Object obj) {
+            if (!aClass.equals(String.class) || !(obj.getClass().equals(URI.class))) {
+                throw new ConversionException("I only convert URIs to Strings...");
+            }
+            return ((URI)obj).toString();
+        }
+    }
+    converter.register(new URIToStringConverter(), URI.class);
+  }
+
+    // TODO Register a URI -> String converter
 
   private static Map<String, String> convertObject(Object value, String key, Set<Object> cache) {
     // if this type has a registered converted, then get the string and return

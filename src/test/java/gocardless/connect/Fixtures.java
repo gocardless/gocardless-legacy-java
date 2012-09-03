@@ -1,5 +1,7 @@
 package gocardless.connect;
 
+import java.net.URI;
+
 public interface Fixtures {
 
   public final static String NEW_BILL_URL =
@@ -48,7 +50,7 @@ public interface Fixtures {
   public final static Resource RESOURCE = new Resource.Builder()
     .resourceId("VZUG2SC3PRT5EM")
     .resourceType("bill")
-    .resourceUri("https://gocardless.com/api/v1/bills/VZUG2SC3PRT5EM")
+    .resourceUri(URI.create("https://gocardless.com/api/v1/bills/VZUG2SC3PRT5EM"))
     .state("id_9SX5G36")
     .signature("f5332dc226ef1196cc03bd3f4d7259412a180a4528f9fae28f8c008a772c540e")
     .build();

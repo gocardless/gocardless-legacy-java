@@ -2,6 +2,7 @@ package gocardless.api;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.net.URI;
 import java.util.Date;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -39,7 +40,7 @@ public class Bill implements Serializable {
   
   private String sourceId;
   
-  private String uri;
+  private URI uri;
 
   public BigDecimal getAmount() {
     return amount;
@@ -153,11 +154,11 @@ public class Bill implements Serializable {
     this.sourceId = sourceId;
   }
 
-  public String getUri() {
+  public URI getUri() {
     return uri;
   }
 
-  public void setUri(String uri) {
+  public void setUri(URI uri) {
     this.uri = uri;
   }
   
@@ -201,7 +202,7 @@ public class Bill implements Serializable {
     
     private String sourceId;
     
-    private String uri;
+    private URI uri;
 
     public Builder amount(BigDecimal amount) {
       this.amount = amount;
@@ -273,7 +274,7 @@ public class Bill implements Serializable {
       return this;
     }
     
-    public Builder uri(String uri) {
+    public Builder uri(URI uri) {
       this.uri = uri;
       return this;
     }
