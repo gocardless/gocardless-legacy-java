@@ -2,6 +2,7 @@ package gocardless.webhook;
 
 import gocardless.AccountDetails;
 
+import gocardless.exception.SignatureException;
 import org.junit.Test;
 
 public class WebHookTest {
@@ -12,7 +13,7 @@ public class WebHookTest {
   private WebHook webHook = new WebHook(accountDetails);
   
   @Test
-  public void testValidate() {
+  public void testValidate() throws SignatureException {
     webHook.validate(Fixtures.WEBHOOK);
   }
   

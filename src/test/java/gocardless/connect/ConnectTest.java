@@ -6,6 +6,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 import gocardless.AccountDetails;
+import gocardless.exception.SignatureException;
 import gocardless.http.HttpClient;
 import gocardless.utils.Utils;
 
@@ -68,7 +69,7 @@ public class ConnectTest {
   }
 
   @Test
-  public void testConfirmResource() {
+  public void testConfirmResource() throws SignatureException {
     Map<String, String> headers = basicAuth(accountDetails.getAppId(), accountDetails.getAppSecret());
     connect.confirm(Fixtures.RESOURCE);
     String expectedPath = "https://gocardless.com/api/v1/confirm";
