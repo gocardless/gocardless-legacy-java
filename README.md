@@ -8,7 +8,7 @@ You can sign up for a GoCardless account at [https://gocardless.com](https://goc
 
 ### Requirements
 
-Java 1.5 and later.
+Java 6 or later.
 
 ### Installing
 
