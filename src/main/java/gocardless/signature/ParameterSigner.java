@@ -43,7 +43,7 @@ public class ParameterSigner {
   /**
    * Note that params must include the key "signature"
    */
-  public static void validateSignature(Map<String, ? extends Object> params, String key) {
+  public static void validateSignature(Map<String, ? extends Object> params, String key) throws SignatureException {
     String signature = (String) params.remove("signature");
     if (!signParams(params, key).equals(signature)) {
       throw new SignatureException("Invalid signature");

@@ -9,6 +9,7 @@ import static gocardless.utils.Utils.utc;
 import static java.lang.String.format;
 import gocardless.AccountDetails;
 import gocardless.GoCardless;
+import gocardless.exception.SignatureException;
 import gocardless.http.HttpClient;
 import gocardless.utils.BeanUtils;
 
@@ -45,7 +46,7 @@ public class Connect {
     return this.newUrl(preAuthorization, ApiPath.NEW_PRE_AUTHORIZATION, redirectUri, cancelUri, state);    
   }
   
-  public void confirm(Resource resource) {
+  public void confirm(Resource resource) throws SignatureException {
     validateSignature(BeanUtils.recursiveDescribe(resource, false), accountDetails.getAppSecret());
     String payload = String.format("{\"%s\":\"%s\", \"%s\":\"%s\"}", 
         Resource.Params.RESOURCE_ID, resource.getResourceId(),
