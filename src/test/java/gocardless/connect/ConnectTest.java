@@ -11,6 +11,7 @@ import gocardless.http.HttpClient;
 import gocardless.utils.Utils;
 
 import java.math.BigDecimal;
+import java.net.URI;
 import java.util.Map;
 
 import org.junit.Before;
@@ -46,26 +47,26 @@ public class ConnectTest {
   @Test
   public void testNewBillUrl() {
     Bill bill = new Bill(accountDetails.getMerchantId(), new BigDecimal("1000.0"));
-    assertEquals(connect.newBillUrl(bill, null, null, null), Fixtures.NEW_BILL_URL);
+    assertEquals(connect.newBillUrl(bill, (URI) null, (URI) null, null), Fixtures.NEW_BILL_URL);
   }
 
   @Test
   public void testNewSubscriptionUrl() {
     Subscription subscription = new Subscription(accountDetails.getMerchantId(), new BigDecimal("15.0"), 1, "month");
-    assertEquals(connect.newSubscriptionUrl(subscription, null, null, null), Fixtures.NEW_SUBSCRIPTION_URL);
+    assertEquals(connect.newSubscriptionUrl(subscription, (URI) null, (URI) null, null), Fixtures.NEW_SUBSCRIPTION_URL);
   }
 
   @Test
   public void testNewSubscriptionUrlWithSetupFee() {
     Subscription subscription = new Subscription(accountDetails.getMerchantId(), new BigDecimal("15.0"), 1, "month");
     subscription.setSetupFee(new BigDecimal(20));
-    assertEquals(connect.newSubscriptionUrl(subscription, null, null, null), Fixtures.NEW_SUB_URL_WITH_SETUP_FEE);
+    assertEquals(connect.newSubscriptionUrl(subscription, (URI) null, (URI) null, null), Fixtures.NEW_SUB_URL_WITH_SETUP_FEE);
   }
 
   @Test
   public void testNewPreAuthorizationUrl() {
     PreAuthorization preAuthorization = new PreAuthorization(accountDetails.getMerchantId(), new BigDecimal("15.0"), 1, "month");
-    assertEquals(connect.newPreAuthorizationUrl(preAuthorization, null, null, null), Fixtures.NEW_PRE_AUTHORIZATION_URL);
+    assertEquals(connect.newPreAuthorizationUrl(preAuthorization, (URI) null, (URI) null, null), Fixtures.NEW_PRE_AUTHORIZATION_URL);
   }
 
   @Test
