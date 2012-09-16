@@ -14,6 +14,7 @@ import gocardless.http.HttpClient;
 import gocardless.utils.BeanUtils;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,15 +35,33 @@ public class Connect {
   public Connect(AccountDetails accountDetails) {
     this.accountDetails = accountDetails;
   }
-  
+
+  public String newBillUrl(Bill bill, String redirectUriStr, String cancelUriStr, String state) throws URISyntaxException {
+    URI redirectUri = new URI(redirectUriStr);
+    URI cancelUri = new URI(cancelUriStr);
+    return newBillUrl(bill, redirectUri, cancelUri, state);
+  }
+
   public String newBillUrl(Bill bill, URI redirectUri, URI cancelUri, String state) {
     return this.newUrl(bill, ApiPath.NEW_BILL, redirectUri, cancelUri, state);    
   }
-  
+
+  public String newSubscriptionUrl(Subscription subscription, String redirectUriStr, String cancelUriStr, String state) throws URISyntaxException {
+    URI redirectUri = new URI(redirectUriStr);
+    URI cancelUri = new URI(cancelUriStr);
+    return newSubscriptionUrl(subscription, redirectUri, cancelUri, state);
+  }
+
   public String newSubscriptionUrl(Subscription subscription, URI redirectUri, URI cancelUri, String state) {
     return this.newUrl(subscription, ApiPath.NEW_SUBSCRIPTION, redirectUri, cancelUri, state);    
   }
-  
+
+  public String newPreAuthorizationUrl(PreAuthorization preAuthorization, String redirectUriStr, String cancelUriStr, String state) throws URISyntaxException {
+    URI redirectUri = new URI(redirectUriStr);
+    URI cancelUri = new URI(cancelUriStr);
+    return newPreAuthorizationUrl(preAuthorization, redirectUri, cancelUri, state);
+  }
+
   public String newPreAuthorizationUrl(PreAuthorization preAuthorization, URI redirectUri, URI cancelUri, String state) {
     return this.newUrl(preAuthorization, ApiPath.NEW_PRE_AUTHORIZATION, redirectUri, cancelUri, state);    
   }

@@ -10,6 +10,7 @@ import gocardless.http.HttpClient;
 import gocardless.utils.BeanUtils;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +28,11 @@ public class Partner {
   public Partner(AccountDetails accountDetails) {
     this.accountDetails = accountDetails;
   }
-  
+
+  public String newMerchantUrl(String redirectUriStr, Merchant merchant, String state) throws URISyntaxException {
+    return newMerchantUrl(new URI(redirectUriStr), merchant, state);
+  }
+
   public String newMerchantUrl(URI redirectUri, Merchant merchant, String state) {
     Map<String, String> params = params(redirectUri, state);
     params.put("response_type", "code");
@@ -37,7 +42,11 @@ public class Partner {
     }
     return url(ApiPath.AUTHORIZE, params);
   }
-  
+
+  public MerchantAccessToken getMerchantAccessToken(String redirectUriStr, String code) throws URISyntaxException {
+    return getMerchantAccessToken(new URI(redirectUriStr), code);
+  }
+
   public MerchantAccessToken getMerchantAccessToken(URI redirectUri, String code) {
     Map<String, String> params = params(redirectUri, null);
     params.put("code", code);

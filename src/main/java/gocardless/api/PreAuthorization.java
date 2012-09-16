@@ -3,6 +3,7 @@ package gocardless.api;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Date;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -203,6 +204,10 @@ public class PreAuthorization implements Serializable {
     return uri;
   }
 
+  public void setUri(String uriStr) throws URISyntaxException {
+    setUri(new URI(uriStr));
+  }
+
   public void setUri(URI uri) {
     this.uri = uri;
   }
@@ -328,7 +333,11 @@ public class PreAuthorization implements Serializable {
       this.userId = userId;
       return this;
     }
-    
+
+    public Builder uri(String uriStr) throws URISyntaxException {
+      return uri(new URI(uriStr));
+    }
+
     public Builder uri(URI uri) {
       this.uri = uri;
       return this;
