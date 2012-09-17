@@ -1,6 +1,8 @@
 package gocardless.connect;
 
 import java.io.Serializable;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class Resource implements Serializable {
 
@@ -18,7 +20,7 @@ public class Resource implements Serializable {
   
   private String resourceType;
   
-  private String resourceUri;
+  private URI resourceUri;
   
   private String state;
   
@@ -40,11 +42,15 @@ public class Resource implements Serializable {
     this.resourceType = resourceType;
   }
 
-  public String getResourceUri() {
+  public URI getResourceUri() {
     return resourceUri;
   }
 
-  public void setResourceUri(String resourceUri) {
+  public void setResourceUri(String resourceUriStr) throws URISyntaxException {
+    setResourceUri(new URI(resourceUriStr));
+  }
+
+  public void setResourceUri(URI resourceUri) {
     this.resourceUri = resourceUri;
   }
 
@@ -70,7 +76,7 @@ public class Resource implements Serializable {
     
     private String resourceType;
     
-    private String resourceUri;
+    private URI resourceUri;
     
     private String state;
     
@@ -85,8 +91,12 @@ public class Resource implements Serializable {
       this.resourceType = resourceType;
       return this;
     }
-    
-    public Builder resourceUri(String resourceUri) {
+
+    public Builder resourceUri(String resourceUriStr) throws URISyntaxException {
+      return resourceUri(new URI(resourceUriStr));
+    }
+
+    public Builder resourceUri(URI resourceUri) {
       this.resourceUri = resourceUri;
       return this;
     }

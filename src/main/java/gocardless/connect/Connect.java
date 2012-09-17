@@ -13,6 +13,8 @@ import gocardless.exception.SignatureException;
 import gocardless.http.HttpClient;
 import gocardless.utils.BeanUtils;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,16 +35,34 @@ public class Connect {
   public Connect(AccountDetails accountDetails) {
     this.accountDetails = accountDetails;
   }
-  
-  public String newBillUrl(Bill bill, String redirectUri, String cancelUri, String state) {
+
+  public String newBillUrl(Bill bill, String redirectUriStr, String cancelUriStr, String state) throws URISyntaxException {
+    URI redirectUri = new URI(redirectUriStr);
+    URI cancelUri = new URI(cancelUriStr);
+    return newBillUrl(bill, redirectUri, cancelUri, state);
+  }
+
+  public String newBillUrl(Bill bill, URI redirectUri, URI cancelUri, String state) {
     return this.newUrl(bill, ApiPath.NEW_BILL, redirectUri, cancelUri, state);    
   }
-  
-  public String newSubscriptionUrl(Subscription subscription, String redirectUri, String cancelUri, String state) {
+
+  public String newSubscriptionUrl(Subscription subscription, String redirectUriStr, String cancelUriStr, String state) throws URISyntaxException {
+    URI redirectUri = new URI(redirectUriStr);
+    URI cancelUri = new URI(cancelUriStr);
+    return newSubscriptionUrl(subscription, redirectUri, cancelUri, state);
+  }
+
+  public String newSubscriptionUrl(Subscription subscription, URI redirectUri, URI cancelUri, String state) {
     return this.newUrl(subscription, ApiPath.NEW_SUBSCRIPTION, redirectUri, cancelUri, state);    
   }
-  
-  public String newPreAuthorizationUrl(PreAuthorization preAuthorization, String redirectUri, String cancelUri, String state) {
+
+  public String newPreAuthorizationUrl(PreAuthorization preAuthorization, String redirectUriStr, String cancelUriStr, String state) throws URISyntaxException {
+    URI redirectUri = new URI(redirectUriStr);
+    URI cancelUri = new URI(cancelUriStr);
+    return newPreAuthorizationUrl(preAuthorization, redirectUri, cancelUri, state);
+  }
+
+  public String newPreAuthorizationUrl(PreAuthorization preAuthorization, URI redirectUri, URI cancelUri, String state) {
     return this.newUrl(preAuthorization, ApiPath.NEW_PRE_AUTHORIZATION, redirectUri, cancelUri, state);    
   }
   
@@ -58,7 +78,7 @@ public class Connect {
   /**
    * Note that this method automatically includes the nonce, timestamp and signature.
    */  
-  protected String newUrl(Object resource, String apiPath, String redirectUri, String cancelUri, String state) {
+  protected String newUrl(Object resource, String apiPath, URI redirectUri, URI cancelUri, String state) {
     Map<String, String> params = params(redirectUri, cancelUri, state);
     params.putAll(BeanUtils.recursiveDescribe(resource));
     String signature = signParams(params, accountDetails.getAppSecret());
@@ -66,16 +86,16 @@ public class Connect {
     return url(apiPath, params);
   }
   
-  protected Map<String, String> params(String redirectUri, String cancelUri, String state) {
+  protected Map<String, String> params(URI redirectUri, URI cancelUri, String state) {
     Map<String, String> params = new HashMap<String, String>();
     params.put("client_id", accountDetails.getAppId());
     params.put("nonce", nonce());
     params.put("timestamp", utc());    
     if (redirectUri != null) {
-      params.put("redirect_uri", redirectUri);
+      params.put("redirect_uri", redirectUri.toString());
     }
     if (cancelUri != null) {
-      params.put("cancel_uri", cancelUri);
+      params.put("cancel_uri", cancelUri.toString());
     }
     if (state != null) {
       params.put("state", state);

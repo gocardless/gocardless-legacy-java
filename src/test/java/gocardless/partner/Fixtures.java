@@ -2,9 +2,11 @@ package gocardless.partner;
 
 import gocardless.partner.Partner.ApiPath;
 
+import java.net.URI;
+
 public interface Fixtures {
   
-  public final static String REDIRECT_URI = "http://example.com/confirm_resource";
+  public final static URI REDIRECT_URI = URI.create("http://example.com/confirm_resource");
   
   public final static String CODE = "9kbgD/RlJck1fbwAFCIJA6A8j8erXX+ujngNvHQD5guRIY5gFDGf2fa4jrGqfAkF";
   

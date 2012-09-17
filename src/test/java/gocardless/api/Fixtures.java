@@ -3,6 +3,7 @@ package gocardless.api;
 import static gocardless.utils.Utils.parseUTC;
 
 import java.math.BigDecimal;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public interface Fixtures {
     .firstName("Tom")
     .lastName("Blomfield")
     .email("tom@gocardless.com")
-    .uri("https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1")
+    .uri(URI.create("https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1"))
     .balance(new BigDecimal("12.00"))
     .pendingBalance(new BigDecimal("0.00"))
     .nextPayoutDate(parseUTC("2011-11-25T17:07:09Z"))
@@ -121,7 +122,7 @@ public interface Fixtures {
     .paidAt(null)
     .sourceType("pre_authorization")
     .sourceId("FAZ6FGSMTCOZUG")
-    .uri("https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z")
+    .uri(URI.create("https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z"))
     .build();
   
   public final static String BILLS_RESPONSE = "[" + BILL_RESPONSE + "," + BILL_RESPONSE + "]";
@@ -172,7 +173,7 @@ public interface Fixtures {
     .merchantId("WOQRUJU9OH2HH1")
     .status("active")
     .userId("HJEH638AJD")
-    .uri("https://gocardless.com/api/v1/subscriptions/1580")
+    .uri(URI.create("https://gocardless.com/api/v1/subscriptions/1580"))
     .subResourceUris(
         new Subscription.SubResourceUris.Builder()
           .bills("https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/bills?source_id=1580")
@@ -226,7 +227,7 @@ public interface Fixtures {
     .status("active")
     .remainingAmount(new BigDecimal("65.0"))
     .userId("834JUH8KLJ")
-    .uri("https://gocardless.com/api/v1/pre_authorizations/1609")
+    .uri(URI.create("https://gocardless.com/api/v1/pre_authorizations/1609"))
     .subResourceUris(
         new PreAuthorization.SubResourceUris.Builder()
           .bills("https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/bills?source_id=1609")

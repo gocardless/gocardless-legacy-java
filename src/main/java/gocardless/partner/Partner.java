@@ -9,6 +9,8 @@ import gocardless.GoCardless;
 import gocardless.http.HttpClient;
 import gocardless.utils.BeanUtils;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,8 +28,12 @@ public class Partner {
   public Partner(AccountDetails accountDetails) {
     this.accountDetails = accountDetails;
   }
-  
-  public String newMerchantUrl(String redirectUri, Merchant merchant, String state) {
+
+  public String newMerchantUrl(String redirectUriStr, Merchant merchant, String state) throws URISyntaxException {
+    return newMerchantUrl(new URI(redirectUriStr), merchant, state);
+  }
+
+  public String newMerchantUrl(URI redirectUri, Merchant merchant, String state) {
     Map<String, String> params = params(redirectUri, state);
     params.put("response_type", "code");
     params.put("scope", "manage_merchant");
@@ -36,8 +42,12 @@ public class Partner {
     }
     return url(ApiPath.AUTHORIZE, params);
   }
-  
-  public MerchantAccessToken getMerchantAccessToken(String redirectUri, String code) {
+
+  public MerchantAccessToken getMerchantAccessToken(String redirectUriStr, String code) throws URISyntaxException {
+    return getMerchantAccessToken(new URI(redirectUriStr), code);
+  }
+
+  public MerchantAccessToken getMerchantAccessToken(URI redirectUri, String code) {
     Map<String, String> params = params(redirectUri, null);
     params.put("code", code);
     params.put("grant_type", "authorization_code");
@@ -45,11 +55,11 @@ public class Partner {
     return fromJson(httpClient.post(url(ApiPath.ACCESS_TOKEN, params), headers, null), MerchantAccessToken.class);
   }
   
-  protected Map<String, String> params(String redirectUri, String state) {
+  protected Map<String, String> params(URI redirectUri, String state) {
     Map<String, String> params = new HashMap<String, String>();
     params.put("client_id", accountDetails.getAppId());
     if (redirectUri != null) {
-      params.put("redirect_uri", redirectUri);
+      params.put("redirect_uri", redirectUri.toString());
     }
     if (state != null) {
       params.put("state", state);
