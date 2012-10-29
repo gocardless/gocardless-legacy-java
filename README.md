@@ -1,6 +1,4 @@
-![GoCardless](https://s3-eu-west-1.amazonaws.com/gocardless/images/gocardless-dark.png)
-
-## GoCardless Java Client Library
+![GoCardless Java Client Library](https://s3-eu-west-1.amazonaws.com/gocardless/images/client-lib-headers/java-lib-header.png)
 
 The GoCardless Java client provides a simple interface to the GoCardless API.
 
