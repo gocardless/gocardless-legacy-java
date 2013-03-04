@@ -8,7 +8,7 @@ You can sign up for a GoCardless account at [https://gocardless.com](https://goc
 
 Java 6 or later.
 
-### Installing
+### Using with Maven
 
 Add this dependency to your project's POM:
 
@@ -17,6 +17,16 @@ Add this dependency to your project's POM:
       <artifactId>gocardless-java</artifactId>
       <version>1.1.0</version>
     </dependency>
+
+### Using without Maven
+
+Note that using `gocardless-java` with Maven is the officially supported and recommended method.
+
+That said, if you want to use `gocardless-java` without Maven, just:
+
+* Download the `jar` from [the Maven Central Repository](http://search.maven.org/#search%7Cga%7C1%7Cgocardless-java)
+* Ensure the `jar` is on your classpath
+* Ensure you have the various dependency `jar`s on your classpath (Apache Commons Lang, Apache Commons Codec, Apache Commons BeanUtils, Google GSON)
 
 ### Usage
 
