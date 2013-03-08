@@ -4,6 +4,8 @@ import gocardless.exception.SignatureException;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,8 +24,9 @@ public class ParameterSigner {
   public static final String CHARSET = "UTF-8";
 
   public static String signParams(Map<String, ? extends Object> params, String key) {
+    final String ALGORITHM = "HmacSHA256";
     try {
-      Mac mac = Mac.getInstance("HmacSHA256");
+      Mac mac = Mac.getInstance(ALGORITHM);
       SecretKeySpec s = new SecretKeySpec(key.getBytes(), mac.getAlgorithm());
       mac.init(s);
       List<List<String>> flatParams = flattenParams(params, null);
@@ -35,7 +38,11 @@ public class ParameterSigner {
       }
 
       return sb.toString();
-    } catch (Exception ex) {
+    } catch (NoSuchAlgorithmException ex) {
+      throw new RuntimeException("Your platform needs to be able to provide the " + ALGORITHM + " algorithm", ex);
+	} catch (InvalidKeyException ex) {
+      throw new RuntimeException("Internal library error - tried to initialize a MAC with an inappropriate key", ex);
+	} catch (UnsupportedEncodingException ex) {
       throw new RuntimeException(ex);
     }
   }
