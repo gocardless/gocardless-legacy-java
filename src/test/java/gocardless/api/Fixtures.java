@@ -9,27 +9,27 @@ import java.util.List;
 
 public interface Fixtures {
 
-  public final static String MERCHANT_RESPONSE = "{\n" + 
-  		"   \"created_at\": \"2011-11-18T17:07:09Z\",\n" + 
-  		"   \"description\": null,\n" + 
-  		"   \"id\": \"WOQRUJU9OH2HH1\",\n" + 
-  		"   \"name\": \"Tom's Delicious Chicken Shop\",\n" + 
-  		"   \"first_name\": \"Tom\",\n" + 
-  		"   \"last_name\": \"Blomfield\",\n" + 
-  		"   \"email\": \"tom@gocardless.com\",\n" + 
-  		"   \"uri\": \"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1\",\n" + 
-  		"   \"balance\": \"12.00\",\n" + 
-  		"   \"pending_balance\": \"0.00\",\n" + 
-  		"   \"next_payout_date\": \"2011-11-25T17: 07: 09Z\",\n" + 
-  		"   \"next_payout_amount\": \"12.00\",\n" + 
-  		"   \"sub_resource_uris\": {\n" + 
-  		"      \"users\": \"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/users\",\n" + 
-  		"      \"bills\": \"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/bills\",\n" + 
-  		"      \"pre_authorizations\": \"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/pre_authorizations\",\n" + 
-  		"      \"subscriptions\": \"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/subscriptions\"\n" + 
-  		"   }\n" + 
-  		"}";
-  
+  public final static String MERCHANT_RESPONSE = "{\n" +
+    "   \"created_at\": \"2011-11-18T17:07:09Z\",\n" +
+    "   \"description\": null,\n" +
+    "   \"id\": \"WOQRUJU9OH2HH1\",\n" +
+    "   \"name\": \"Tom's Delicious Chicken Shop\",\n" +
+    "   \"first_name\": \"Tom\",\n" +
+    "   \"last_name\": \"Blomfield\",\n" +
+    "   \"email\": \"tom@gocardless.com\",\n" +
+    "   \"uri\": \"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1\",\n" +
+    "   \"balance\": \"12.00\",\n" +
+    "   \"pending_balance\": \"0.00\",\n" +
+    "   \"next_payout_date\": \"2011-11-25T17: 07: 09Z\",\n" +
+    "   \"next_payout_amount\": \"12.00\",\n" +
+    "   \"sub_resource_uris\": {\n" +
+    "      \"users\": \"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/users\",\n" +
+    "      \"bills\": \"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/bills\",\n" +
+    "      \"pre_authorizations\": \"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/pre_authorizations\",\n" +
+    "      \"subscriptions\": \"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/subscriptions\"\n" +
+    "   }\n" +
+    "}";
+
   public final static Merchant MERCHANT = new Merchant.Builder()
     .createdAt(parseUTC("2011-11-18T17:07:09Z"))
     .description(null)
@@ -52,24 +52,24 @@ public interface Fixtures {
           .build()
     )
     .build();
-  
+
   public final static String MERCHANT_USERS_RESPONSE =
     "[\n" +
-		"   {\n" +
-		"      \"created_at\":\"2011-11-18T17:06:15Z\",\n" +
-		"      \"email\":\"customer40@gocardless.com\",\n" +
-		"      \"id\": \"JKH8HGKL9H\",\n" +
-		"      \"first_name\":\"Frank\",\n" +
-		"      \"last_name\":\"Smith\"\n" +
-		"   },\n" +
-		"   {\n" +
-		"      \"created_at\":\"2011-11-19T14:16:15Z\",\n" +
-		"      \"email\":\"customer41@gocardless.com\",\n" +
-		"      \"id\":\"JKH8HGKL9I\",\n" +
-		"      \"first_name\":\"James\",\n" +
-		"      \"last_name\":\"Dean\"\n" +
-		"   }\n" +
-		"]";
+    "   {\n" +
+    "      \"created_at\":\"2011-11-18T17:06:15Z\",\n" +
+    "      \"email\":\"customer40@gocardless.com\",\n" +
+    "      \"id\": \"JKH8HGKL9H\",\n" +
+    "      \"first_name\":\"Frank\",\n" +
+    "      \"last_name\":\"Smith\"\n" +
+    "   },\n" +
+    "   {\n" +
+    "      \"created_at\":\"2011-11-19T14:16:15Z\",\n" +
+    "      \"email\":\"customer41@gocardless.com\",\n" +
+    "      \"id\":\"JKH8HGKL9I\",\n" +
+    "      \"first_name\":\"James\",\n" +
+    "      \"last_name\":\"Dean\"\n" +
+    "   }\n" +
+    "]";
 
   public final static List<User> MERCHANT_USERS = Arrays.asList(
     new User.Builder()
@@ -87,26 +87,26 @@ public interface Fixtures {
       .lastName("Dean")
       .build()
   );
-  
-  public final static String BILL_RESPONSE = 
-    "{\n" + 
-		"   \"amount\": \"10.00\",\n" + 
-		"   \"gocardless_fees\": \"0.10\",\n" + 
-		"   \"partner_fees\": \"0\",\n" + 
-		"   \"currency\": \"GBP\",\n" + 
-		"   \"created_at\": \"2011-11-22T11: 59: 12Z\",\n" + 
-		"   \"description\": null,\n" + 
-		"   \"id\": \"PWSDXRYSCOKA7Z\",\n" + 
-		"   \"name\": null,\n" + 
-		"   \"status\": \"pending\",\n" + 
-		"   \"merchant_id\": \"6UFY9IJWGYBTAP\",\n" + 
-		"   \"user_id\": \"BWJ2GP659OXPAU\",\n" + 
-		"   \"paid_at\": null,\n" + 
-		"   \"source_type\": \"pre_authorization\",\n" + 
-		"   \"source_id\": \"FAZ6FGSMTCOZUG\",\n" + 
-		"   \"uri\": \"https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z\"\n" + 
-		"}";
-  
+
+  public final static String BILL_RESPONSE =
+    "{\n" +
+    "   \"amount\": \"10.00\",\n" +
+    "   \"gocardless_fees\": \"0.10\",\n" +
+    "   \"partner_fees\": \"0\",\n" +
+    "   \"currency\": \"GBP\",\n" +
+    "   \"created_at\": \"2011-11-22T11: 59: 12Z\",\n" +
+    "   \"description\": null,\n" +
+    "   \"id\": \"PWSDXRYSCOKA7Z\",\n" +
+    "   \"name\": null,\n" +
+    "   \"status\": \"pending\",\n" +
+    "   \"merchant_id\": \"6UFY9IJWGYBTAP\",\n" +
+    "   \"user_id\": \"BWJ2GP659OXPAU\",\n" +
+    "   \"paid_at\": null,\n" +
+    "   \"source_type\": \"pre_authorization\",\n" +
+    "   \"source_id\": \"FAZ6FGSMTCOZUG\",\n" +
+    "   \"uri\": \"https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z\"\n" +
+    "}";
+
   public final static Bill BILL = new Bill.Builder()
     .amount(new BigDecimal("10.00"))
     .gocardlessFees(new BigDecimal("0.10"))
@@ -124,11 +124,11 @@ public interface Fixtures {
     .sourceId("FAZ6FGSMTCOZUG")
     .uri(URI.create("https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z"))
     .build();
-  
+
   public final static String BILLS_RESPONSE = "[" + BILL_RESPONSE + "," + BILL_RESPONSE + "]";
-  
+
   public final static List<Bill> BILLS = Arrays.asList(BILL, BILL);
-  
+
   public final static String BILLS_FILTER =
     "after=2011-11-23T09%3A00%3A00Z" +
     "&subscription_id=test_subscriptiod_id" +
@@ -140,25 +140,25 @@ public interface Fixtures {
 
   public final static String SUBSCRIPTION_RESPONSE =
     "{\n" +
-		"   \"amount\":\"44.0\",\n" +
-		"   \"interval_length\":1,\n" +
-		"   \"interval_unit\":\"month\",\n" +
-		"   \"created_at\":\"2011-09-12T13:51:30Z\",\n" +
-		"   \"currency\":\"GBP\",\n" +
-		"   \"name\":\"London Gym Membership\",\n" +
-		"   \"description\":\"Entitles you to use all of the gyms around London\",\n" +
-		"   \"expires_at\":null,\n" +
-		"   \"next_interval_start\":\"2011-10-12T13:51:30Z\",\n" +
-		"   \"id\": \"AJKH638A99\",\n" +
-		"   \"merchant_id\":\"WOQRUJU9OH2HH1\",\n" +
-		"   \"status\":\"active\",\n" +
-		"   \"user_id\":\"HJEH638AJD\",\n" +
-		"   \"uri\":\"https://gocardless.com/api/v1/subscriptions/1580\",\n" +
-		"   \"sub_resource_uris\":{\n" +
-		"      \"bills\":\"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/bills?source_id=1580\"\n" +
-		"   }\n" +
-		"}";
-  
+    "   \"amount\":\"44.0\",\n" +
+    "   \"interval_length\":1,\n" +
+    "   \"interval_unit\":\"month\",\n" +
+    "   \"created_at\":\"2011-09-12T13:51:30Z\",\n" +
+    "   \"currency\":\"GBP\",\n" +
+    "   \"name\":\"London Gym Membership\",\n" +
+    "   \"description\":\"Entitles you to use all of the gyms around London\",\n" +
+    "   \"expires_at\":null,\n" +
+    "   \"next_interval_start\":\"2011-10-12T13:51:30Z\",\n" +
+    "   \"id\": \"AJKH638A99\",\n" +
+    "   \"merchant_id\":\"WOQRUJU9OH2HH1\",\n" +
+    "   \"status\":\"active\",\n" +
+    "   \"user_id\":\"HJEH638AJD\",\n" +
+    "   \"uri\":\"https://gocardless.com/api/v1/subscriptions/1580\",\n" +
+    "   \"sub_resource_uris\":{\n" +
+    "      \"bills\":\"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/bills?source_id=1580\"\n" +
+    "   }\n" +
+    "}";
+
   public final static Subscription SUBSCRIPTION = new Subscription.Builder()
     .amount(new BigDecimal("44.0"))
     .intervalLength(1)
@@ -249,12 +249,12 @@ public interface Fixtures {
     .preAuthorizationId("UQSTF7AMQMYWBL")
     .build();
 
-  public final static String PRE_AUTHORIZED_BILL_POST = 
-    "{" + 
-      "\"bill\":{" + 
-        "\"amount\":10.0," + 
-        "\"pre_authorization_id\":\"UQSTF7AMQMYWBL\"" + 
-      "}" + 
+  public final static String PRE_AUTHORIZED_BILL_POST =
+    "{" +
+      "\"bill\":{" +
+        "\"amount\":10.0," +
+        "\"pre_authorization_id\":\"UQSTF7AMQMYWBL\"" +
+      "}" +
     "}";
 
 }
