@@ -18,9 +18,9 @@ import java.util.Map;
 import com.google.gson.reflect.TypeToken;
 
 public class Api {
-  
+
   public interface ApiPath {
-    public static final String BASE = format("%s/%s", GoCardless.getApiBase(), GoCardless.API_PATH);  
+    public static final String BASE = format("%s/%s", GoCardless.getApiBase(), GoCardless.API_PATH);
     public static final String MERCHANT = format("%s/merchants", BASE);
     public static final String MERCHANT_USERS = MERCHANT + "/%s/users";
     public static final String BILL = format("%s/bills", BASE);
@@ -31,16 +31,18 @@ public class Api {
     public static final String PRE_AUTHORIZATION = format("%s/pre_authorizations", BASE);
     public static final String MERCHANT_PRE_AUTHORIZATIONS = MERCHANT + "/%s/pre_authorizations";
     public static final String PRE_AUTHORIZATION_CANCEL = PRE_AUTHORIZATION + "/%s/cancel";
+    public static final String PAYOUT = format("%s/payouts", BASE);
+    public static final String MERCHANT_PAYOUTS = MERCHANT + "/%s/payouts";
   }
-  
+
   protected HttpClient httpClient = HttpClient.DEFAULT;
-  
+
   protected AccountDetails accountDetails;
 
   public Api(AccountDetails accountDetails) {
     this.accountDetails = accountDetails;
   }
-  
+
   public Merchant getMerchant(String merchantId) {
     return fromJson(httpClient.get(format("%s/%s", ApiPath.MERCHANT, merchantId), headers()), Merchant.class);
   }
@@ -52,7 +54,7 @@ public class Api {
   public Bill getBill(String billId) {
     return fromJson(httpClient.get(format("%s/%s", ApiPath.BILL, billId), headers()), Bill.class);
   }
-  
+
   public List<Bill> getMerchantBills(
       String merchantId, String sourceId, String subscriptionId,
       String preAuthorizationId, String userId, Date before, Date after, Boolean paid) {
@@ -72,7 +74,7 @@ public class Api {
   public Subscription getSubscription(String subscriptionId) {
     return fromJson(httpClient.get(format("%s/%s", ApiPath.SUBSCRIPTION, subscriptionId), headers()), Subscription.class);
   }
-  
+
   public List<Subscription> getMerchantSubscriptions(String merchantId, String userId, Date before, Date after) {
     Map<String, String> params = new HashMap<String, String>();
     if (userId != null) params.put("user_id", userId);
@@ -108,7 +110,17 @@ public class Api {
   public Bill postPreAuthorizedBill(PreAuthorizedBill preAuthorizedBill) {
     return fromJson(httpClient.post(ApiPath.BILL, headers(), toJson(preAuthorizedBill, "bill")), Bill.class);
   }
-  
+
+  public List<Payout> getMerchantPayouts(String merchantId) {
+    return fromJson(
+      httpClient.get(format(ApiPath.MERCHANT_PAYOUTS, merchantId), headers()),
+      new TypeToken<ArrayList<Payout>>(){}.getType());
+  }
+
+  public Payout getPayout(String payoutId) {
+    return fromJson(httpClient.get(format("%s/%s", ApiPath.PAYOUT, payoutId), headers()), Payout.class);
+  }
+
   protected Map<String, String> headers() {
     Map<String, String> headers = new HashMap<String, String>();
     headers.put("Authorization", format("bearer %s", accountDetails.getAccessToken()));
@@ -118,5 +130,5 @@ public class Api {
   protected void setHttpClient(HttpClient httpClient) {
     this.httpClient = httpClient;
   }
-  
+
 }

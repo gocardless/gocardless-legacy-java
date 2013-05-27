@@ -259,4 +259,25 @@ public interface Fixtures {
       "}" +
     "}";
 
+  public final static String PAYOUT_RESPONSE =
+    "{\n" +
+      "\"amount\": \"12.37\",\n" +
+      "\"bank_reference\": \"JOHNSMITH-Z5DRM\",\n" +
+      "\"created_at\": \"2013-05-10T16:34:34Z\",\n" +
+      "\"id\": \"0BKR1AZNJF\",\n" +
+      "\"paid_at\": \"2013-05-10T17:00:26Z\",\n" +
+      "\"transaction_fees\": \"0.13\"\n" +
+    "}";
+
+  public final static Payout PAYOUT = new Payout.Builder()
+    .amount(new BigDecimal("12.37"))
+    .bankReference("JOHNSMITH-Z5DRM")
+    .createdAt(parseUTC("2013-05-10T16:34:34Z"))
+    .id("0BKR1AZNJF")
+    .paidAt(parseUTC("2013-05-10T17:00:26Z"))
+    .transactionFees(new BigDecimal("0.13"))
+    .build();
+
+  public final static String PAYOUTS_RESPONSE = "[" + PAYOUT_RESPONSE + "," + PAYOUT_RESPONSE + "]";
+  public final static List<Payout> PAYOUTS = Arrays.asList(PAYOUT, PAYOUT);
 }
