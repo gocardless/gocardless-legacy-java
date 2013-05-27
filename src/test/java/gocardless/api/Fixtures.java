@@ -104,6 +104,7 @@ public interface Fixtures {
     "   \"paid_at\": null,\n" +
     "   \"source_type\": \"pre_authorization\",\n" +
     "   \"source_id\": \"FAZ6FGSMTCOZUG\",\n" +
+    "   \"payment_id\": \"0B1R2T0507\",\n" +
     "   \"uri\": \"https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z\"\n" +
     "}";
 
@@ -122,6 +123,7 @@ public interface Fixtures {
     .paidAt(null)
     .sourceType("pre_authorization")
     .sourceId("FAZ6FGSMTCOZUG")
+    .paymentId("0B1R2T0507")
     .uri(URI.create("https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z"))
     .build();
 
