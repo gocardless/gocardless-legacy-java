@@ -18,22 +18,22 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 public class ApiTest {
-  
+
   private AccountDetails accountDetails = new AccountDetails.Builder()
     .appId("id01").appSecret("sec01").accessToken("tok01").merchantId("mer01").build();
-  
+
   private Api api = new Api(accountDetails);
-  
+
   private Map<String, String> headers = api.headers();
-  
+
   @Mock private HttpClient mockHttpClient;
-  
+
   @Before
-  public void setUp() {    
+  public void setUp() {
     initMocks(this);
     api.setHttpClient(mockHttpClient);
   }
-  
+
   @Test
   public void testGetMerchant() {
     String url = format("%s/%s", Api.ApiPath.MERCHANT, Fixtures.MERCHANT.getId());
@@ -42,7 +42,7 @@ public class ApiTest {
     verify(mockHttpClient, times(1)).get(url, headers);
     assertEquals(Fixtures.MERCHANT, merchant);
   }
-  
+
   @Test
   public void testGetMerchantUsers() {
     String url = format(Api.ApiPath.MERCHANT_USERS, Fixtures.MERCHANT.getId());
@@ -60,7 +60,7 @@ public class ApiTest {
     verify(mockHttpClient, times(1)).get(url, headers);
     assertEquals(Fixtures.BILL, bill);
   }
-  
+
   @Test
   public void testGetMerchantBills() {
     String url = format(Api.ApiPath.MERCHANT_BILLS, Fixtures.MERCHANT.getId());
@@ -69,7 +69,7 @@ public class ApiTest {
     verify(mockHttpClient, times(1)).get(url, headers);
     assertEquals(Fixtures.BILLS, bills);
   }
-  
+
   @Test
   public void testGetFilteredMerchantBills() {
     String url = format(Api.ApiPath.MERCHANT_BILLS + "?%s", Fixtures.MERCHANT.getId(), Fixtures.BILLS_FILTER);
@@ -80,7 +80,7 @@ public class ApiTest {
     verify(mockHttpClient, times(1)).get(url, headers);
     assertEquals(Fixtures.BILLS, bills);
   }
-  
+
   @Test
   public void testGetSubscription() {
     String url = format("%s/%s", Api.ApiPath.SUBSCRIPTION, Fixtures.SUBSCRIPTION.getId());
