@@ -2,7 +2,7 @@ package gocardless.webhook;
 
 public interface Fixtures {
 
-    public final static String WEBHOOK =
+    String WEBHOOK =
         "{\n" +
         "    \"payload\": {\n" +
         "        \"resource_type\": \"bill\",\n" +
