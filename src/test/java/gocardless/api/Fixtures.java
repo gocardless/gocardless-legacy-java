@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
+import java.util.GregorianCalendar;
 
 public interface Fixtures {
 
@@ -90,23 +91,23 @@ public interface Fixtures {
 
   public final static String BILL_RESPONSE =
     "{\n" +
-    "   \"amount\": \"10.00\",\n" +
-    "   \"gocardless_fees\": \"0.10\",\n" +
-    "   \"partner_fees\": \"0\",\n" +
-    "   \"currency\": \"GBP\",\n" +
-    "   \"created_at\": \"2011-11-22T11: 59: 12Z\",\n" +
-    "   \"description\": null,\n" +
-    "   \"id\": \"PWSDXRYSCOKA7Z\",\n" +
-    "   \"name\": null,\n" +
-    "   \"status\": \"pending\",\n" +
-    "   \"merchant_id\": \"6UFY9IJWGYBTAP\",\n" +
-    "   \"user_id\": \"BWJ2GP659OXPAU\",\n" +
-    "   \"paid_at\": null,\n" +
-    "   \"source_type\": \"pre_authorization\",\n" +
-    "   \"source_id\": \"FAZ6FGSMTCOZUG\",\n" +
-    "   \"payment_id\": \"0B1R2T0507\",\n" +
-    "   \"uri\": \"https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z\"\n" +
-    "}";
+		"   \"amount\": \"10.00\",\n" +
+		"   \"gocardless_fees\": \"0.10\",\n" +
+		"   \"partner_fees\": \"0\",\n" +
+		"   \"currency\": \"GBP\",\n" +
+		"   \"created_at\": \"2011-11-22T11: 59: 12Z\",\n" +
+		"   \"description\": null,\n" +
+		"   \"id\": \"PWSDXRYSCOKA7Z\",\n" +
+		"   \"name\": null,\n" +
+		"   \"status\": \"pending\",\n" +
+		"   \"merchant_id\": \"6UFY9IJWGYBTAP\",\n" +
+		"   \"user_id\": \"BWJ2GP659OXPAU\",\n" +
+		"   \"paid_at\": null,\n" +
+		"   \"source_type\": \"pre_authorization\",\n" +
+		"   \"source_id\": \"FAZ6FGSMTCOZUG\",\n" +
+		"   \"payment_id\": \"0B1R2T0507\",\n" +
+		"   \"uri\": \"https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z\"\n" +
+		"}";
 
   public final static Bill BILL = new Bill.Builder()
     .amount(new BigDecimal("10.00"))
@@ -142,24 +143,24 @@ public interface Fixtures {
 
   public final static String SUBSCRIPTION_RESPONSE =
     "{\n" +
-    "   \"amount\":\"44.0\",\n" +
-    "   \"interval_length\":1,\n" +
-    "   \"interval_unit\":\"month\",\n" +
-    "   \"created_at\":\"2011-09-12T13:51:30Z\",\n" +
-    "   \"currency\":\"GBP\",\n" +
-    "   \"name\":\"London Gym Membership\",\n" +
-    "   \"description\":\"Entitles you to use all of the gyms around London\",\n" +
-    "   \"expires_at\":null,\n" +
-    "   \"next_interval_start\":\"2011-10-12T13:51:30Z\",\n" +
-    "   \"id\": \"AJKH638A99\",\n" +
-    "   \"merchant_id\":\"WOQRUJU9OH2HH1\",\n" +
-    "   \"status\":\"active\",\n" +
-    "   \"user_id\":\"HJEH638AJD\",\n" +
-    "   \"uri\":\"https://gocardless.com/api/v1/subscriptions/1580\",\n" +
-    "   \"sub_resource_uris\":{\n" +
-    "      \"bills\":\"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/bills?source_id=1580\"\n" +
-    "   }\n" +
-    "}";
+		"   \"amount\":\"44.0\",\n" +
+		"   \"interval_length\":1,\n" +
+		"   \"interval_unit\":\"month\",\n" +
+		"   \"created_at\":\"2011-09-12T13:51:30Z\",\n" +
+		"   \"currency\":\"GBP\",\n" +
+		"   \"name\":\"London Gym Membership\",\n" +
+		"   \"description\":\"Entitles you to use all of the gyms around London\",\n" +
+		"   \"expires_at\":null,\n" +
+		"   \"next_interval_start\":\"2011-10-12T13:51:30Z\",\n" +
+		"   \"id\": \"AJKH638A99\",\n" +
+		"   \"merchant_id\":\"WOQRUJU9OH2HH1\",\n" +
+		"   \"status\":\"active\",\n" +
+		"   \"user_id\":\"HJEH638AJD\",\n" +
+		"   \"uri\":\"https://gocardless.com/api/v1/subscriptions/1580\",\n" +
+		"   \"sub_resource_uris\":{\n" +
+		"      \"bills\":\"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/bills?source_id=1580\"\n" +
+		"   }\n" +
+		"}";
 
   public final static Subscription SUBSCRIPTION = new Subscription.Builder()
     .amount(new BigDecimal("44.0"))
@@ -249,13 +250,15 @@ public interface Fixtures {
   public final static PreAuthorizedBill PRE_AUTHORIZED_BILL = new PreAuthorizedBill.Builder()
     .amount(new BigDecimal("10.0"))
     .preAuthorizationId("UQSTF7AMQMYWBL")
+    .chargeCustomerAt(new GregorianCalendar(2013, 7, 27).getTime())
     .build();
 
   public final static String PRE_AUTHORIZED_BILL_POST =
     "{" +
       "\"bill\":{" +
         "\"amount\":10.0," +
-        "\"pre_authorization_id\":\"UQSTF7AMQMYWBL\"" +
+        "\"pre_authorization_id\":\"UQSTF7AMQMYWBL\"," +
+        "\"charge_customer_at\":\"2013-08-27\"" +
       "}" +
     "}";
 

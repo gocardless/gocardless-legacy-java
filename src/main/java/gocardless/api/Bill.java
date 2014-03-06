@@ -25,6 +25,8 @@ public class Bill implements Serializable {
 
   private String description;
 
+  private Date chargeCustomerAt;
+
   private String id;
 
   private String name;
@@ -91,6 +93,14 @@ public class Bill implements Serializable {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public Date getChargeCustomerAt() {
+    return this.chargeCustomerAt;
+  }
+
+  public void setChargeCustomerAt(Date chargeCustomerAt) {
+    this.chargeCustomerAt = chargeCustomerAt;
   }
 
   public String getId() {
@@ -201,6 +211,8 @@ public class Bill implements Serializable {
 
     private String description;
 
+    private Date chargeCustomerAt;
+
     private String id;
 
     private String name;
@@ -248,6 +260,11 @@ public class Bill implements Serializable {
 
     public Builder description(String description) {
       this.description = description;
+      return this;
+    }
+
+    public Builder chargeCustomerAt(Date chargeCustomerAt) {
+      this.chargeCustomerAt = chargeCustomerAt;
       return this;
     }
 
@@ -313,6 +330,7 @@ public class Bill implements Serializable {
       bill.currency = this.currency;
       bill.createdAt = this.createdAt;
       bill.description = this.description;
+      bill.chargeCustomerAt = this.chargeCustomerAt;
       bill.id = this.id;
       bill.name = this.name;
       bill.paidAt = this.paidAt;
