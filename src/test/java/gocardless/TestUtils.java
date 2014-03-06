@@ -7,15 +7,19 @@ import java.io.InputStreamReader;
 
 public class TestUtils {
 
-    public static String readFromRawResourceFile(String filename) throws IOException
+    public static String readFromRawResourceFile(String filename)
     {
-        InputStream is = TestUtils.class.getResourceAsStream(filename);
-        BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-        StringBuilder sb = new StringBuilder();
-        String line = null;
-        while ((line = br.readLine()) != null) {
-            sb.append(line);
+        try {
+            InputStream is = TestUtils.class.getResourceAsStream(filename);
+            BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+            return sb.toString();
+        } catch (IOException e) {
+            throw new RuntimeException(e); // Given we're in TestUtils, it doesn't seem completely unreasonable to do this...
         }
-        return sb.toString();
     }
 }
