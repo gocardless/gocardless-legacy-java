@@ -10,27 +10,6 @@ import static gocardless.utils.Utils.parseUTC;
 
 public interface Fixtures {
 
-  String MERCHANT_RESPONSE = "{\n" +
-  		"   \"created_at\": \"2011-11-18T17:07:09Z\",\n" +
-  		"   \"description\": null,\n" +
-  		"   \"id\": \"WOQRUJU9OH2HH1\",\n" +
-  		"   \"name\": \"Tom's Delicious Chicken Shop\",\n" +
-  		"   \"first_name\": \"Tom\",\n" +
-  		"   \"last_name\": \"Blomfield\",\n" +
-  		"   \"email\": \"tom@gocardless.com\",\n" +
-  		"   \"uri\": \"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1\",\n" +
-  		"   \"balance\": \"12.00\",\n" +
-  		"   \"pending_balance\": \"0.00\",\n" +
-  		"   \"next_payout_date\": \"2011-11-25T17: 07: 09Z\",\n" +
-  		"   \"next_payout_amount\": \"12.00\",\n" +
-  		"   \"sub_resource_uris\": {\n" +
-  		"      \"users\": \"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/users\",\n" +
-  		"      \"bills\": \"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/bills\",\n" +
-  		"      \"pre_authorizations\": \"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/pre_authorizations\",\n" +
-  		"      \"subscriptions\": \"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/subscriptions\"\n" +
-  		"   }\n" +
-  		"}";
-
   Merchant MERCHANT = new Merchant.Builder()
     .createdAt(parseUTC("2011-11-18T17:07:09Z"))
     .description(null)
