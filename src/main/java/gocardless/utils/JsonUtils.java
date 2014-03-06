@@ -2,6 +2,7 @@ package gocardless.utils;
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Map;
 
@@ -12,7 +13,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializer;
+import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonDeserializationContext;
 import com.google.gson.reflect.TypeToken;
 
 class DateSerializer implements JsonSerializer<Date> {
@@ -20,6 +23,30 @@ class DateSerializer implements JsonSerializer<Date> {
                                JsonSerializationContext context) {
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     return new JsonPrimitive(formatter.format(src));
+  }
+}
+
+class DateDeserializer implements JsonDeserializer<Date> {
+  public Date deserialize(JsonElement json, Type typeOfSrc,
+                               JsonDeserializationContext context) {
+    SimpleDateFormat formatterShort = new SimpleDateFormat("yyyy-MM-dd");
+    Date deserialized = null;
+    String dateAsString = json.getAsJsonPrimitive().getAsString();
+
+    if (dateAsString.equalsIgnoreCase("null")) {
+        return null;
+    }
+
+    if (dateAsString.length() > 10) {
+      deserialized = Utils.parseUTC(dateAsString);
+    } else {
+      try {
+          deserialized = formatterShort.parse(dateAsString);
+      } catch (ParseException e) {
+      }
+    }
+
+    return deserialized;
   }
 }
 
@@ -31,6 +58,7 @@ public class JsonUtils {
   public static final Gson gson = new GsonBuilder()
     .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
     .registerTypeAdapter(Date.class, new DateSerializer())
+    .registerTypeAdapter(Date.class, new DateDeserializer())
     .create();
 
   public static <T> T fromJson(String json, Class<T> clazz) {

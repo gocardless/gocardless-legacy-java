@@ -95,6 +95,7 @@ public interface Fixtures {
 		"   \"gocardless_fees\": \"0.10\",\n" +
 		"   \"partner_fees\": \"0\",\n" +
 		"   \"currency\": \"GBP\",\n" +
+        "   \"charge_customer_at\": \"2013-12-25\",\n" +
 		"   \"created_at\": \"2011-11-22T11: 59: 12Z\",\n" +
 		"   \"description\": null,\n" +
 		"   \"id\": \"PWSDXRYSCOKA7Z\",\n" +
@@ -113,6 +114,7 @@ public interface Fixtures {
     .gocardlessFees(new BigDecimal("0.10"))
     .partnerFees(new BigDecimal("0"))
     .currency("GBP")
+    .chargeCustomerAt(new GregorianCalendar(2013, 11, 25).getTime())
     .createdAt(parseUTC("2011-11-22T11:59:12Z"))
     .description(null)
     .id("PWSDXRYSCOKA7Z")
