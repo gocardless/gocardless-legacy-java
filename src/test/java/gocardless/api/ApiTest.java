@@ -38,7 +38,7 @@ public class ApiTest {
   @Test
   public void testGetMerchant() {
     String url = format("%s/%s", Api.ApiPath.MERCHANT, Fixtures.MERCHANT.getId());
-    when(mockHttpClient.get(url, headers)).thenReturn(TestUtils.readFromRawResourceFile("merchant_response.json"));
+    when(mockHttpClient.get(url, headers)).thenReturn(TestUtils.readFromRawResourceFile("/merchant_response.json"));
     Merchant merchant = api.getMerchant(Fixtures.MERCHANT.getId());
     verify(mockHttpClient, times(1)).get(url, headers);
     assertEquals(Fixtures.MERCHANT, merchant);
