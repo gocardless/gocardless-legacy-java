@@ -1,16 +1,16 @@
 package gocardless.api;
 
-import static gocardless.utils.Utils.parseUTC;
-
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Arrays;
-import java.util.List;
 import java.util.GregorianCalendar;
+import java.util.List;
+
+import static gocardless.utils.Utils.parseUTC;
 
 public interface Fixtures {
 
-  public final static String MERCHANT_RESPONSE = "{\n" +
+  String MERCHANT_RESPONSE = "{\n" +
   		"   \"created_at\": \"2011-11-18T17:07:09Z\",\n" +
   		"   \"description\": null,\n" +
   		"   \"id\": \"WOQRUJU9OH2HH1\",\n" +
@@ -31,7 +31,7 @@ public interface Fixtures {
   		"   }\n" +
   		"}";
 
-  public final static Merchant MERCHANT = new Merchant.Builder()
+  Merchant MERCHANT = new Merchant.Builder()
     .createdAt(parseUTC("2011-11-18T17:07:09Z"))
     .description(null)
     .id("WOQRUJU9OH2HH1")
@@ -54,7 +54,7 @@ public interface Fixtures {
     )
     .build();
 
-  public final static String MERCHANT_USERS_RESPONSE =
+  String MERCHANT_USERS_RESPONSE =
     "[\n" +
 		"   {\n" +
 		"      \"created_at\":\"2011-11-18T17:06:15Z\",\n" +
@@ -72,7 +72,7 @@ public interface Fixtures {
 		"   }\n" +
 		"]";
 
-  public final static List<User> MERCHANT_USERS = Arrays.asList(
+  List<User> MERCHANT_USERS = Arrays.asList(
     new User.Builder()
       .createdAt(parseUTC("2011-11-18T17:06:15Z"))
       .email("customer40@gocardless.com")
@@ -89,7 +89,7 @@ public interface Fixtures {
       .build()
   );
 
-  public final static String BILL_RESPONSE =
+  String BILL_RESPONSE =
     "{\n" +
 		"   \"amount\": \"10.00\",\n" +
 		"   \"gocardless_fees\": \"0.10\",\n" +
@@ -109,7 +109,7 @@ public interface Fixtures {
 		"   \"uri\": \"https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z\"\n" +
 		"}";
 
-  public final static Bill BILL = new Bill.Builder()
+  Bill BILL = new Bill.Builder()
     .amount(new BigDecimal("10.00"))
     .gocardlessFees(new BigDecimal("0.10"))
     .partnerFees(new BigDecimal("0"))
@@ -128,11 +128,11 @@ public interface Fixtures {
     .uri(URI.create("https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z"))
     .build();
 
-  public final static String BILLS_RESPONSE = "[" + BILL_RESPONSE + "," + BILL_RESPONSE + "]";
+  String BILLS_RESPONSE = "[" + BILL_RESPONSE + "," + BILL_RESPONSE + "]";
 
-  public final static List<Bill> BILLS = Arrays.asList(BILL, BILL);
+   List<Bill> BILLS = Arrays.asList(BILL, BILL);
 
-  public final static String BILLS_FILTER =
+  String BILLS_FILTER =
     "after=2011-11-23T09%3A00%3A00Z" +
     "&subscription_id=test_subscriptiod_id" +
     "&paid=false" +
@@ -141,7 +141,7 @@ public interface Fixtures {
     "&pre_authorization_id=test_pre_authorized_id" +
     "&user_id=BWJ2GP659OXPAU";
 
-  public final static String SUBSCRIPTION_RESPONSE =
+  String SUBSCRIPTION_RESPONSE =
     "{\n" +
 		"   \"amount\":\"44.0\",\n" +
 		"   \"interval_length\":1,\n" +
@@ -162,7 +162,7 @@ public interface Fixtures {
 		"   }\n" +
 		"}";
 
-  public final static Subscription SUBSCRIPTION = new Subscription.Builder()
+  Subscription SUBSCRIPTION = new Subscription.Builder()
     .amount(new BigDecimal("44.0"))
     .intervalLength(1)
     .intervalUnit("month")
@@ -184,16 +184,16 @@ public interface Fixtures {
     )
     .build();
 
-  public final static String SUBSCRIPTIONS_RESPONSE = "[" + SUBSCRIPTION_RESPONSE + "," + SUBSCRIPTION_RESPONSE + "]";
+  String SUBSCRIPTIONS_RESPONSE = "[" + SUBSCRIPTION_RESPONSE + "," + SUBSCRIPTION_RESPONSE + "]";
 
-  public final static List<Subscription> SUBSCRIPTIONS = Arrays.asList(SUBSCRIPTION, SUBSCRIPTION);
+  List<Subscription> SUBSCRIPTIONS = Arrays.asList(SUBSCRIPTION, SUBSCRIPTION);
 
-  public final static String SUBSCRIPTIONS_FILTER =
+  String SUBSCRIPTIONS_FILTER =
     "after=2011-09-12T09%3A00%3A00Z" +
     "&before=2011-09-13T09%3A00%3A00Z" +
     "&user_id=HJEH638AJD";
 
-  public final static String PRE_AUTHORIZATION_RESPONSE =
+  String PRE_AUTHORIZATION_RESPONSE =
     "{\n" +
     "   \"created_at\":\"2011-02-18T15:25:58Z\",\n" +
     "   \"currency\":\"GBP\",\n" +
@@ -215,7 +215,7 @@ public interface Fixtures {
     "   }\n" +
     "}";
 
-  public final static PreAuthorization PRE_AUTHORIZATION = new PreAuthorization.Builder()
+  PreAuthorization PRE_AUTHORIZATION = new PreAuthorization.Builder()
     .maxAmount(new BigDecimal("70.0"))
     .intervalLength(1)
     .intervalUnit("month")
@@ -238,22 +238,22 @@ public interface Fixtures {
     )
     .build();
 
-  public final static String PRE_AUTHORIZATIONS_RESPONSE = "[" + PRE_AUTHORIZATION_RESPONSE + "," + PRE_AUTHORIZATION_RESPONSE + "]";
+  String PRE_AUTHORIZATIONS_RESPONSE = "[" + PRE_AUTHORIZATION_RESPONSE + "," + PRE_AUTHORIZATION_RESPONSE + "]";
 
-  public final static List<PreAuthorization> PRE_AUTHORIZATIONS = Arrays.asList(PRE_AUTHORIZATION, PRE_AUTHORIZATION);
+  List<PreAuthorization> PRE_AUTHORIZATIONS = Arrays.asList(PRE_AUTHORIZATION, PRE_AUTHORIZATION);
 
-  public final static String PRE_AUTHORIZATIONS_FILTER =
+  String PRE_AUTHORIZATIONS_FILTER =
     "after=2011-02-18T09%3A00%3A00Z" +
     "&before=2011-02-19T09%3A00%3A00Z" +
     "&user_id=834JUH8KLJ";
 
-  public final static PreAuthorizedBill PRE_AUTHORIZED_BILL = new PreAuthorizedBill.Builder()
+  PreAuthorizedBill PRE_AUTHORIZED_BILL = new PreAuthorizedBill.Builder()
     .amount(new BigDecimal("10.0"))
     .preAuthorizationId("UQSTF7AMQMYWBL")
     .chargeCustomerAt(new GregorianCalendar(2013, 7, 27).getTime())
     .build();
 
-  public final static String PRE_AUTHORIZED_BILL_POST =
+  String PRE_AUTHORIZED_BILL_POST =
     "{" +
       "\"bill\":{" +
         "\"amount\":10.0," +
