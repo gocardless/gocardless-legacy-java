@@ -1,5 +1,7 @@
 package gocardless.api;
 
+import gocardless.TestUtils;
+
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Arrays;
@@ -50,25 +52,7 @@ public interface Fixtures {
       .build()
   );
 
-  String BILL_RESPONSE =
-    "{\n" +
-		"   \"amount\": \"10.00\",\n" +
-		"   \"gocardless_fees\": \"0.10\",\n" +
-		"   \"partner_fees\": \"0\",\n" +
-		"   \"currency\": \"GBP\",\n" +
-        "   \"charge_customer_at\": \"2013-12-25\",\n" +
-		"   \"created_at\": \"2011-11-22T11: 59: 12Z\",\n" +
-		"   \"description\": null,\n" +
-		"   \"id\": \"PWSDXRYSCOKA7Z\",\n" +
-		"   \"name\": null,\n" +
-		"   \"status\": \"pending\",\n" +
-		"   \"merchant_id\": \"6UFY9IJWGYBTAP\",\n" +
-		"   \"user_id\": \"BWJ2GP659OXPAU\",\n" +
-		"   \"paid_at\": null,\n" +
-		"   \"source_type\": \"pre_authorization\",\n" +
-		"   \"source_id\": \"FAZ6FGSMTCOZUG\",\n" +
-		"   \"uri\": \"https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z\"\n" +
-		"}";
+  String BILL_RESPONSE = TestUtils.readFromRawResourceFile("/bill_response.json");
 
   Bill BILL = new Bill.Builder()
     .amount(new BigDecimal("10.00"))
@@ -102,26 +86,7 @@ public interface Fixtures {
     "&pre_authorization_id=test_pre_authorized_id" +
     "&user_id=BWJ2GP659OXPAU";
 
-  String SUBSCRIPTION_RESPONSE =
-    "{\n" +
-		"   \"amount\":\"44.0\",\n" +
-		"   \"interval_length\":1,\n" +
-		"   \"interval_unit\":\"month\",\n" +
-		"   \"created_at\":\"2011-09-12T13:51:30Z\",\n" +
-		"   \"currency\":\"GBP\",\n" +
-		"   \"name\":\"London Gym Membership\",\n" +
-		"   \"description\":\"Entitles you to use all of the gyms around London\",\n" +
-		"   \"expires_at\":null,\n" +
-		"   \"next_interval_start\":\"2011-10-12T13:51:30Z\",\n" +
-		"   \"id\": \"AJKH638A99\",\n" +
-		"   \"merchant_id\":\"WOQRUJU9OH2HH1\",\n" +
-		"   \"status\":\"active\",\n" +
-		"   \"user_id\":\"HJEH638AJD\",\n" +
-		"   \"uri\":\"https://gocardless.com/api/v1/subscriptions/1580\",\n" +
-		"   \"sub_resource_uris\":{\n" +
-		"      \"bills\":\"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/bills?source_id=1580\"\n" +
-		"   }\n" +
-		"}";
+  String SUBSCRIPTION_RESPONSE = TestUtils.readFromRawResourceFile("/subscription_response.json");
 
   Subscription SUBSCRIPTION = new Subscription.Builder()
     .amount(new BigDecimal("44.0"))
@@ -154,27 +119,7 @@ public interface Fixtures {
     "&before=2011-09-13T09%3A00%3A00Z" +
     "&user_id=HJEH638AJD";
 
-  String PRE_AUTHORIZATION_RESPONSE =
-    "{\n" +
-    "   \"created_at\":\"2011-02-18T15:25:58Z\",\n" +
-    "   \"currency\":\"GBP\",\n" +
-    "   \"name\":\"Variable Payments For Tennis Court Rental\",\n" +
-    "   \"description\":\"You will be charged according to your monthly usage of the tennis courts\",\n" +
-    "   \"expires_at\":null,\n" +
-    "   \"id\": \"1234JKH8KLJ\",\n" +
-    "   \"interval_length\":1,\n" +
-    "   \"interval_unit\":\"month\",\n" +
-    "   \"merchant_id\": \"WOQRUJU9OH2HH1\",\n" +
-    "   \"status\":\"active\",\n" +
-    "   \"remaining_amount\": \"65.0\",\n" +
-    "   \"next_interval_start\": \"2012-02-20T00:00:00Z\",\n" +
-    "   \"user_id\": \"834JUH8KLJ\",\n" +
-    "   \"max_amount\":\"70.0\",\n" +
-    "   \"uri\":\"https://gocardless.com/api/v1/pre_authorizations/1609\",\n" +
-    "   \"sub_resource_uris\":{\n" +
-    "      \"bills\":\"https://gocardless.com/api/v1/merchants/WOQRUJU9OH2HH1/bills?source_id=1609\"\n" +
-    "   }\n" +
-    "}";
+  String PRE_AUTHORIZATION_RESPONSE = TestUtils.readFromRawResourceFile("/pre_authorization_response.json");
 
   PreAuthorization PRE_AUTHORIZATION = new PreAuthorization.Builder()
     .maxAmount(new BigDecimal("70.0"))
@@ -214,13 +159,6 @@ public interface Fixtures {
     .chargeCustomerAt(new GregorianCalendar(2013, 7, 27).getTime())
     .build();
 
-  String PRE_AUTHORIZED_BILL_POST =
-    "{" +
-      "\"bill\":{" +
-        "\"amount\":10.0," +
-        "\"pre_authorization_id\":\"UQSTF7AMQMYWBL\"," +
-        "\"charge_customer_at\":\"2013-08-27\"" +
-      "}" +
-    "}";
+  String PRE_AUTHORIZED_BILL_POST = TestUtils.readFromRawResourceFile("/pre_authorized_bill_post.json");
 
 }
