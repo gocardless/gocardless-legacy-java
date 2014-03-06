@@ -1,6 +1,7 @@
 package gocardless.webhook;
 
 import gocardless.AccountDetails;
+import gocardless.TestUtils;
 import gocardless.exception.SignatureException;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,23 +21,11 @@ public class WebHookTest {
 
   @Before
   public void init() throws IOException {
-    webHookJsonData = readFromRawResourceFile("/webhook.json");
+    webHookJsonData = TestUtils.readFromRawResourceFile("/webhook.json");
   }
 
   @Test
   public void testValidate() throws SignatureException {
     webHook.validate(webHookJsonData);
-  }
-
-  private String readFromRawResourceFile(String filename) throws IOException
-  {
-    InputStream is = getClass().getResourceAsStream(filename);
-    BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-    StringBuilder sb = new StringBuilder();
-    String line = null;
-    while ((line = br.readLine()) != null) {
-      sb.append(line);
-    }
-    return sb.toString();
   }
 }
