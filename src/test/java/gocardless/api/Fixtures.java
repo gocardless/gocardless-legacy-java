@@ -33,24 +33,6 @@ public interface Fixtures {
     )
     .build();
 
-  String MERCHANT_USERS_RESPONSE =
-    "[\n" +
-		"   {\n" +
-		"      \"created_at\":\"2011-11-18T17:06:15Z\",\n" +
-		"      \"email\":\"customer40@gocardless.com\",\n" +
-		"      \"id\": \"JKH8HGKL9H\",\n" +
-		"      \"first_name\":\"Frank\",\n" +
-		"      \"last_name\":\"Smith\"\n" +
-		"   },\n" +
-		"   {\n" +
-		"      \"created_at\":\"2011-11-19T14:16:15Z\",\n" +
-		"      \"email\":\"customer41@gocardless.com\",\n" +
-		"      \"id\":\"JKH8HGKL9I\",\n" +
-		"      \"first_name\":\"James\",\n" +
-		"      \"last_name\":\"Dean\"\n" +
-		"   }\n" +
-		"]";
-
   List<User> MERCHANT_USERS = Arrays.asList(
     new User.Builder()
       .createdAt(parseUTC("2011-11-18T17:06:15Z"))

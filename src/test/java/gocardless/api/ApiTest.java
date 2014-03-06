@@ -47,7 +47,7 @@ public class ApiTest {
   @Test
   public void testGetMerchantUsers() {
     String url = format(Api.ApiPath.MERCHANT_USERS, Fixtures.MERCHANT.getId());
-    when(mockHttpClient.get(url, headers)).thenReturn(Fixtures.MERCHANT_USERS_RESPONSE);
+    when(mockHttpClient.get(url, headers)).thenReturn(TestUtils.readFromRawResourceFile("/merchant_users_response.json"));
     List<User> users = api.getMerchantUsers(Fixtures.MERCHANT.getId());
     verify(mockHttpClient, times(1)).get(url, headers);
     assertEquals(Fixtures.MERCHANT_USERS, users);
