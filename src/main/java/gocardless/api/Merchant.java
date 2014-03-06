@@ -232,7 +232,7 @@ public class Merchant implements Serializable {
     this.nextPayoutAmount = nextPayoutAmount;
   }
 
-  public BigDecimal getHideVariableAmount() {
+  public Boolean getHideVariableAmount() {
     return hideVariableAmount;
   }
 
