@@ -8,6 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import gocardless.AccountDetails;
+import gocardless.TestUtils;
 import gocardless.http.HttpClient;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class ApiTest {
   @Test
   public void testGetMerchant() {
     String url = format("%s/%s", Api.ApiPath.MERCHANT, Fixtures.MERCHANT.getId());
-    when(mockHttpClient.get(url, headers)).thenReturn(Fixtures.MERCHANT_RESPONSE);
+    when(mockHttpClient.get(url, headers)).thenReturn(TestUtils.readFromRawResourceFile("/merchant_response.json"));
     Merchant merchant = api.getMerchant(Fixtures.MERCHANT.getId());
     verify(mockHttpClient, times(1)).get(url, headers);
     assertEquals(Fixtures.MERCHANT, merchant);
@@ -46,7 +47,7 @@ public class ApiTest {
   @Test
   public void testGetMerchantUsers() {
     String url = format(Api.ApiPath.MERCHANT_USERS, Fixtures.MERCHANT.getId());
-    when(mockHttpClient.get(url, headers)).thenReturn(Fixtures.MERCHANT_USERS_RESPONSE);
+    when(mockHttpClient.get(url, headers)).thenReturn(TestUtils.readFromRawResourceFile("/merchant_users_response.json"));
     List<User> users = api.getMerchantUsers(Fixtures.MERCHANT.getId());
     verify(mockHttpClient, times(1)).get(url, headers);
     assertEquals(Fixtures.MERCHANT_USERS, users);
