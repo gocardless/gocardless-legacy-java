@@ -12,74 +12,76 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 public class Merchant implements Serializable {
 
   private static final long serialVersionUID = 1L;
-  
+
   private Date createdAt;
-  
+
   private String description;
-  
+
   private String id;
-  
+
   private String name;
-  
+
   private String firstName;
-  
+
   private String lastName;
-  
+
   private String email;
-  
+
   private URI uri;
-  
+
   private BigDecimal balance;
-  
+
   private BigDecimal pendingBalance;
-  
+
   private Date nextPayoutDate;
-  
+
   private BigDecimal nextPayoutAmount;
-  
+
+  private Boolean hideVariableAmount;
+
   private SubResourceUris subResourceUris = new SubResourceUris();
-  
+
   public static class SubResourceUris implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     private String users;
     private String bills;
     private String preAuthorizations;
     private String subscriptions;
-    
+
     public String getUsers() {
       return users;
     }
-    
+
     public void setUsers(String users) {
       this.users = users;
     }
-    
+
     public String getBills() {
       return bills;
     }
-    
+
     public void setBills(String bills) {
       this.bills = bills;
     }
-    
+
     public String getPreAuthorizations() {
       return preAuthorizations;
     }
-    
+
     public void setPreAuthorizations(String preAuthorizations) {
       this.preAuthorizations = preAuthorizations;
     }
-    
+
     public String getSubscriptions() {
       return subscriptions;
     }
-    
+
     public void setSubscriptions(String subscriptions) {
       this.subscriptions = subscriptions;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         return EqualsBuilder.reflectionEquals(this, obj);
@@ -89,14 +91,14 @@ public class Merchant implements Serializable {
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
     }
-    
+
     public static class Builder {
 
       private String users;
-      private String bills;      
+      private String bills;
       private String preAuthorizations;
       private String subscriptions;
-      
+
       public Builder users(String users) {
         this.users = users;
         return this;
@@ -106,12 +108,12 @@ public class Merchant implements Serializable {
         this.bills = bills;
         return this;
       }
-      
+
       public Builder preAuthorizations(String preAuthorizations) {
         this.preAuthorizations = preAuthorizations;
         return this;
       }
-      
+
       public Builder subscriptions(String subscriptions) {
         this.subscriptions = subscriptions;
         return this;
@@ -127,7 +129,7 @@ public class Merchant implements Serializable {
       }
 
     }
-    
+
   }
 
   public Date getCreatedAt() {
@@ -230,6 +232,14 @@ public class Merchant implements Serializable {
     this.nextPayoutAmount = nextPayoutAmount;
   }
 
+  public Boolean getHideVariableAmount() {
+    return hideVariableAmount;
+  }
+
+  public void setHideVariableAmount(Boolean hideVariableAmount) {
+    this.hideVariableAmount = hideVariableAmount;
+  }
+
   public SubResourceUris getSubResourceUris() {
     return subResourceUris;
   }
@@ -237,7 +247,7 @@ public class Merchant implements Serializable {
   public void setSubResourceUris(SubResourceUris subResourceUris) {
     this.subResourceUris = subResourceUris;
   }
-  
+
   @Override
   public boolean equals(Object obj) {
       return EqualsBuilder.reflectionEquals(this, obj);
@@ -247,7 +257,7 @@ public class Merchant implements Serializable {
   public int hashCode() {
       return HashCodeBuilder.reflectionHashCode(this);
   }
-  
+
   public static class Builder {
 
     private Date createdAt;
@@ -268,7 +278,7 @@ public class Merchant implements Serializable {
       this.createdAt = createdAt;
       return this;
     }
-    
+
     public Builder description(String description) {
       this.description = description;
       return this;
@@ -278,22 +288,22 @@ public class Merchant implements Serializable {
       this.id = id;
       return this;
     }
-    
+
     public Builder name(String name) {
       this.name = name;
       return this;
     }
-    
+
     public Builder firstName(String firstName) {
       this.firstName = firstName;
       return this;
     }
-    
+
     public Builder lastName(String lastName) {
       this.lastName = lastName;
       return this;
     }
-    
+
     public Builder email(String email) {
       this.email = email;
       return this;
@@ -307,27 +317,27 @@ public class Merchant implements Serializable {
       this.uri = uri;
       return this;
     }
-    
+
     public Builder balance(BigDecimal balance) {
       this.balance = balance;
       return this;
     }
-    
+
     public Builder pendingBalance(BigDecimal pendingBalance) {
       this.pendingBalance = pendingBalance;
       return this;
     }
-    
+
     public Builder nextPayoutDate(Date nextPayoutDate) {
       this.nextPayoutDate = nextPayoutDate;
       return this;
     }
-    
+
     public Builder nextPayoutAmount(BigDecimal nextPayoutAmount) {
       this.nextPayoutAmount = nextPayoutAmount;
       return this;
     }
-    
+
     public Builder subResourceUris(SubResourceUris subResourceUris) {
       this.subResourceUris = subResourceUris;
       return this;
@@ -352,5 +362,5 @@ public class Merchant implements Serializable {
     }
 
   }
-  
+
 }

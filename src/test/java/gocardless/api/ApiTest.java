@@ -8,6 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import gocardless.AccountDetails;
+import gocardless.TestUtils;
 import gocardless.http.HttpClient;
 
 import java.util.List;
@@ -18,35 +19,35 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 public class ApiTest {
-  
+
   private AccountDetails accountDetails = new AccountDetails.Builder()
     .appId("id01").appSecret("sec01").accessToken("tok01").merchantId("mer01").build();
-  
+
   private Api api = new Api(accountDetails);
-  
+
   private Map<String, String> headers = api.headers();
-  
+
   @Mock private HttpClient mockHttpClient;
-  
+
   @Before
-  public void setUp() {    
+  public void setUp() {
     initMocks(this);
     api.setHttpClient(mockHttpClient);
   }
-  
+
   @Test
   public void testGetMerchant() {
     String url = format("%s/%s", Api.ApiPath.MERCHANT, Fixtures.MERCHANT.getId());
-    when(mockHttpClient.get(url, headers)).thenReturn(Fixtures.MERCHANT_RESPONSE);
+    when(mockHttpClient.get(url, headers)).thenReturn(TestUtils.readFromRawResourceFile("/merchant_response.json"));
     Merchant merchant = api.getMerchant(Fixtures.MERCHANT.getId());
     verify(mockHttpClient, times(1)).get(url, headers);
     assertEquals(Fixtures.MERCHANT, merchant);
   }
-  
+
   @Test
   public void testGetMerchantUsers() {
     String url = format(Api.ApiPath.MERCHANT_USERS, Fixtures.MERCHANT.getId());
-    when(mockHttpClient.get(url, headers)).thenReturn(Fixtures.MERCHANT_USERS_RESPONSE);
+    when(mockHttpClient.get(url, headers)).thenReturn(TestUtils.readFromRawResourceFile("/merchant_users_response.json"));
     List<User> users = api.getMerchantUsers(Fixtures.MERCHANT.getId());
     verify(mockHttpClient, times(1)).get(url, headers);
     assertEquals(Fixtures.MERCHANT_USERS, users);
@@ -60,7 +61,7 @@ public class ApiTest {
     verify(mockHttpClient, times(1)).get(url, headers);
     assertEquals(Fixtures.BILL, bill);
   }
-  
+
   @Test
   public void testGetMerchantBills() {
     String url = format(Api.ApiPath.MERCHANT_BILLS, Fixtures.MERCHANT.getId());
@@ -69,7 +70,7 @@ public class ApiTest {
     verify(mockHttpClient, times(1)).get(url, headers);
     assertEquals(Fixtures.BILLS, bills);
   }
-  
+
   @Test
   public void testGetFilteredMerchantBills() {
     String url = format(Api.ApiPath.MERCHANT_BILLS + "?%s", Fixtures.MERCHANT.getId(), Fixtures.BILLS_FILTER);
@@ -80,7 +81,7 @@ public class ApiTest {
     verify(mockHttpClient, times(1)).get(url, headers);
     assertEquals(Fixtures.BILLS, bills);
   }
-  
+
   @Test
   public void testGetSubscription() {
     String url = format("%s/%s", Api.ApiPath.SUBSCRIPTION, Fixtures.SUBSCRIPTION.getId());
@@ -163,4 +164,22 @@ public class ApiTest {
     assertEquals(Fixtures.BILL, bill);
   }
 
+  @Test
+  public void testGetPayout() {
+    String url = format("%s/%s", Api.ApiPath.PAYOUT, Fixtures.PAYOUT.getId());
+    when(mockHttpClient.get(url, headers)).thenReturn(Fixtures.PAYOUT_RESPONSE);
+    Payout payout = api.getPayout(Fixtures.PAYOUT.getId());
+    verify(mockHttpClient, times(1)).get(url, headers);
+    assertEquals(Fixtures.PAYOUT, payout);
+  }
+
+  @Test
+  public void testGetPayouts() {
+    String merchantId = "MERCHANTID";
+    String url = format(Api.ApiPath.MERCHANT_PAYOUTS, merchantId);
+    when(mockHttpClient.get(url, headers)).thenReturn(Fixtures.PAYOUTS_RESPONSE);
+    List<Payout> payouts = api.getMerchantPayouts(merchantId);
+    verify(mockHttpClient, times(1)).get(url, headers);
+    assertEquals(Fixtures.PAYOUTS, payouts);
+  }
 }

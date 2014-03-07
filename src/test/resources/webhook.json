@@ -1,0 +1,33 @@
+{
+    "payload": {
+        "resource_type": "bill",
+        "action": "paid",
+        "bills": [
+            {
+                "id": "AKJ398H8KA",
+                "status": "paid",
+                "source_type": "subscription",
+                "source_id": "KKJ398H8K8",
+                "user_id": "ABC398H8K8",
+                "merchant_id": "DEF398H8K8",
+                "amount": "20.0",
+                "amount_minus_fees": "19.8",
+                "paid_at": "2011-12-01T12:00:00Z",
+                "uri": "https://gocardless.com/api/v1/bills/AKJ398H8KA"
+            },
+            {
+                "id": "AKJ398H8KB",
+                "status": "paid",
+                "source_type": "subscription",
+                "source_id": "8AKJ398H78",
+                "user_id": "ABC398H8K8",
+                "merchant_id": "DEF398H8K8",
+                "amount": "20.0",
+                "amount_minus_fees": "19.8",
+                "paid_at": "2011-12-09T12:00:00Z",
+                "uri": "https://gocardless.com/api/v1/bills/AKJ398H8KB"
+            }
+        ],
+        "signature": "d81e52100e6f4af6aa37d739f0e8359d6461cbcdc8556088f45453940c7fff4d"
+    }
+}

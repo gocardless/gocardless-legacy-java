@@ -2,27 +2,30 @@ package gocardless.connect;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Bill implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   private BigDecimal amount;
-  
+
   private String merchantId;
-  
+
   private String name;
-  
+
   private String description;
-  
+
+  private Date chargeCustomerAt;
+
   private User user;
-  
-  public Bill() {    
+
+  public Bill() {
   }
-  
+
   public Bill(String merchantId, BigDecimal amount) {
     this.merchantId = merchantId;
-    this.amount = amount;    
+    this.amount = amount;
   }
 
   public BigDecimal getAmount() {
@@ -57,6 +60,14 @@ public class Bill implements Serializable {
     this.description = description;
   }
 
+  public Date getChargeCustomerAt() {
+    return chargeCustomerAt;
+  }
+
+  public void setChargeCustomerAt(Date chargeCustomerAt) {
+    this.chargeCustomerAt = chargeCustomerAt;
+  }
+
   public User getUser() {
     return user;
   }
@@ -64,5 +75,5 @@ public class Bill implements Serializable {
   public void setUser(User user) {
     this.user = user;
   }
-    
+
 }
