@@ -10,6 +10,7 @@ import java.util.List;
 
 import static gocardless.utils.Utils.parseUTC;
 
+
 public interface Fixtures {
 
   Merchant MERCHANT = new Merchant.Builder()
@@ -70,6 +71,7 @@ public interface Fixtures {
     .paidAt(null)
     .sourceType("pre_authorization")
     .sourceId("FAZ6FGSMTCOZUG")
+    .paymentId("0B1R2T0507")
     .uri(URI.create("https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z"))
     .build();
 
@@ -161,4 +163,17 @@ public interface Fixtures {
 
   String PRE_AUTHORIZED_BILL_POST = TestUtils.readFromRawResourceFile("/pre_authorized_bill_post.json");
 
+  String PAYOUT_RESPONSE = TestUtils.readFromRawResourceFile("/payout_response.json");
+
+  Payout PAYOUT = new Payout.Builder()
+    .amount(new BigDecimal("12.37"))
+    .bankReference("JOHNSMITH-Z5DRM")
+    .createdAt(parseUTC("2013-05-10T16:34:34Z"))
+    .id("0BKR1AZNJF")
+    .paidAt(parseUTC("2013-05-10T17:00:26Z"))
+    .transactionFees(new BigDecimal("0.13"))
+    .build();
+
+  String PAYOUTS_RESPONSE = "[" + PAYOUT_RESPONSE + "," + PAYOUT_RESPONSE + "]";
+  List<Payout> PAYOUTS = Arrays.asList(PAYOUT, PAYOUT);
 }

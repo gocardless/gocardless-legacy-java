@@ -14,5 +14,6 @@
     "paid_at": null,
     "source_type": "pre_authorization",
     "source_id": "FAZ6FGSMTCOZUG",
+    "payment_id": "0B1R2T0507",
     "uri": "https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z"
 }

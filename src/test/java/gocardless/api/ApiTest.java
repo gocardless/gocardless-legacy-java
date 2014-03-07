@@ -164,4 +164,22 @@ public class ApiTest {
     assertEquals(Fixtures.BILL, bill);
   }
 
+  @Test
+  public void testGetPayout() {
+    String url = format("%s/%s", Api.ApiPath.PAYOUT, Fixtures.PAYOUT.getId());
+    when(mockHttpClient.get(url, headers)).thenReturn(Fixtures.PAYOUT_RESPONSE);
+    Payout payout = api.getPayout(Fixtures.PAYOUT.getId());
+    verify(mockHttpClient, times(1)).get(url, headers);
+    assertEquals(Fixtures.PAYOUT, payout);
+  }
+
+  @Test
+  public void testGetPayouts() {
+    String merchantId = "MERCHANTID";
+    String url = format(Api.ApiPath.MERCHANT_PAYOUTS, merchantId);
+    when(mockHttpClient.get(url, headers)).thenReturn(Fixtures.PAYOUTS_RESPONSE);
+    List<Payout> payouts = api.getMerchantPayouts(merchantId);
+    verify(mockHttpClient, times(1)).get(url, headers);
+    assertEquals(Fixtures.PAYOUTS, payouts);
+  }
 }

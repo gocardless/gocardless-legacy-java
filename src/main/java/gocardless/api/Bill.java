@@ -43,6 +43,8 @@ public class Bill implements Serializable {
 
   private String sourceId;
 
+  private String paymentId;
+
   private URI uri;
 
   public BigDecimal getAmount() {
@@ -165,6 +167,14 @@ public class Bill implements Serializable {
     this.sourceId = sourceId;
   }
 
+  public String getPaymentId() {
+    return paymentId;
+  }
+
+  public void setPaymentId(String paymentId) {
+    this.paymentId = paymentId;
+  }
+
   public URI getUri() {
     return uri;
   }
@@ -218,6 +228,8 @@ public class Bill implements Serializable {
     private String sourceType;
 
     private String sourceId;
+
+    private String paymentId;
 
     private URI uri;
 
@@ -296,6 +308,11 @@ public class Bill implements Serializable {
       return this;
     }
 
+    public Builder paymentId(String paymentId) {
+      this.paymentId = paymentId;
+      return this;
+    }
+
     public Builder uri(String uriStr) throws URISyntaxException {
       return uri(new URI(uriStr));
     }
@@ -322,6 +339,7 @@ public class Bill implements Serializable {
       bill.userId = this.userId;
       bill.sourceType = this.sourceType;
       bill.sourceId = this.sourceId;
+      bill.paymentId = this.paymentId;
       bill.uri = this.uri;
       return bill;
     }
