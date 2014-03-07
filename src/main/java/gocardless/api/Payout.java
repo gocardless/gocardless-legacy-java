@@ -34,7 +34,7 @@ public class Payout implements Serializable {
   public Date getPaidAt() { return paidAt; }
   public void setPaidAt(Date paidAt) { this.paidAt = paidAt; }
 
-  public BigDecimal geTtransactionFees() { return transactionFees; }
+  public BigDecimal getTransactionFees() { return transactionFees; }
   public void setTransactionFees(BigDecimal transactionFees) { this.transactionFees = transactionFees; }
 
   @Override
