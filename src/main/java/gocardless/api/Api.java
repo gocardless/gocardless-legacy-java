@@ -93,6 +93,10 @@ public class Api {
     return fromJson(httpClient.get(format("%s/%s", ApiPath.PRE_AUTHORIZATION, preAuthorizationId), headers()), PreAuthorization.class);
   }
 
+  public List<PreAuthorization> getMerchantPreAuthorizations(String merchantId) {
+    return getMerchantPreAuthorizations(merchantId, null, null, null);
+  }
+
   public List<PreAuthorization> getMerchantPreAuthorizations(String merchantId, String userId, Date before, Date after) {
     Map<String, String> params = new HashMap<String, String>();
     if (userId != null) params.put("user_id", userId);
