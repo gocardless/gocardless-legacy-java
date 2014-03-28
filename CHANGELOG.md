@@ -1,3 +1,13 @@
+## 2.1.0 - March 28, 2014
+
+- Added `setup_fee` field to `PreAuthorization`s (https://github.com/gocardless/gocardless-java/issues/9)
+- Added convenience method for fetching `PreAuthorization`s
+- Explicitly specified minimum required version for `commons-code` (https://github.com/gocardless/gocardless-java/issues/8)
+- Added payouts API support (https://github.com/gocardless/gocardless-java/pull/19)
+- Internal test harness refactor (https://github.com/gocardless/gocardless-java/pull/23)
+- Added `charge_customer_at` field for `Bill`s
+- Fixed `Bill` `Date` deserialisation bug (https://github.com/gocardless/gocardless-java/pull/21)
+
 ## 2.0.0 - October 18, 2013
 
 - Dropped support for pre-Java 6
