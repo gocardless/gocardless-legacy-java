@@ -24,6 +24,9 @@ public class Api {
     public static final String MERCHANT = format("%s/merchants", BASE);
     public static final String MERCHANT_USERS = MERCHANT + "/%s/users";
     public static final String BILL = format("%s/bills", BASE);
+    public static final String BILL_CANCEL = BILL + "/%s/cancel";
+    public static final String BILL_RETRY = BILL + "/%s/retry";
+    public static final String BILL_REFUND = BILL + "/%s/refund";
     public static final String MERCHANT_BILLS = MERCHANT + "/%s/bills";
     public static final String SUBSCRIPTION = format("%s/subscriptions", BASE);
     public static final String MERCHANT_SUBSCRIPTIONS = MERCHANT + "/%s/subscriptions";
@@ -53,6 +56,18 @@ public class Api {
 
   public Bill getBill(String billId) {
     return fromJson(httpClient.get(format("%s/%s", ApiPath.BILL, billId), headers()), Bill.class);
+  }
+
+  public Bill cancelBill(String billId) {
+    return fromJson(httpClient.put(format(ApiPath.BILL_CANCEL, billId), headers(), null), Bill.class);
+  }
+
+  public Bill retryBill(String billId) {
+    return fromJson(httpClient.post(format(ApiPath.BILL_RETRY, billId), headers(), null), Bill.class);
+  }
+
+  public Bill refundBill(String billId) {
+    return fromJson(httpClient.post(format(ApiPath.BILL_REFUND, billId), headers(), null), Bill.class);
   }
 
   public List<Bill> getMerchantBills(

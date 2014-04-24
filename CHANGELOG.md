@@ -1,3 +1,9 @@
+## 2.2.0 - April 24, 2014
+
+- Added method to `cancelBill`.
+- Added method to `retryBill`.
+- Added method to `refundBill`.
+
 ## 2.1.0 - March 28, 2014
 
 - Added `setup_fee` field to `PreAuthorization`s (https://github.com/gocardless/gocardless-java/issues/9)
