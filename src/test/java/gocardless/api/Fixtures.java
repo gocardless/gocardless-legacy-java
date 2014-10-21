@@ -71,7 +71,7 @@ public interface Fixtures {
     .paidAt(null)
     .sourceType("pre_authorization")
     .sourceId("FAZ6FGSMTCOZUG")
-    .paymentId("0B1R2T0507")
+    .payoutId("0B1R2T0507")
     .uri(URI.create("https://gocardless.com/api/v1/bills/PWSDXRYSCOKA7Z"))
     .build();
 

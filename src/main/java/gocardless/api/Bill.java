@@ -11,7 +11,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 public class Bill implements Serializable {
 
-  private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 2L;
 
   private BigDecimal amount;
 
@@ -43,7 +43,7 @@ public class Bill implements Serializable {
 
   private String sourceId;
 
-  private String paymentId;
+  private String payoutId;
 
   private URI uri;
 
@@ -167,12 +167,12 @@ public class Bill implements Serializable {
     this.sourceId = sourceId;
   }
 
-  public String getPaymentId() {
-    return paymentId;
+  public String getPayoutId() {
+    return payoutId;
   }
 
-  public void setPaymentId(String paymentId) {
-    this.paymentId = paymentId;
+  public void setPayoutId(String payoutId) {
+    this.payoutId = payoutId;
   }
 
   public URI getUri() {
@@ -229,7 +229,7 @@ public class Bill implements Serializable {
 
     private String sourceId;
 
-    private String paymentId;
+    private String payoutId;
 
     private URI uri;
 
@@ -308,8 +308,8 @@ public class Bill implements Serializable {
       return this;
     }
 
-    public Builder paymentId(String paymentId) {
-      this.paymentId = paymentId;
+    public Builder payoutId(String payoutId) {
+      this.payoutId = payoutId;
       return this;
     }
 
@@ -339,7 +339,7 @@ public class Bill implements Serializable {
       bill.userId = this.userId;
       bill.sourceType = this.sourceType;
       bill.sourceId = this.sourceId;
-      bill.paymentId = this.paymentId;
+      bill.payoutId = this.payoutId;
       bill.uri = this.uri;
       return bill;
     }
