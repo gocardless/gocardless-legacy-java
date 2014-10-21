@@ -63,6 +63,33 @@ public class ApiTest {
   }
 
   @Test
+  public void testCancelBill() {
+    String url = format(Api.ApiPath.BILL_CANCEL, Fixtures.BILL.getId());
+    when(mockHttpClient.put(url, headers, null)).thenReturn(Fixtures.BILL_RESPONSE);
+    Bill bill = api.cancelBill(Fixtures.BILL.getId());
+    verify(mockHttpClient, times(1)).put(url, headers, null);
+    assertEquals(Fixtures.BILL, bill);
+  }
+
+  @Test
+  public void testRetryBill() {
+    String url = format(Api.ApiPath.BILL_RETRY, Fixtures.BILL.getId());
+    when(mockHttpClient.post(url, headers, null)).thenReturn(Fixtures.BILL_RESPONSE);
+    Bill bill = api.retryBill(Fixtures.BILL.getId());
+    verify(mockHttpClient, times(1)).post(url, headers, null);
+    assertEquals(Fixtures.BILL, bill);
+  }
+
+  @Test
+  public void testRefundBill() {
+    String url = format(Api.ApiPath.BILL_REFUND, Fixtures.BILL.getId());
+    when(mockHttpClient.post(url, headers, null)).thenReturn(Fixtures.BILL_RESPONSE);
+    Bill bill = api.refundBill(Fixtures.BILL.getId());
+    verify(mockHttpClient, times(1)).post(url, headers, null);
+    assertEquals(Fixtures.BILL, bill);
+  }
+
+  @Test
   public void testGetMerchantBills() {
     String url = format(Api.ApiPath.MERCHANT_BILLS, Fixtures.MERCHANT.getId());
     when(mockHttpClient.get(url, headers)).thenReturn(Fixtures.BILLS_RESPONSE);
