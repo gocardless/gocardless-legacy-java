@@ -27,7 +27,9 @@ public class Subscription implements Serializable {
   private String description;
   
   private Integer intervalCount;
-  
+
+  private String currency;
+
   private User user;
   
   public Subscription() {    
@@ -110,6 +112,14 @@ public class Subscription implements Serializable {
 
   public void setIntervalCount(Integer intervalCount) {
     this.intervalCount = intervalCount;
+  }
+
+  public String getCurrency() {
+    return currency;
+  }
+
+  public void setCurrency(String currency) {
+    this.currency = currency;
   }
 
   public User getUser() {

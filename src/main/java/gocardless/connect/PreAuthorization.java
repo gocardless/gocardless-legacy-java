@@ -27,7 +27,9 @@ public class PreAuthorization implements Serializable {
   private Boolean calendarIntervals;
 
   private BigDecimal setupFee;
-  
+
+  private String currency;
+
   private User user;
   
   public PreAuthorization() {    
@@ -115,6 +117,14 @@ public class PreAuthorization implements Serializable {
   public BigDecimal getSetupFee() { return setupFee; }
 
   public void setSetupFee(BigDecimal setupFee) { this.setupFee = setupFee; }
+
+  public String getCurrency() {
+    return currency;
+  }
+
+  public void setCurrency(String currency) {
+    this.currency = currency;
+  }
 
   public User getUser() {
     return user;
