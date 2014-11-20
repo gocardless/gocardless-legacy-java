@@ -11,7 +11,7 @@ import gocardless.webhook.WebHook;
  */
 public class GoCardless {
 
-  public final static String VERSION = "1.1.0";
+  public final static String VERSION = "3.1.0";
 
   public final static AccountDetails accountDetails = new AccountDetails();
 
