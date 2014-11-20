@@ -47,26 +47,47 @@ public class ConnectTest {
   @Test
   public void testNewBillUrl() {
     Bill bill = new Bill(accountDetails.getMerchantId(), new BigDecimal("1000.0"));
-    assertEquals(connect.newBillUrl(bill, (URI) null, (URI) null, null), Fixtures.NEW_BILL_URL);
+    assertEquals(Fixtures.NEW_BILL_URL, connect.newBillUrl(bill, (URI) null, (URI) null, null));
+  }
+
+  @Test
+  public void testNewBillUrlInEuros() {
+    Bill bill = new Bill(accountDetails.getMerchantId(), new BigDecimal("1000.0"));
+    bill.setCurrency("EUR");
+    assertEquals(Fixtures.NEW_BILL_URL_EUR, connect.newBillUrl(bill, (URI) null, (URI) null, null));
   }
 
   @Test
   public void testNewSubscriptionUrl() {
     Subscription subscription = new Subscription(accountDetails.getMerchantId(), new BigDecimal("15.0"), 1, "month");
-    assertEquals(connect.newSubscriptionUrl(subscription, (URI) null, (URI) null, null), Fixtures.NEW_SUBSCRIPTION_URL);
+    assertEquals(Fixtures.NEW_SUBSCRIPTION_URL, connect.newSubscriptionUrl(subscription, (URI) null, (URI) null, null));
+  }
+
+  @Test
+  public void testNewSubscriptionUrlInEuros() {
+    Subscription subscription = new Subscription(accountDetails.getMerchantId(), new BigDecimal("15.0"), 1, "month");
+    subscription.setCurrency("EUR");
+    assertEquals(Fixtures.NEW_SUBSCRIPTION_URL_EUR, connect.newSubscriptionUrl(subscription, (URI) null, (URI) null, null));
   }
 
   @Test
   public void testNewSubscriptionUrlWithSetupFee() {
     Subscription subscription = new Subscription(accountDetails.getMerchantId(), new BigDecimal("15.0"), 1, "month");
     subscription.setSetupFee(new BigDecimal(20));
-    assertEquals(connect.newSubscriptionUrl(subscription, (URI) null, (URI) null, null), Fixtures.NEW_SUB_URL_WITH_SETUP_FEE);
+    assertEquals(Fixtures.NEW_SUB_URL_WITH_SETUP_FEE, connect.newSubscriptionUrl(subscription, (URI) null, (URI) null, null));
   }
 
   @Test
   public void testNewPreAuthorizationUrl() {
     PreAuthorization preAuthorization = new PreAuthorization(accountDetails.getMerchantId(), new BigDecimal("15.0"), 1, "month");
-    assertEquals(connect.newPreAuthorizationUrl(preAuthorization, (URI) null, (URI) null, null), Fixtures.NEW_PRE_AUTHORIZATION_URL);
+    assertEquals(Fixtures.NEW_PRE_AUTHORIZATION_URL, connect.newPreAuthorizationUrl(preAuthorization, (URI) null, (URI) null, null));
+  }
+
+  @Test
+  public void testNewPreAuthorizationUrlInEuros() {
+    PreAuthorization preAuthorization = new PreAuthorization(accountDetails.getMerchantId(), new BigDecimal("15.0"), 1, "month");
+    preAuthorization.setCurrency("EUR");
+    assertEquals(Fixtures.NEW_PRE_AUTHORIZATION_URL_EUR, connect.newPreAuthorizationUrl(preAuthorization, (URI) null, (URI) null, null));
   }
 
   @Test

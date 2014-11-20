@@ -18,6 +18,8 @@ public class Bill implements Serializable {
 
   private Date chargeCustomerAt;
 
+  private String currency;
+
   private User user;
 
   public Bill() {
@@ -66,6 +68,14 @@ public class Bill implements Serializable {
 
   public void setChargeCustomerAt(Date chargeCustomerAt) {
     this.chargeCustomerAt = chargeCustomerAt;
+  }
+
+  public String getCurrency() {
+    return currency;
+  }
+
+  public void setCurrency(String currency) {
+    this.currency = currency;
   }
 
   public User getUser() {
