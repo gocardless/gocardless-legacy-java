@@ -1,3 +1,7 @@
+## 3.1.0 - November 20, 2014
+
+- Added `currency` field to connect.* classes to make them SEPA (EUR payments) compatible (https://github.com/gocardless/gocardless-java/pull/31)
+
 ## 3.0.0 - October 30, 2014
 **Note:** The rename of `payoutId` on `Bill` means that this release breaks compatibility with any `Bill` objects serialized with a previous version of
     this library. We strongly recommend against long-term storage of serialized objects produced by Java's built-in object serialization, as this mechanism
