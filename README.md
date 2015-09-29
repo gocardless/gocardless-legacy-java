@@ -1,5 +1,7 @@
 ![GoCardless Java Client Library](https://s3-eu-west-1.amazonaws.com/gocardless/images/client-lib-headers/java-lib-header.png)
 
+**Important notice:** if you're using [GoCardless Pro](https://gocardless.com/pro/), use the [Pro Java client](https://github.com/gocardless/gocardless-pro-java) instead.
+
 The GoCardless Java client provides a simple interface to the GoCardless API.
 
 You can sign up for a GoCardless account at [https://gocardless.com](https://gocardless.com).
